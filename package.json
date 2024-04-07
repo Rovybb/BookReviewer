@@ -1,0 +1,11 @@
+{
+  "name": "web-project-2024",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "style": "npx sass --watch sass:styles"
+  },
+  "author": "",
+  "license": "MIT"
+}

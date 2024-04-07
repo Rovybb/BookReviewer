@@ -1,0 +1,23 @@
+@import "../boilerplate/theme";
+
+.footer {
+  min-height: 70px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  .footer-copyright {
+    font-size: $font-size-sm;
+  }
+}
+
+@include themify($themes) {
+  .footer {
+    background-color: themed($card-bg);
+
+    .footer-copyright {
+        color: themed($text-secondary);
+    }
+  }
+}

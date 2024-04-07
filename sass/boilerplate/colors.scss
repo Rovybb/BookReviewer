@@ -1,0 +1,48 @@
+$light-creme: #fbe4d8;
+$creme: #dfb6b2;
+$light-purple: #854f6c;
+$purple: #522b5b;
+$dark-purple: #391E41;
+$shade-purple: #1F1023;
+$black: #190019;
+
+$themes: (
+  light: (
+    bg: $light-creme,
+    card-bg: $creme,
+    text: $black,
+    text-secondary: $dark-purple,
+    link: $light-purple,
+    hover: $creme,
+    border: $dark-purple
+  ),
+  dark: (
+    bg: $black,
+    card-bg: $shade-purple,
+    text: $light-creme,
+    text-secondary: $creme,
+    link: $light-purple,
+    hover: $dark-purple,
+    border: $light-creme
+  ),
+);
+
+@mixin themify($themes) {
+  @each $name, $values in $themes {
+    .#{$name}-theme {
+      $theme-map: $values !global;
+      @content;
+    }
+  }
+}
+@function themed($key) {
+  @return map-get($theme-map, $key);
+}
+
+$bg: 'bg';
+$card-bg: 'card-bg';
+$text: 'text';
+$text-secondary: 'text-secondary';
+$link: 'link';
+$hover: 'hover';
+$border: 'border';

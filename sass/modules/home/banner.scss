@@ -1,0 +1,73 @@
+@import "../../boilerplate/theme";
+
+.banner {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 40px;
+  padding-top: 40px;
+
+  .banner-img-wrapper {
+    position: relative;
+    top: -50px;
+    width: 800px;
+    height: fit-content;
+  }
+
+  .banner-img-bg {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+  }
+
+  .banner-img {
+    width: 100%;
+  }
+}
+
+.banner-text-wrapper {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 40px;
+
+  .banner-title {
+    font-size: $font-size-hg;
+    font-weight: 800;
+    line-height: 80px;
+    text-align: center;
+  }
+
+  .banner-subtitle {
+    font-size: $font-size-md;
+    font-weight: 500;
+    text-align: center;
+  }
+}
+
+@include themify($themes) {
+  .banner-img-bg {
+    background-image: linear-gradient(0deg, #00000000 0%, themed($bg) 100%);
+  }
+
+  .banner-title {
+    background: linear-gradient(
+      145deg,
+      themed($text) 65%,
+      rgba(255, 255, 255, 0.43) 100%
+    );
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  .banner-subtitle {
+    color: themed($text-secondary);
+  }
+}

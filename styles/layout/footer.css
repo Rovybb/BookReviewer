@@ -1,0 +1,26 @@
+.footer {
+  min-height: 70px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.footer .footer-copyright {
+  font-size: 14px;
+}
+
+.light-theme .footer {
+  background-color: #dfb6b2;
+}
+.light-theme .footer .footer-copyright {
+  color: #391E41;
+}
+
+.dark-theme .footer {
+  background-color: #1F1023;
+}
+.dark-theme .footer .footer-copyright {
+  color: #dfb6b2;
+}
+
+/*# sourceMappingURL=footer.css.map */

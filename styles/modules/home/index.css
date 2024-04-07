@@ -1,0 +1,73 @@
+.banner {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 40px;
+  padding-top: 40px;
+}
+.banner .banner-img-wrapper {
+  position: relative;
+  top: -50px;
+  width: 800px;
+  height: fit-content;
+}
+.banner .banner-img-bg {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+}
+.banner .banner-img {
+  width: 100%;
+}
+
+.banner-text-wrapper {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 40px;
+}
+.banner-text-wrapper .banner-title {
+  font-size: 80px;
+  font-weight: 800;
+  line-height: 80px;
+  text-align: center;
+}
+.banner-text-wrapper .banner-subtitle {
+  font-size: 16px;
+  font-weight: 500;
+  text-align: center;
+}
+
+.light-theme .banner-img-bg {
+  background-image: linear-gradient(0deg, rgba(0, 0, 0, 0) 0%, #fbe4d8 100%);
+}
+.light-theme .banner-title {
+  background: linear-gradient(145deg, #190019 65%, rgba(255, 255, 255, 0.43) 100%);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+.light-theme .banner-subtitle {
+  color: #391E41;
+}
+
+.dark-theme .banner-img-bg {
+  background-image: linear-gradient(0deg, rgba(0, 0, 0, 0) 0%, #190019 100%);
+}
+.dark-theme .banner-title {
+  background: linear-gradient(145deg, #fbe4d8 65%, rgba(255, 255, 255, 0.43) 100%);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+.dark-theme .banner-subtitle {
+  color: #dfb6b2;
+}
+
+/*# sourceMappingURL=index.css.map */

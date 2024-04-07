@@ -1,0 +1,254 @@
+@font-face {
+  font-family: "Satoshi-Variable";
+  src: url("../../fonts/Satoshi-Variable.woff2") format("woff2"), url("../../fonts/Satoshi-Variable.woff") format("woff"), url("../../fonts/Satoshi-Variable.ttf") format("truetype");
+  font-weight: 300 900;
+  font-display: swap;
+  font-style: normal;
+}
+@font-face {
+  font-family: "Satoshi-VariableItalic";
+  src: url("../../fonts/Satoshi-VariableItalic.woff2") format("woff2"), url("../../fonts/Satoshi-VariableItalic.woff") format("woff"), url("../../fonts/Satoshi-VariableItalic.ttf") format("truetype");
+  font-weight: 300 900;
+  font-display: swap;
+  font-style: italic;
+}
+*,
+*::after,
+*::before {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  user-select: none;
+}
+
+html {
+  width: 100%;
+  min-height: 100vh;
+}
+
+::-webkit-scrollbar {
+  display: none;
+}
+
+body {
+  min-height: 100vh;
+  font-family: "Satoshi-Variable", sans-serif;
+  font-size: 16px;
+}
+
+.container {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.light-theme .container {
+  background-color: #fbe4d8;
+  color: #190019;
+}
+
+.dark-theme .container {
+  background-color: #190019;
+  color: #fbe4d8;
+}
+
+.header {
+  min-height: 72px;
+  width: 100%;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  align-items: center;
+  padding: 0 24px;
+}
+.header .logo {
+  font-size: 24px;
+  font-weight: 800;
+  justify-self: flex-start;
+}
+.header .button {
+  justify-self: flex-end;
+}
+
+.nav {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.nav-list {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 40px;
+  list-style: none;
+  padding: 20;
+}
+
+.nav-item {
+  cursor: pointer;
+}
+.nav-item .nav-link {
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.light-theme .header .logo mark {
+  background: none;
+  color: #391E41;
+}
+.light-theme .nav-link {
+  color: #190019;
+}
+.light-theme .nav-link:hover {
+  color: #391E41;
+}
+
+.dark-theme .header .logo mark {
+  background: none;
+  color: #dfb6b2;
+}
+.dark-theme .nav-link {
+  color: #fbe4d8;
+}
+.dark-theme .nav-link:hover {
+  color: #dfb6b2;
+}
+
+.button {
+  height: 38px;
+  width: fit-content;
+  padding: 0 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 32px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 500;
+  border: none;
+}
+
+.light-theme .button {
+  color: #dfb6b2;
+  background-color: #190019;
+}
+.light-theme .button:hover {
+  background-color: #391E41;
+}
+.light-theme .button--bordered {
+  color: #190019;
+  background-color: #fbe4d8;
+  outline: 2px solid #190019;
+}
+.light-theme .button--bordered:hover {
+  background-color: #dfb6b2;
+}
+
+.dark-theme .button {
+  color: #1F1023;
+  background-color: #fbe4d8;
+}
+.dark-theme .button:hover {
+  background-color: #dfb6b2;
+}
+.dark-theme .button--bordered {
+  color: #fbe4d8;
+  background-color: #190019;
+  outline: 2px solid #fbe4d8;
+}
+.dark-theme .button--bordered:hover {
+  background-color: #391E41;
+}
+
+@font-face {
+  font-family: "Satoshi-Variable";
+  src: url("../../fonts/Satoshi-Variable.woff2") format("woff2"), url("../../fonts/Satoshi-Variable.woff") format("woff"), url("../../fonts/Satoshi-Variable.ttf") format("truetype");
+  font-weight: 300 900;
+  font-display: swap;
+  font-style: normal;
+}
+@font-face {
+  font-family: "Satoshi-VariableItalic";
+  src: url("../../fonts/Satoshi-VariableItalic.woff2") format("woff2"), url("../../fonts/Satoshi-VariableItalic.woff") format("woff"), url("../../fonts/Satoshi-VariableItalic.ttf") format("truetype");
+  font-weight: 300 900;
+  font-display: swap;
+  font-style: italic;
+}
+*,
+*::after,
+*::before {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  user-select: none;
+}
+
+html {
+  width: 100%;
+  min-height: 100vh;
+}
+
+::-webkit-scrollbar {
+  display: none;
+}
+
+body {
+  min-height: 100vh;
+  font-family: "Satoshi-Variable", sans-serif;
+  font-size: 16px;
+}
+
+.container {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.light-theme .container {
+  background-color: #fbe4d8;
+  color: #190019;
+}
+
+.dark-theme .container {
+  background-color: #190019;
+  color: #fbe4d8;
+}
+
+.main-content {
+  width: 100%;
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+}
+
+.footer {
+  min-height: 70px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.footer .footer-copyright {
+  font-size: 14px;
+}
+
+.light-theme .footer {
+  background-color: #dfb6b2;
+}
+.light-theme .footer .footer-copyright {
+  color: #391E41;
+}
+
+.dark-theme .footer {
+  background-color: #1F1023;
+}
+.dark-theme .footer .footer-copyright {
+  color: #dfb6b2;
+}
+
+/*# sourceMappingURL=index.css.map */
