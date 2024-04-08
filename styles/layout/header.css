@@ -37,6 +37,10 @@
   text-decoration: none;
   font-weight: 500;
 }
+.nav-item .nav-link--active {
+  font-weight: 500;
+  cursor: default;
+}
 
 .light-theme .header .logo mark {
   background: none;
@@ -48,6 +52,9 @@
 .light-theme .nav-link:hover {
   color: #391E41;
 }
+.light-theme .nav-link--active:hover {
+  color: #190019;
+}
 
 .dark-theme .header .logo mark {
   background: none;
@@ -58,6 +65,9 @@
 }
 .dark-theme .nav-link:hover {
   color: #dfb6b2;
+}
+.dark-theme .nav-link--active:hover {
+  color: #fbe4d8;
 }
 
 /*# sourceMappingURL=header.css.map */
