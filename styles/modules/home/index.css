@@ -15,12 +15,25 @@
 }
 .banner .banner-img-bg {
   position: absolute;
+  top: -11px;
   width: 100%;
   height: 100%;
   z-index: 1;
 }
 .banner .banner-img {
   width: 100%;
+  animation: float 3s ease-in-out infinite;
+}
+@keyframes float {
+  0% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+  100% {
+    transform: translateY(0);
+  }
 }
 
 .banner-text-wrapper {
@@ -48,7 +61,7 @@
   background-image: linear-gradient(0deg, rgba(0, 0, 0, 0) 0%, #fbe4d8 100%);
 }
 .light-theme .banner-title {
-  background: linear-gradient(145deg, #190019 65%, rgba(255, 255, 255, 0.43) 100%);
+  background: linear-gradient(145deg, #190019 0%, rgba(255, 255, 255, 0.43) 100%);
   background-clip: text;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -61,7 +74,7 @@
   background-image: linear-gradient(0deg, rgba(0, 0, 0, 0) 0%, #190019 100%);
 }
 .dark-theme .banner-title {
-  background: linear-gradient(145deg, #fbe4d8 65%, rgba(255, 255, 255, 0.43) 100%);
+  background: linear-gradient(145deg, #fbe4d8 0%, rgba(255, 255, 255, 0.43) 100%);
   background-clip: text;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;

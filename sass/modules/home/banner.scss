@@ -1,4 +1,7 @@
 @import "../../boilerplate/theme";
+@import "../../boilerplate/animate";
+
+
 
 .banner {
   width: 100%;
@@ -18,6 +21,7 @@
 
   .banner-img-bg {
     position: absolute;
+    top: -11px;
     width: 100%;
     height: 100%;
     z-index: 1;
@@ -25,6 +29,20 @@
 
   .banner-img {
     width: 100%;
+
+    @include keyframes(float) {
+      0% {
+        transform: translateY(0);
+      }
+      50% {
+        transform: translateY(-10px);
+      }
+      100% {
+        transform: translateY(0);
+      }
+    }
+
+    @include animate(float, 3s, ease-in-out, infinite);
   }
 }
 
@@ -59,7 +77,7 @@
   .banner-title {
     background: linear-gradient(
       145deg,
-      themed($text) 65%,
+      themed($text) 0%,
       rgba(255, 255, 255, 0.43) 100%
     );
     background-clip: text;
