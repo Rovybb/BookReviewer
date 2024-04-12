@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Book Reviewer</title>
+        <link
+            rel="apple-touch-icon"
+            sizes="180x180"
+            href="./public/apple-touch-icon.png"
+        />
+        <link
+            rel="icon"
+            type="image/png"
+            sizes="32x32"
+            href="./public/favicon-32x32.png"
+        />
+        <link
+            rel="icon"
+            type="image/png"
+            sizes="16x16"
+            href="./public/favicon-16x16.png"
+        />
+        <link rel="manifest" href="./public/site.webmanifest" />
+        <link rel="stylesheet" href="styles/layout/index.css" />
+        <link rel="stylesheet" href="styles/modules/auth/index.css" />
+    </head>
+    <body class="dark-theme">
+        <div class="container">
+            <header class="header">
+                <h1
+                    class="logo logo--clickable"
+                    onclick="handleNavigate('./index.html')"
+                >
+                    Book<mark>Reviewer</mark>
+                </h1>
+            </header>
+            <main class="main-content">
+                <div class="auth-card">
+                    <section class="auth-card-left-section">
+                        <div class="auth-card-wrapper">
+                            <h2 class="auth-card-subtitle">
+                                Welcome to BookReviewer!
+                            </h2>
+                            <h1 class="auth-card-title">Register</h1>
+                            <form action="./register_step2.html" class="auth-form-container"> <!-- TO DO: change the action in the future -->
+                                <label
+                                    for="email"
+                                    class="input-text-label hidden"
+                                    >Email</label
+                                >
+                                <input
+                                    type="email"
+                                    id="email"
+                                    class="input-text"
+                                    placeholder="Email"
+                                    required
+                                />
+                                <label
+                                    for="password"
+                                    class="input-text-label hidden"
+                                    >Password</label
+                                >
+                                <input
+                                    type="password"
+                                    id="password"
+                                    class="input-text"
+                                    placeholder="Password"
+                                    required
+                                />
+                                <label
+                                    for="confirm-password"
+                                    class="input-text-label hidden"
+                                    >Confirm Password</label
+                                >
+                                <input
+                                    type="password"
+                                    id="confirm-password"
+                                    class="input-text"
+                                    placeholder="Confirm Password"
+                                    required
+                                />
+                                <button class="button" type="submit">
+                                    Next
+                                </button>
+                            </form>
+                        </div>
+                        <p class="auth-card-tou">
+                            Already have an account?
+                            <a href="./login.html">Login</a>
+                        </p>
+                    </section>
+                    <img
+                        src="assets/auth_banner.png"
+                        alt="Banner"
+                        class="auth-card-img"
+                    />
+                </div>
+            </main>
+        </div>
+        <script>
+            const handleNavigate = (path) => {
+                window.location.href = path;
+            };
+        </script>
+    </body>
+</html>

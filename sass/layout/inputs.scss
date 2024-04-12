@@ -15,6 +15,48 @@
     border-radius: 8px;
 }
 
+.input-file {
+    display: none;
+}
+
+.input-file-label {
+    width: 100%;
+    height: 100px;
+    font-size: $font-size-md;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+.plus-svg {
+    width: $font-size-md;
+    height: $font-size-md;
+    cursor: pointer;
+}
+
+.input-file-label-text {
+    font-size: $font-size-xs;
+    font-weight: 600;
+}
+
+.input-file-preview {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+}
+
+.input-file-preview-img {
+    width: 75px;
+    height: 75px;
+    object-fit: cover;
+    border-radius: 8px;
+}
+
 @include themify($themes) {
     .input-text {
         font-size: $font-size-md;
@@ -25,10 +67,25 @@
         &::placeholder {
             color: themed($text-secondary);
         }
-    
+
         &:focus {
             outline: none;
             border-color: themed($link);
         }
+    }
+
+    .input-file-label {
+        background-color: themed($card-bg);
+        color: themed($text);
+        border: 1px solid themed($border);
+
+        &:hover {
+            background-color: themed($hover);
+        }
+        
+    }
+
+    .plus-svg {
+        fill: themed($text);
     }
 }
