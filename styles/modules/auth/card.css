@@ -62,26 +62,31 @@
   font-size: 12px;
   font-weight: 400;
 }
-.auth-card-tou mark {
+.auth-card-tou a {
   cursor: pointer;
+  text-decoration: none;
 }
 
 .light-theme .auth-card {
   background-color: #dfb6b2;
   color: #190019;
 }
-.light-theme .auth-card-tou mark {
-  background: none;
+.light-theme .auth-card-tou a {
   color: #854f6c;
+}
+.light-theme .auth-card-tou a:hover {
+  color: #391E41;
 }
 
 .dark-theme .auth-card {
   background-color: #1F1023;
   color: #fbe4d8;
 }
-.dark-theme .auth-card-tou mark {
-  background: none;
+.dark-theme .auth-card-tou a {
   color: #854f6c;
+}
+.dark-theme .auth-card-tou a:hover {
+  color: #dfb6b2;
 }
 
 @media screen and (max-width: 768px) {
