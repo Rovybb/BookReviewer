@@ -5,26 +5,38 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Book Reviewer</title>
     <link rel="stylesheet" href="styles/layout/index.css" />
-    <link rel="stylesheet" href="styles/modules/home/index.css" />
+    <link rel="stylesheet" href="styles/modules/auth/index.css" />
   </head>
   <body class="dark-theme">
     <div class="container">
       <header class="header">
-        <h1 class="logo">Book<mark>Reviewer</mark></h1>
-        <nav class="nav">
-          <ul class="nav-list">
-            <li class="nav-item"><a href="index.html" class="nav-link">Home</a></li>
-            <li class="nav-item"><a href="about.html" class="nav-link">About</a></li>
-            <li class="nav-item"><a href="chat.html" class="nav-link">Chat</a></li>
-            <li class="nav-item"><a href="reviews.html" class="nav-link">Reviews</a></li>
-          </ul>
+        <h1 class="logo logo--clickable" onclick="handleNavigate('./index.html')">Book<mark>Reviewer</mark></h1>
         </nav>
       </header>
       <main class="main-content">
+        <div class="auth-card">
+          <section class="auth-card-left-section">
+            <div class="auth-card-wrapper">
+              <h2 class="auth-card-subtitle">Welcome to BookReviewer!</h2>
+              <h1 class="auth-card-title">Login</h1>
+              <form action="" class="auth-form-container">
+                <label for="username" class="input-text-label hidden">Username</label>
+                <input type="text" id="username" class="input-text" placeholder="Username" required />
+                <label for="password" class="input-text-label hidden">Password</label>
+                <input type="password" id="password" class="input-text" placeholder="Password" required />
+                <button class="button" type="submit">Login</button>
+              </form>
+            </div>
+            <p class="auth-card-tou">By connecting, you agreeto the <mark>Terms of Use</mark> and <mark>Privacy Policy</mark></p>
+          </section>
+          <img src="assets/auth_banner.png" alt="Banner" class="auth-card-img">
+        </div>
       </main>
-      <footer class="footer">
-        <p class="footer-copyright">©2024 BookReviewer, Inc.</p>
-      </footer>
     </div>
   </body>
+  <script type="text/javascript">
+    const handleNavigate = (path) => {
+      window.location.href = path;
+    };
+  </script>
 </html>

@@ -1,0 +1,96 @@
+.auth-card {
+  width: 100%;
+  height: 100%;
+  max-width: 800px;
+  max-height: 500px;
+  border-radius: 16px;
+  display: flex;
+}
+
+.auth-card-left-section {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  flex-grow: 1;
+  gap: 16px;
+  padding: 32px 40px;
+}
+
+.auth-card-img {
+  object-fit: cover;
+  border-radius: 0 16px 16px 0;
+  flex-grow: 2;
+  max-width: 450px;
+  height: 500px;
+}
+
+.auth-card-wrapper {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  gap: 48px;
+}
+
+.auth-card-subtitle {
+  font-size: 18px;
+  font-weight: 600;
+  align-self: flex-start;
+}
+
+.auth-card-title {
+  font-size: 40px;
+  font-weight: 600;
+  align-self: flex-start;
+}
+
+.auth-form-container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 24px;
+}
+.auth-form-container .button {
+  margin-top: 10px;
+}
+
+.auth-card-tou {
+  font-size: 12px;
+  font-weight: 400;
+}
+.auth-card-tou mark {
+  cursor: pointer;
+}
+
+.light-theme .auth-card {
+  background-color: #dfb6b2;
+  color: #190019;
+}
+.light-theme .auth-card-tou mark {
+  background: none;
+  color: #854f6c;
+}
+
+.dark-theme .auth-card {
+  background-color: #1F1023;
+  color: #fbe4d8;
+}
+.dark-theme .auth-card-tou mark {
+  background: none;
+  color: #854f6c;
+}
+
+@media screen and (max-width: 768px) {
+  .auth-card {
+    max-width: 500px;
+  }
+  .auth-card-img {
+    display: none;
+  }
+}
+
+/*# sourceMappingURL=card.css.map */

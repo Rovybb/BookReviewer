@@ -19,7 +19,7 @@
             <li class="nav-item"><a href="reviews.html" class="nav-link">Reviews</a></li>
           </ul>
         </nav>
-        <button id="button--login" class="button button--bordered">Login</button>
+        <button id="button--login" class="button button--bordered" onclick="handleNavigate('./login.html')">Login</button>
       </header>
       <main class="main-content">
         <section class="banner">
@@ -46,8 +46,8 @@
     </div>
   </body>
   <script type="text/javascript">
-    document.getElementById("button--login").addEventListener("click", function() {
-      window.location.href = "login.html";
-    });
+    const handleNavigate = (path) => {
+      window.location.href = path;
+    };
   </script>
 </html>

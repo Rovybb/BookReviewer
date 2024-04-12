@@ -9,7 +9,7 @@
   <body class="dark-theme">
     <div class="container">
       <header class="header">
-        <h1 class="logo">Book<mark>Reviewer</mark></h1>
+        <h1 class="logo logo--clickable" onclick="handleNavigate('./index.html')">Book<mark>Reviewer</mark></h1>
         <nav class="nav">
           <ul class="nav-list">
             <li class="nav-item"><a href="index.html" class="nav-link">Home</a></li>
@@ -18,7 +18,7 @@
             <li class="nav-item"><a href="reviews.html" class="nav-link">Reviews</a></li>
           </ul>
         </nav>
-        <button id="button--login" class="button button--bordered">Login</button>
+        <button id="button--login" class="button button--bordered" onclick="handleNavigate('./login.html')">Login</button>
       </header>
       <main class="main-content">
       </main>
@@ -28,8 +28,8 @@
     </div>
   </body>
   <script type="text/javascript">
-    document.getElementById("button--login").addEventListener("click", function() {
-      window.location.href = "login.html";
-    });
+    const handleNavigate = (path) => {
+      window.location.href = path;
+    };
   </script>
 </html>

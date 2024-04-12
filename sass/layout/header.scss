@@ -12,6 +12,10 @@
     font-size: $font-size-xl;
     font-weight: 800;
     justify-self: flex-start;
+
+    &--clickable {
+      cursor: pointer;
+    }
   }
 
   .button {
@@ -31,7 +35,7 @@
   justify-content: center;
   gap: 40px;
   list-style: none;
-  padding: 20;
+  padding: 20px;
 }
 
 .nav-item {

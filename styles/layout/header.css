@@ -11,6 +11,9 @@
   font-weight: 800;
   justify-self: flex-start;
 }
+.header .logo--clickable {
+  cursor: pointer;
+}
 .header .button {
   justify-self: flex-end;
 }
@@ -27,7 +30,7 @@
   justify-content: center;
   gap: 40px;
   list-style: none;
-  padding: 20;
+  padding: 20px;
 }
 
 .nav-item {
