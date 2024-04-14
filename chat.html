@@ -23,8 +23,37 @@
         />
         <link rel="manifest" href="./public/site.webmanifest" />
         <link rel="stylesheet" href="styles/layout/index.css" />
+        <script
+            src="https://kit.fontawesome.com/3811cdfa76.js"
+            crossorigin="anonymous"
+        ></script>
     </head>
     <body class="dark-theme">
+        <div class="mobile-menu">
+            <span class="fa-solid fa-x mobile-menu-close-button"></span>
+            <span
+                class="mobile-menu-logo"
+                onclick="handleNavigate('../index.html')"
+                >Book<mark>Reviewer</mark></span
+            >
+            <ul class="mobile-menu-list">
+                <li class="mobile-menu-list-item">
+                    <a href="../index.html" class="menu-list-link">Home</a>
+                </li>
+                <li class="mobile-menu-list-item">
+                    <a href="../about.html" class="menu-list-link">About</a>
+                </li>
+                <li class="mobile-menu-list-item">
+                    <p class="menu-list-link--active">Chat</p>
+                </li>
+                <li class="mobile-menu-list-item">
+                    <a href="../reviews.html" class="menu-list-link">Reviews</a>
+                </li>
+                <li class="mobile-menu-list-item">
+                    <a href="../login.html" class="menu-list-link">Login</a>
+                </li>
+            </ul>
+        </div>
         <div class="container">
             <header class="header">
                 <h1
@@ -56,16 +85,20 @@
                 >
                     Login
                 </button>
+                <div class="mobile-menu-button">
+                    <span class="fa fa-bars"></span>
+                </div>
             </header>
             <main class="main-content"></main>
             <footer class="footer">
                 <p class="footer-copyright">©2024 BookReviewer, Inc.</p>
             </footer>
         </div>
-    <script>
-        const handleNavigate = (path) => {
-            window.location.href = path;
-        };
-    </script>
+        <script>
+            const handleNavigate = (path) => {
+                window.location.href = path;
+            };
+        </script>
+        <script src="../utils/handleOpenMenu.js"></script>
     </body>
 </html>

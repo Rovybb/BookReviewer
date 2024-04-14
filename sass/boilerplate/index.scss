@@ -44,6 +44,10 @@ body {
   font-size: $font-size-md;
 }
 
+body:has(.mobile-menu.open) {
+  overflow: hidden;
+}
+
 .container {
   min-height: 100vh;
   display: flex;

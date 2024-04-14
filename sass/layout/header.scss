@@ -1,74 +1,184 @@
 @import "../boilerplate/theme";
 
 .header {
-  min-height: 72px;
-  width: 100%;
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-  align-items: center;
-  padding: 0 24px;
+    min-height: 72px;
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    align-items: center;
+    padding: 0 24px;
 
-  .logo {
-    font-size: $font-size-xl;
-    font-weight: 800;
-    justify-self: flex-start;
+    .logo {
+        font-size: $font-size-xl;
+        font-weight: 800;
+        justify-self: flex-start;
 
-    &--clickable {
-      cursor: pointer;
+        &--clickable {
+            cursor: pointer;
+        }
     }
-  }
 
-  .button {
-    justify-self: flex-end;
-  }
+    .button {
+        justify-self: flex-end;
+    }
 }
 
 .nav {
-  display: flex;
-  align-items: center;
-  justify-content: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .nav-list {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 40px;
-  list-style: none;
-  padding: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 40px;
+    list-style: none;
+    padding: 20px;
 }
 
 .nav-item {
-  cursor: pointer;
+    cursor: pointer;
 
-  .nav-link {
-    text-decoration: none;
-    font-weight: 500;
+    .nav-link {
+        text-decoration: none;
+        font-weight: 500;
 
-    &--active {
-      font-weight: 500;
-      cursor: default;
+        &--active {
+            font-weight: 500;
+            cursor: default;
+        }
     }
-  }
+}
+
+.mobile-menu-button {
+    display: none;
+}
+
+.mobile-menu {
+    display: none;
+}
+
+@media screen and (max-width: $breakpoint-md) {
+    .header {
+        grid-template-columns: 1fr 1fr;
+        justify-items: flex-end;
+    }
+
+    .nav {
+        display: none;
+    }
+
+    button.button {
+        display: none;
+    }
+
+    .mobile-menu-button {
+        width: 36px;
+        height: 36px;
+        cursor: pointer;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        font-size: $font-size-lg;
+    }
+
+    .mobile-menu {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 60px;
+        padding: 26px 30px;
+        position: fixed;
+        top: 0;
+        right: 0;
+        width: 100%;
+        height: 100vh;
+        z-index: 100;
+        transform: translate(-100%);
+        transition: transform 0.3s ease-in-out;
+
+        &-close-button {
+            align-self: flex-end;
+            cursor: pointer;
+            font-size: $font-size-lg;
+        }
+
+        &-logo {
+            font-size: $font-size-xl;
+            font-weight: 800;
+            cursor: pointer;
+        }
+
+        &-list {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 20px;
+            list-style: none;
+
+            &-item {
+                cursor: pointer;
+
+                .menu-list-link {
+                    text-decoration: none;
+                    font-weight: 500;
+
+                    &--active {
+                        text-decoration: none;
+                        font-weight: 500;
+                        cursor: default;
+                    }
+                }
+            }
+        }
+    }
+
+    .open {
+        transform: translate(0);
+    }
 }
 
 @include themify($themes) {
-  .header .logo {
-    mark {
-      background: none;
-      color: themed($text-secondary);
-    }
-  }
-
-  .nav-link {
-    color: themed($text);
-
-    &:hover {
-      color: themed($text-secondary);
+    .header .logo mark {
+        background: none;
+        color: themed($text-secondary);
     }
 
-    &--active:hover {
-      color: themed($text);
+    .nav-link {
+        color: themed($text);
+
+        &:hover {
+            color: themed($text-secondary);
+        }
+
+        &--active:hover {
+            color: themed($text);
+        }
     }
-  }
+
+    .mobile-menu {
+        background: themed($bg);
+        color: themed($text);
+
+        &-logo mark {
+            background: none;
+            color: themed($text-secondary);
+        }
+
+        .menu-list-link {
+            color: themed($text);
+
+            &:hover {
+                color: themed($text-secondary);
+            }
+
+            &--active:hover {
+                color: themed($text);
+            }
+        }
+    }
 }
