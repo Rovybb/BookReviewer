@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Book Reviewer</title>
+        <link
+            rel="apple-touch-icon"
+            sizes="180x180"
+            href="../public/apple-touch-icon.png"
+        />
+        <link
+            rel="icon"
+            type="image/png"
+            sizes="32x32"
+            href="../public/favicon-32x32.png"
+        />
+        <link
+            rel="icon"
+            type="image/png"
+            sizes="16x16"
+            href="../public/favicon-16x16.png"
+        />
+        <link rel="manifest" href="../public/site.webmanifest" />
+        <link rel="stylesheet" href="../styles/layout/index.css" />
+        <link
+            rel="stylesheet"
+            href="../styles/modules/books/book-page/index.css"
+        />
+        <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+        />
+    </head>
+    <body class="dark-theme">
+        <div class="container">
+            <header class="header">
+                <span
+                    class="logo logo--clickable"
+                    onclick="handleNavigate('../index.html')"
+                >
+                    Book<mark>Reviewer</mark>
+                </span>
+                <nav class="nav">
+                    <ul class="nav-list">
+                        <li class="nav-item">
+                            <a href="../index.html" class="nav-link">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="../about.html" class="nav-link">About</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="../chat.html" class="nav-link">Chat</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="../reviews.html" class="nav-link"
+                                >Reviews</a
+                            >
+                        </li>
+                    </ul>
+                </nav>
+                <button
+                    id="button--login"
+                    class="button button--bordered"
+                    onclick="handleNavigate('../login.html')"
+                >
+                    Login
+                </button>
+            </header>
+            <main class="main-content">
+                <div class="book-card">
+                    <img
+                        src="./Berserk_vol1.jpg"
+                        alt="Berserk, Vol.1"
+                        class="book-card-image"
+                    />
+                    <h1 class="book-card-title">Berserk, Vol.1</h1>
+                    <p class="book-card-author">by Kentaro Miura</p>
+                    <button class="button">+Add</button>
+                    <div class="book-card-rating">
+                        <span class="fa fa-star --filled"></span>
+                        <span class="fa fa-star --filled"></span>
+                        <span class="fa fa-star --filled"></span>
+                        <span class="fa fa-star --filled"></span>
+                        <span class="fa fa-star"></span>
+                    </div>
+                    <p class="book-card-description">
+                        Guts, the Black Swordsman, wanders around in a medieval
+                        world slaying demons as they are attracted to a demonic
+                        mark on his neck. To his help he has inhuman strength
+                        gained from a harsh childhood lived with mercenaries, a
+                        gigantic sword, an iron prosthetic left hand and the elf
+                        Puck. In his search for vengeance on the one who gave
+                        him the mark, he meets many interesting persons and
+                        creatures, whom all is affected by him in one way or
+                        another.
+                    </p>
+                    <section class="book-card-tags">
+                        <span class="book-card-tag">Dark Fantasy</span>
+                        <span class="book-card-tag">Manga</span>
+                        <span class="book-card-tag">Action</span>
+                        <span class="book-card-tag">Adventure</span>
+                        <span class="book-card-tag">Drama</span>
+                        <span class="book-card-tag">Horror</span>
+                        <span class="book-card-tag">Mature</span>
+                        <span class="book-card-tag">Seinen</span>
+                    </section>
+                    <section class="comment-section">
+                        <div class="comment-section-title-container">
+                            <h2 class="comment-section-title">Reviews</h2>
+                        </div>
+                        <form class="comment-section-form">
+                            <textarea
+                                class="input-text"
+                                placeholder="Write a review..."
+                                required
+                            ></textarea>
+                            <div class="comment-section-form-rating">
+                                <span class="fa fa-star"></span>
+                                <span class="fa fa-star"></span>
+                                <span class="fa fa-star"></span>
+                                <span class="fa fa-star"></span>
+                                <span class="fa fa-star"></span>
+                            </div>
+                            <button type="submit" class="button">Submit</button>
+                        </form>
+                        <div class="comment-section-comments">
+                            <div class="comment">
+                                <div class="comment-header">
+                                    <span class="comment-author">John Doe</span>
+                                    <span class="comment-date">01-01-2024</span>
+                                </div>
+                                <div class="comment-rating">
+                                    <span class="fa fa-star --filled"></span>
+                                    <span class="fa fa-star --filled"></span>
+                                    <span class="fa fa-star --filled"></span>
+                                    <span class="fa fa-star --filled"></span>
+                                    <span class="fa fa-star --filled"></span>
+                                </div>
+                                <p class="comment-content">
+                                    This is a great manga! I love the art style
+                                    and the story is very interesting. I can't
+                                    wait to read the next volume.
+                                </p>
+                            </div>
+                            <div class="comment">
+                                <div class="comment-header">
+                                    <span class="comment-author">Jane Doe</span>
+                                    <span class="comment-date">01-01-2024</span>
+                                </div>
+                                <div class="comment-rating">
+                                    <span class="fa fa-star --filled"></span>
+                                    <span class="fa fa-star --filled"></span>
+                                    <span class="fa fa-star --filled"></span>
+                                    <span class="fa fa-star --filled"></span>
+                                    <span class="fa fa-star --filled"></span>
+                                </div>
+                                <p class="comment-content">
+                                    I've read the whole series and it's amazing!
+                                    I highly recommend it to anyone who loves
+                                    dark fantasy.
+                                </p>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+            </main>
+            <footer class="footer">
+                <p class="footer-copyright">©2024 BookReviewer, Inc.</p>
+            </footer>
+        </div>
+        <script>
+            const handleNavigate = (path) => {
+                window.location.href = path;
+            };
+        </script>
+    </body>
+</html>
