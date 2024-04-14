@@ -92,6 +92,7 @@
 @media screen and (max-width: 768px) {
   .auth-card {
     max-width: 500px;
+    width: 90%;
   }
   .auth-card-img {
     display: none;

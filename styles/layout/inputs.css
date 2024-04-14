@@ -4,12 +4,25 @@
 .input-text-label.hidden {
   display: none;
 }
+@media screen and (max-width: 576px) {
+  .input-text-label {
+    font-size: 14px;
+  }
+}
 
 .input-text {
   width: 100%;
   padding: 8px 12px;
   font-size: 16px;
   border-radius: 8px;
+}
+.input-text::placeholder {
+  color: "text-secondary";
+}
+@media screen and (max-width: 576px) {
+  .input-text {
+    font-size: 14px;
+  }
 }
 
 .input-file {
@@ -27,11 +40,21 @@
   border-radius: 8px;
   cursor: pointer;
 }
+@media screen and (max-width: 576px) {
+  .input-file-label {
+    font-size: 14px;
+  }
+}
 
 .plus-svg {
   width: 16px;
   height: 16px;
   cursor: pointer;
+}
+@media screen and (max-width: 576px) {
+  .plus-svg {
+    font-size: 14px;
+  }
 }
 
 .input-file-label-text {

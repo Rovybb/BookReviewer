@@ -1,91 +1,102 @@
 @import "../../boilerplate/theme";
 @import "../../boilerplate/animate";
 
-
-
 .banner {
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 40px;
-  padding-top: 40px;
-
-  .banner-img-wrapper {
-    position: relative;
-    top: -100px;
-    width: 760px;
-    height: fit-content;
-  }
-
-  .banner-img-bg {
-    position: absolute;
-    top: -11px;
     width: 100%;
-    height: 100%;
-    z-index: 1;
-  }
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 40px;
+    padding-top: 40px;
 
-  .banner-img {
-    width: 100%;
+    .banner-img-wrapper {
+        position: relative;
+        top: -100px;
+        width: 760px;
+        height: fit-content;
 
-    @include keyframes(float) {
-      0% {
-        transform: translateY(0);
-      }
-      50% {
-        transform: translateY(-10px);
-      }
-      100% {
-        transform: translateY(0);
-      }
+        @media screen and (max-width: $breakpoint-md) {
+            width: 100%;
+        }
     }
 
-    @include animate(float, 3s, ease-in-out, infinite);
-  }
+    .banner-img-bg {
+        position: absolute;
+        top: -11px;
+        width: 100%;
+        height: 100%;
+        z-index: 1;
+    }
+
+    .banner-img {
+        width: 100%;
+
+        @include keyframes(float) {
+            0% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-10px);
+            }
+            100% {
+                transform: translateY(0);
+            }
+        }
+
+        @include animate(float, 3s, ease-in-out, infinite);
+    }
 }
 
 .banner-text-wrapper {
-  position: relative;
-  z-index: 2;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 40px;
+    position: relative;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 40px;
 
-  .banner-title {
-    font-size: $font-size-hg;
-    font-weight: 800;
-    line-height: 80px;
-    text-align: center;
-  }
+    .banner-title {
+        font-size: $font-size-hg;
+        font-weight: 800;
+        line-height: $font-size-hg;
+        text-align: center;
 
-  .banner-subtitle {
-    font-size: $font-size-md;
-    font-weight: 500;
-    text-align: center;
-  }
+        @media screen and (max-width: $breakpoint-md){
+            font-size: $font-size-xxl;
+            line-height: $font-size-xxl;
+        }
+    }
+
+    .banner-subtitle {
+        font-size: $font-size-md;
+        font-weight: 500;
+        text-align: center;
+
+        @media screen and (max-width: $breakpoint-md){
+            font-size: $font-size-sm;
+        }
+    }
 }
 
 @include themify($themes) {
-  .banner-img-bg {
-    background-image: linear-gradient(0deg, #00000000 0%, themed($bg) 100%);
-  }
+    .banner-img-bg {
+        background-image: linear-gradient(0deg, #00000000 0%, themed($bg) 100%);
+    }
 
-  .banner-title {
-    background: linear-gradient(
-      145deg,
-      themed($text) 0%,
-      rgba(255, 255, 255, 0.43) 100%
-    );
-    background-clip: text;
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-  }
+    .banner-title {
+        background: linear-gradient(
+            145deg,
+            themed($text) 0%,
+            rgba(255, 255, 255, 0.43) 100%
+        );
+        background-clip: text;
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+    }
 
-  .banner-subtitle {
-    color: themed($text-secondary);
-  }
+    .banner-subtitle {
+        color: themed($text-secondary);
+    }
 }

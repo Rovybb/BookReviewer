@@ -5,8 +5,7 @@
     flex-direction: column;
     align-items: center;
     gap: 20px;
-    border-radius: 16px 16px 0 0;
-    padding: 50px;
+    padding: 75px;
 
     &-image {
         width: 35%;
@@ -17,11 +16,24 @@
     &-title {
         font-size: $font-size-xxl;
         font-weight: bold;
+
+        @media screen and (max-width: $breakpoint-md){
+            font-size: 36px;
+        }
+
+        @media screen and (max-width: $breakpoint-sm){
+            font-size: $font-size-xl;
+            
+        }
     }
 
     &-author {
         font-size: $font-size-lg;
         font-weight: bold;
+
+        @media screen and (max-width: $breakpoint-sm){
+            font-size: $font-size-md;
+        }
     }
 
     &-rating {
@@ -35,6 +47,10 @@
     &-description {
         font-size: $font-size-md;
         margin: 20px 0;
+
+        @media screen and (max-width: $breakpoint-sm){
+            font-size: $font-size-sm;
+        }
     }
 
     &-tags {
@@ -51,6 +67,15 @@
         border-radius: 24px;
         font-size: $font-size-sm;
         font-weight: 700;
+
+        @media screen and (max-width: $breakpoint-sm){
+            padding: 8px 12px;
+            font-size: $font-size-xs;
+        }
+    }
+
+    @media screen and (max-width: $breakpoint-md){
+        padding: 16px;
     }
 }
 
@@ -101,6 +126,10 @@
         flex-direction: column;
         gap: 20px;
     }
+
+    @media screen and (max-width: $breakpoint-md){
+        padding: 0 16px;
+    }
 }
 
 .comment {
@@ -115,15 +144,29 @@
         align-items: center;
         justify-content: space-between;
         gap: 10px;
+
+        @media screen and (max-width: $breakpoint-sm){
+            flex-direction: column;
+            gap: 5px;
+            
+        }
     }
 
     &-author {
         font-size: $font-size-lg;
         font-weight: bold;
+
+        @media screen and (max-width: $breakpoint-sm){
+            font-size: $font-size-md;
+        }
     }
 
     &-date {
         font-size: $font-size-sm;
+
+        @media screen and (max-width: $breakpoint-sm){
+            font-size: $font-size-xs;
+        }
     }
 
     &-rating {
@@ -131,10 +174,19 @@
         align-items: center;
         gap: 5px;
         font-size: $font-size-md;
+
+        @media screen and (max-width: $breakpoint-sm){
+            font-size: $font-size-sm;
+            align-self: center;
+        }
     }
 
     &-content {
         font-size: $font-size-md;
+
+        @media screen and (max-width: $breakpoint-sm){
+            font-size: $font-size-sm;
+        }
     }
 }
 

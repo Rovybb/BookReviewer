@@ -64,13 +64,13 @@
     .header {
         grid-template-columns: 1fr 1fr;
         justify-items: flex-end;
+
+        button.button {
+            display: none;
+        }
     }
 
     .nav {
-        display: none;
-    }
-
-    button.button {
         display: none;
     }
 

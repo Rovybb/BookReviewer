@@ -58,10 +58,10 @@
     grid-template-columns: 1fr 1fr;
     justify-items: flex-end;
   }
-  .nav {
+  .header button.button {
     display: none;
   }
-  button.button {
+  .nav {
     display: none;
   }
   .mobile-menu-button {
