@@ -182,10 +182,10 @@
 
 .light-theme .book-card {
   background-image: linear-gradient(to bottom, #dfb6b2, #fbe4d8);
-  color: #190019;
+  color: #391E41;
 }
 .light-theme .book-card-author {
-  color: #391E41;
+  color: #190019;
 }
 .light-theme .book-card-rating {
   color: #854f6c;
@@ -208,10 +208,10 @@
 }
 .light-theme .comment {
   background-color: #dfb6b2;
-  color: #190019;
+  color: #391E41;
 }
 .light-theme .comment-date {
-  color: #391E41;
+  color: #190019;
 }
 .light-theme .comment-rating {
   color: #854f6c;
@@ -234,7 +234,7 @@
   color: #ed8a19;
 }
 .dark-theme .book-card-tag {
-  background-color: #dfb6b2;
+  background-color: #fbe4d8;
   color: #1F1023;
 }
 .dark-theme .comment-section-title-container {

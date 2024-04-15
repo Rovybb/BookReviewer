@@ -14,15 +14,15 @@
 
 .light-theme .button {
   color: #dfb6b2;
-  background-color: #190019;
-}
-.light-theme .button:hover {
   background-color: #391E41;
 }
+.light-theme .button:hover {
+  background-color: #190019;
+}
 .light-theme .button--bordered {
-  color: #190019;
+  color: #391E41;
   background-color: #fbe4d8;
-  outline: 2px solid #190019;
+  outline: 2px solid #391E41;
 }
 .light-theme .button--bordered:hover {
   background-color: #dfb6b2;

@@ -69,13 +69,13 @@
 
 .light-theme .auth-card {
   background-color: #dfb6b2;
-  color: #190019;
+  color: #391E41;
 }
 .light-theme .auth-card-tou a {
   color: #854f6c;
 }
 .light-theme .auth-card-tou a:hover {
-  color: #391E41;
+  color: #190019;
 }
 
 .dark-theme .auth-card {

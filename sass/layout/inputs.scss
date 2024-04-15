@@ -15,12 +15,9 @@
 .input-text {
     width: 100%;
     padding: 8px 12px;
+    font: inherit;
     font-size: $font-size-md;
     border-radius: 8px;
-
-    &::placeholder {
-        color: $text-secondary;
-    }
 
     @media screen and (max-width: $breakpoint-sm){
         font-size: $font-size-sm;

@@ -125,33 +125,33 @@
 }
 .light-theme .header .logo mark {
   background: none;
-  color: #391E41;
+  color: #190019;
 }
 .light-theme .nav-link {
-  color: #190019;
-}
-.light-theme .nav-link:hover {
   color: #391E41;
 }
-.light-theme .nav-link--active:hover {
+.light-theme .nav-link:hover {
   color: #190019;
+}
+.light-theme .nav-link--active:hover {
+  color: #391E41;
 }
 .light-theme .mobile-menu {
   background: #fbe4d8;
-  color: #190019;
+  color: #391E41;
 }
 .light-theme .mobile-menu-logo mark {
   background: none;
-  color: #391E41;
+  color: #190019;
 }
 .light-theme .mobile-menu .menu-list-link {
-  color: #190019;
-}
-.light-theme .mobile-menu .menu-list-link:hover {
   color: #391E41;
 }
-.light-theme .mobile-menu .menu-list-link--active:hover {
+.light-theme .mobile-menu .menu-list-link:hover {
   color: #190019;
+}
+.light-theme .mobile-menu .menu-list-link--active:hover {
+  color: #391E41;
 }
 
 .dark-theme .header .logo mark {

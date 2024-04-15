@@ -77,13 +77,13 @@
   background-image: linear-gradient(0deg, rgba(0, 0, 0, 0) 0%, #fbe4d8 100%);
 }
 .light-theme .banner-title {
-  background: linear-gradient(145deg, #190019 0%, rgba(255, 255, 255, 0.43) 100%);
+  background: linear-gradient(145deg, #391E41 0%, rgba(255, 255, 255, 0.43) 100%);
   background-clip: text;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
 .light-theme .banner-subtitle {
-  color: #391E41;
+  color: #190019;
 }
 
 .dark-theme .banner-img-bg {

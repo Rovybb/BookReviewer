@@ -13,11 +13,9 @@
 .input-text {
   width: 100%;
   padding: 8px 12px;
+  font: inherit;
   font-size: 16px;
   border-radius: 8px;
-}
-.input-text::placeholder {
-  color: "text-secondary";
 }
 @media screen and (max-width: 576px) {
   .input-text {
@@ -80,11 +78,11 @@
 .light-theme .input-text {
   font-size: 16px;
   background-color: #dfb6b2;
-  color: #190019;
+  color: #391E41;
   border: 1px solid #391E41;
 }
 .light-theme .input-text::placeholder {
-  color: #391E41;
+  color: #190019;
 }
 .light-theme .input-text:focus {
   outline: none;
@@ -92,14 +90,14 @@
 }
 .light-theme .input-file-label {
   background-color: #dfb6b2;
-  color: #190019;
+  color: #391E41;
   border: 1px solid #391E41;
 }
 .light-theme .input-file-label:hover {
   background-color: #dfb6b2;
 }
 .light-theme .plus-svg {
-  fill: #190019;
+  fill: #391E41;
 }
 
 .dark-theme .input-text {
