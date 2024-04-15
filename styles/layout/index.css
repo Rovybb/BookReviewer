@@ -254,8 +254,8 @@ body:has(.mobile-menu.open) {
   border-radius: 32px;
   cursor: pointer;
   font-size: 14px;
-  font-weight: 500;
-  font: inherit;
+  font-weight: 700;
+  font-family: inherit;
   border: none;
 }
 
@@ -306,7 +306,7 @@ body:has(.mobile-menu.open) {
 .input-text {
   width: 100%;
   padding: 8px 12px;
-  font: inherit;
+  font-family: inherit;
   font-size: 16px;
   border-radius: 8px;
 }

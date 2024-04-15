@@ -23,6 +23,7 @@
         />
         <link rel="manifest" href="./public/site.webmanifest" />
         <link rel="stylesheet" href="styles/layout/index.css" />
+        <link rel="stylesheet" href="./styles/modules/groups/search-group/index.css" />
         <script
             src="https://kit.fontawesome.com/3811cdfa76.js"
             crossorigin="anonymous"
@@ -47,7 +48,7 @@
                     <a href="../books.html" class="menu-list-link">Books</a>
                 </li>
                 <li class="mobile-menu-list-item">
-                    <p class="menu-list-link--active">Reviews</p>
+                    <p class="menu-list-link--active">Groups</p>
                 </li>
                 <li class="mobile-menu-list-item">
                     <a href="../login.html" class="menu-list-link">Login</a>
@@ -74,7 +75,7 @@
                             <a href="books.html" class="nav-link">Books</a>
                         </li>
                         <li class="nav-item">
-                            <p class="nav-link--active">Reviews</p>
+                            <p class="nav-link--active">Groups</p>
                         </li>
                     </ul>
                 </nav>
@@ -89,7 +90,14 @@
                     <span class="fa fa-bars"></span>
                 </div>
             </header>
-            <main class="main-content"></main>
+            <main class="main-content">
+                <form action="" class="search-form">
+                    <input type="text" class="search-input" placeholder="Search groups">
+                    <button class="search-button">
+                        <span class="fa-solid fa-search"></span>
+                    </button>
+                </form>
+            </main>
             <footer class="footer">
                 <p class="footer-copyright">©2024 BookReviewer, Inc.</p>
             </footer>

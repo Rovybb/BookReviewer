@@ -1,0 +1,70 @@
+@import "../../boilerplate/theme";
+
+.about {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    padding: 50px 50px;
+
+    @media screen and (max-width: $breakpoint-md) {
+        padding: 30px 20px;
+        gap: 10px;
+    }
+
+    &-title {
+        width: 100%;
+        font-size: 36px;
+        font-weight: bold;
+
+        @media screen and (max-width: $breakpoint-md) {
+            font-size: $font-size-xl;
+        }
+    }
+
+    &-subtitle {
+        padding-left: 20px;
+        margin-top: 20px;
+        width: 100%;
+        font-size: $font-size-xl;
+        font-weight: bold;
+
+        @media screen and (max-width: $breakpoint-md) {
+            font-size: $font-size-lg;
+            margin-top: 10px;
+        }
+    }
+
+    &-container {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+
+        &-text {
+            width: 100%;
+            font-size: $font-size-md;
+
+            @media screen and (max-width: $breakpoint-md) {
+                font-size: $font-size-sm;
+            }
+        }
+
+        &-ul {
+            margin: 10px 0;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            padding-left: 20px;
+        }
+
+        &-li {
+            width: 100%;
+            font-size: $font-size-md;
+
+            @media screen and (max-width: $breakpoint-md) {
+                font-size: $font-size-sm;
+            }
+        }
+    }
+}

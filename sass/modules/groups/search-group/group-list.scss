@@ -1,0 +1,98 @@
+@import "../../../boilerplate/theme";
+
+.main-content {
+    justify-content: flex-start;
+}
+
+.groups-container {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    padding: 0 75px;
+
+    @media screen and (max-width: $breakpoint-xl) {
+        padding: 0 50px;
+    }
+
+    @media screen and (max-width: $breakpoint-lg) {
+        padding: 0 20px;
+    }
+
+    @media screen and (max-width: $breakpoint-md) {
+        padding: 0 10px;
+    }
+}
+
+.group-card {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    padding: 16px 20px;
+    border-radius: 16px;
+
+    &-header {
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 10px;
+
+        @media screen and (max-width: $breakpoint-sm){
+            flex-direction: column;
+        }
+    }
+
+    &-title {
+        font-size: $font-size-lg;
+        font-weight: bold;
+
+        @media screen and (max-width: $breakpoint-md){
+            font-size: $font-size-md;
+        }
+
+        @media screen and (max-width: $breakpoint-sm){
+            font-size: $font-size-sm;
+        }
+    }
+
+    &-date {
+        font-size: $font-size-md;
+
+        @media screen and (max-width: $breakpoint-md){
+            font-size: $font-size-sm;
+        }
+
+        @media screen and (max-width: $breakpoint-sm){
+            font-size: $font-size-xs;
+        }
+    }
+
+    &-content {
+        width: 100%;
+        font-size: $font-size-md;
+
+        @media screen and (max-width: $breakpoint-md){
+            font-size: $font-size-sm;
+        }
+
+        @media screen and (max-width: $breakpoint-sm){
+            font-size: $font-size-xs;
+        }
+    }
+}
+
+@include themify($themes) {
+    .group-card {
+        background-color: themed($card-bg);
+
+        &-date {
+            color: themed($text-secondary);
+        }
+    }
+}
