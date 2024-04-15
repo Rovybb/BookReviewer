@@ -1,36 +1,37 @@
 @import "../boilerplate/theme";
 
 .button {
-  height: 38px;
-  width: fit-content;
-  padding: 0 16px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: 32px;
-  cursor: pointer;
-  font-size: $font-size-sm;
-  font-weight: 500;
-  border: none;
+    height: 38px;
+    width: fit-content;
+    padding: 0 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 32px;
+    cursor: pointer;
+    font-size: $font-size-sm;
+    font-weight: 500;
+    font: inherit;
+    border: none;
 }
 
 @include themify($themes) {
-  .button {
-    color: themed($card-bg);
-    background-color: themed($text);
+    .button {
+        color: themed($card-bg);
+        background-color: themed($text);
 
-    &:hover {
-      background-color: themed($text-secondary);
+        &:hover {
+            background-color: themed($text-secondary);
+        }
     }
-  }
 
-  .button--bordered {
-    color: themed($text);
-    background-color: themed($bg);
-    outline: 2px solid themed($text);
+    .button--bordered {
+        color: themed($text);
+        background-color: themed($bg);
+        outline: 2px solid themed($text);
 
-    &:hover {
-        background-color: themed($hover);
+        &:hover {
+            background-color: themed($hover);
+        }
     }
-  }
 }

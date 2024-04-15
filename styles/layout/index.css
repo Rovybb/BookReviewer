@@ -255,6 +255,7 @@ body:has(.mobile-menu.open) {
   cursor: pointer;
   font-size: 14px;
   font-weight: 500;
+  font: inherit;
   border: none;
 }
 
@@ -368,7 +369,6 @@ body:has(.mobile-menu.open) {
 }
 
 .light-theme .input-text {
-  font-size: 16px;
   background-color: #dfb6b2;
   color: #391E41;
   border: 1px solid #391E41;
@@ -393,7 +393,6 @@ body:has(.mobile-menu.open) {
 }
 
 .dark-theme .input-text {
-  font-size: 16px;
   background-color: #1F1023;
   color: #fbe4d8;
   border: 1px solid #fbe4d8;
@@ -449,6 +448,91 @@ body:has(.mobile-menu.open) {
 }
 .dark-theme .footer .footer-copyright {
   color: #dfb6b2;
+}
+
+.search-form {
+  width: 400px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+}
+@media screen and (max-width: 576px) {
+  .search-form {
+    width: 100%;
+    padding: 0 10px;
+    gap: 10px;
+  }
+}
+.search-input {
+  padding: 8px 12px;
+  flex-grow: 1;
+  border-radius: 8px;
+  font-size: 16px;
+  font: inherit;
+}
+@media screen and (max-width: 576px) {
+  .search-input {
+    padding: 6px 10px;
+    font-size: 14px;
+  }
+}
+.search-button {
+  width: fit-content;
+  padding: 8px 16px;
+  border-radius: 32px;
+  font-size: 16px;
+  font: inherit;
+  cursor: pointer;
+  border: none;
+}
+@media screen and (max-width: 576px) {
+  .search-button {
+    padding: 6px 12px;
+    font-size: 14px;
+  }
+}
+
+.light-theme .search-input {
+  border: 2px solid #391E41;
+  color: #391E41;
+  background-color: #dfb6b2;
+}
+.light-theme .search-input::placeholder {
+  color: #190019;
+}
+.light-theme .search-input:focus {
+  outline: none;
+  border-color: #854f6c;
+}
+.light-theme .search-button {
+  outline: 2px solid #391E41;
+  background-color: #dfb6b2;
+  color: #391E41;
+}
+.light-theme .search-button:hover {
+  background-color: #dfb6b2;
+}
+
+.dark-theme .search-input {
+  border: 2px solid #fbe4d8;
+  color: #fbe4d8;
+  background-color: #1F1023;
+}
+.dark-theme .search-input::placeholder {
+  color: #dfb6b2;
+}
+.dark-theme .search-input:focus {
+  outline: none;
+  border-color: #854f6c;
+}
+.dark-theme .search-button {
+  outline: 2px solid #fbe4d8;
+  background-color: #1F1023;
+  color: #fbe4d8;
+}
+.dark-theme .search-button:hover {
+  background-color: #391E41;
 }
 
 /*# sourceMappingURL=index.css.map */

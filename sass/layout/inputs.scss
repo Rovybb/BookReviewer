@@ -76,7 +76,6 @@
 
 @include themify($themes) {
     .input-text {
-        font-size: $font-size-md;
         background-color: themed($card-bg);
         color: themed($text);
         border: 1px solid themed($border);

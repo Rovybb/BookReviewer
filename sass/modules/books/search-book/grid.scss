@@ -1,1 +1,22 @@
 @import "../../../boilerplate/theme";
+
+.main-content {
+    justify-content: flex-start;
+}
+
+.books-grid {
+    margin: 30px 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(125px, 1fr));
+    gap: 20px;
+    padding: 0 20px;
+
+    &-card {
+        width: 100%;
+        cursor: pointer;
+
+        &-image {
+            width: 100%;
+        }
+    }
+}

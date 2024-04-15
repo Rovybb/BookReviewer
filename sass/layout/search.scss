@@ -1,0 +1,74 @@
+@import "../boilerplate/theme";
+
+.search {
+    &-form {
+        width: 400px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 20px;
+
+        @media screen and (max-width: $breakpoint-sm) {
+            width: 100%;
+            padding: 0 10px;
+            gap: 10px;
+        }
+    }
+
+    &-input {
+        padding: 8px 12px;
+        flex-grow: 1;
+        border-radius: 8px;
+        font-size: $font-size-md;
+        font: inherit;
+
+        @media screen and (max-width: $breakpoint-sm) {
+            padding: 6px 10px;
+            font-size: $font-size-sm;
+        }
+    }
+
+    &-button {
+        width: fit-content;
+        padding: 8px 16px;
+        border-radius: 32px;
+        font-size: $font-size-md;
+        font: inherit;
+        cursor: pointer;
+        border: none;
+
+        @media screen and (max-width: $breakpoint-sm) {
+            padding: 6px 12px;
+            font-size: $font-size-sm;
+        }
+    }
+}
+
+@include themify($themes) {
+    .search {
+        &-input {
+            border: 2px solid themed($border);
+            color: themed($text);
+            background-color: themed($card-bg);
+
+            &::placeholder {
+                color: themed($text-secondary);
+            }
+
+            &:focus {
+                outline: none;
+                border-color: themed($link);
+            }
+        }
+
+        &-button {
+            outline: 2px solid themed($border);
+            background-color: themed($card-bg);
+            color: themed($text);
+
+            &:hover {
+                background-color: themed($hover);
+            }
+        }
+    }
+}

@@ -76,7 +76,6 @@
 }
 
 .light-theme .input-text {
-  font-size: 16px;
   background-color: #dfb6b2;
   color: #391E41;
   border: 1px solid #391E41;
@@ -101,7 +100,6 @@
 }
 
 .dark-theme .input-text {
-  font-size: 16px;
   background-color: #1F1023;
   color: #fbe4d8;
   border: 1px solid #fbe4d8;
