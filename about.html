@@ -1,250 +1,146 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Book Reviewer</title>
-        <link
-            rel="apple-touch-icon"
-            sizes="180x180"
-            href="./public/apple-touch-icon.png"
-        />
-        <link
-            rel="icon"
-            type="image/png"
-            sizes="32x32"
-            href="./public/favicon-32x32.png"
-        />
-        <link
-            rel="icon"
-            type="image/png"
-            sizes="16x16"
-            href="./public/favicon-16x16.png"
-        />
-        <link rel="manifest" href="./public/site.webmanifest" />
-        <link rel="stylesheet" href="styles/layout/index.css" />
-        <link rel="stylesheet" href="./styles/modules/about/index.css" />
-        <script
-            src="https://kit.fontawesome.com/3811cdfa76.js"
-            crossorigin="anonymous"
-        ></script>
-    </head>
-    <body class="dark-theme">
-        <div class="mobile-menu">
-            <span class="fa-solid fa-x mobile-menu-close-button"></span>
-            <span
-                class="mobile-menu-logo"
-                onclick="handleNavigate('../index.html')"
-                >Book<mark>Reviewer</mark></span
-            >
-            <ul class="mobile-menu-list">
-                <li class="mobile-menu-list-item">
-                    <a href="../index.html" class="menu-list-link">Home</a>
-                </li>
-                <li class="mobile-menu-list-item">
-                    <p class="menu-list-link--active">About</p>
-                </li>
-                <li class="mobile-menu-list-item">
-                    <a href="../books.html" class="menu-list-link">Books</a>
-                </li>
-                <li class="mobile-menu-list-item">
-                    <a href="../groups.html" class="menu-list-link">Groups</a>
-                </li>
-                <li class="mobile-menu-list-item">
-                    <a href="../login.html" class="menu-list-link">Login</a>
-                </li>
-            </ul>
-        </div>
-        <div class="container">
-            <header class="header">
-                <span
-                    class="logo logo--clickable"
-                    onclick="handleNavigate('./index.html')"
-                >
-                    Book<mark>Reviewer</mark>
-                </span>
-                <nav class="nav">
-                    <ul class="nav-list">
-                        <li class="nav-item">
-                            <a href="index.html" class="nav-link">Home</a>
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Book Reviewer</title>
+    <link rel="apple-touch-icon" sizes="180x180" href="./public/apple-touch-icon.png" />
+    <link rel="icon" type="image/png" sizes="32x32" href="./public/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="./public/favicon-16x16.png" />
+    <link rel="manifest" href="./public/site.webmanifest" />
+    <link rel="stylesheet" href="styles/layout/index.css" />
+    <link rel="stylesheet" href="./styles/modules/about/index.css" />
+    <script src="https://kit.fontawesome.com/3811cdfa76.js" crossorigin="anonymous"></script>
+</head>
+
+<body class="dark-theme">
+    <div class="mobile-menu">
+        <span class="fa-solid fa-x mobile-menu-close-button"></span>
+        <span class="mobile-menu-logo" onclick="handleNavigate('../index.html')">Book<mark>Reviewer</mark></span>
+        <ul class="mobile-menu-list">
+            <li class="mobile-menu-list-item">
+                <a href="../index.html" class="menu-list-link">Home</a>
+            </li>
+            <li class="mobile-menu-list-item">
+                <p class="menu-list-link--active">About</p>
+            </li>
+            <li class="mobile-menu-list-item">
+                <a href="../books.html" class="menu-list-link">Books</a>
+            </li>
+            <li class="mobile-menu-list-item">
+                <a href="../groups.html" class="menu-list-link">Groups</a>
+            </li>
+            <li class="mobile-menu-list-item">
+                <a href="../login.html" class="menu-list-link">Login</a>
+            </li>
+        </ul>
+    </div>
+    <div class="container">
+        <header class="header">
+            <span class="logo logo--clickable" onclick="handleNavigate('./index.html')">
+                Book<mark>Reviewer</mark>
+            </span>
+            <nav class="nav">
+                <ul class="nav-list">
+                    <li class="nav-item">
+                        <a href="index.html" class="nav-link">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <p class="nav-link--active">About</p>
+                    </li>
+                    <li class="nav-item">
+                        <a href="books.html" class="nav-link">Books</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="groups.html" class="nav-link">Groups</a>
+                    </li>
+                </ul>
+            </nav>
+            <button id="button--login" class="button button--bordered" onclick="handleNavigate('./login.html')">
+                Login
+            </button>
+            <div class="mobile-menu-button">
+                <span class="fa fa-bars"></span>
+            </div>
+        </header>
+        <main class="main-content">
+            <section class="about">
+                <h2 class="about-title">About Us</h2>
+                <div class="about-container">
+                    <p class="about-container-text">
+                        Welcome to Boo, where our passion for books meets technology to create an immersive reading
+                        experience for book lovers around the world.
+                        At Boo, we believe that books have the power to inspire, educate, and transform lives. Our
+                        platform is designed to empower readers to discover new books, share their thoughts through
+                        reviews, and connect with fellow book enthusiasts.
+                    </p>
+                </div>
+                <h3 class="about-subtitle">Our Mission</h3>
+                <div class="about-container">
+                    <p class="about-container-text">
+                        Our mission is to foster a vibrant community of readers by providing a user-friendly platform
+                        that encourages exploration, discussion, and appreciation of literature. We aim to:
+                    </p>
+                    <ul class="about-container-ul">
+                        <li class="about-container-li">
+                            <strong>Promote Reading Culture:</strong> Inspire a love for reading and lifelong learning.
                         </li>
-                        <li class="nav-item">
-                            <p class="nav-link--active">About</p>
+                        <li class="about-container-li">
+                            <strong>Facilitate Engagement:</strong> Enable users to interact, share, and learn from one
+                            another.
                         </li>
-                        <li class="nav-item">
-                            <a href="books.html" class="nav-link">Books</a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="groups.html" class="nav-link">Groups</a>
+                        <li class="about-container-li">
+                            <strong>Enhance Literary Discovery:</strong> Help readers discover new books and authors
+                            tailored to their interests.
                         </li>
                     </ul>
-                </nav>
-                <button
-                    id="button--login"
-                    class="button button--bordered"
-                    onclick="handleNavigate('./login.html')"
-                >
-                    Login
-                </button>
-                <div class="mobile-menu-button">
-                    <span class="fa fa-bars"></span>
                 </div>
-            </header>
-            <main class="main-content">
-                <section class="about">
-                    <h2 class="about-title">Title</h2>
-                    <h3 class="about-subtitle">Subtitle</h3>
-                    <div class="about-container">
-                        <p class="about-container-text">
-                            Lorem ipsum dolor sit amet consectetur adipisicing
-                            elit. Illo explicabo numquam, aliquam asperiores
-                            soluta eos. Distinctio corporis tempora
-                            exercitationem quam, aspernatur adipisci
-                            reprehenderit nulla veniam! Repudiandae numquam
-                            dignissimos nisi rem natus consectetur animi unde
-                            placeat laboriosam, at quos sapiente eaque.
-                        </p>
-                        <ul class="about-container-ul">
-                            <li class="about-container-li">
-                                Lorem ipsum dolor sit amet consectetur
-                                adipisicing elit. Numquam, exercitationem!
-                            </li>
-                            <li class="about-container-li">
-                                Lorem, ipsum dolor sit amet consectetur
-                                adipisicing elit. Nesciunt, id.
-                            </li>
-                            <li class="about-container-li">
-                                Lorem ipsum, dolor sit amet consectetur
-                                adipisicing elit. Soluta, itaque!
-                            </li>
-                            <li class="about-container-li">
-                                Lorem ipsum, dolor sit amet consectetur
-                                adipisicing elit. Soluta, itaque!
-                            </li>
-                            <li class="about-container-li">
-                                Lorem ipsum, dolor sit amet consectetur
-                                adipisicing elit. Soluta, itaque!
-                            </li>
-                            <li class="about-container-li">
-                                Lorem ipsum, dolor sit amet consectetur
-                                adipisicing elit. Soluta, itaque!
-                            </li>
-                        </ul>
-                        <p class="about-container-text">
-                            Lorem ipsum dolor sit amet consectetur adipisicing
-                            elit. Illo explicabo numquam, aliquam asperiores
-                            soluta eos. Distinctio corporis tempora
-                            exercitationem quam, aspernatur adipisci
-                            reprehenderit nulla veniam! Repudiandae numquam
-                            dignissimos nisi rem natus consectetur animi unde
-                            placeat laboriosam, at quos sapiente eaque.
-                        </p>
-                    </div>
-                    <h3 class="about-subtitle">Subtitle</h3>
-                    <div class="about-container">
-                        <p class="about-container-text">
-                            Lorem ipsum dolor sit amet consectetur adipisicing
-                            elit. Illo explicabo numquam, aliquam asperiores
-                            soluta eos. Distinctio corporis tempora
-                            exercitationem quam, aspernatur adipisci
-                            reprehenderit nulla veniam! Repudiandae numquam
-                            dignissimos nisi rem natus consectetur animi unde
-                            placeat laboriosam, at quos sapiente eaque.
-                        </p>
-                        <ul class="about-container-ul">
-                            <li class="about-container-li">
-                                Lorem ipsum dolor sit amet consectetur
-                                adipisicing elit. Numquam, exercitationem!
-                            </li>
-                            <li class="about-container-li">
-                                Lorem, ipsum dolor sit amet consectetur
-                                adipisicing elit. Nesciunt, id.
-                            </li>
-                            <li class="about-container-li">
-                                Lorem ipsum, dolor sit amet consectetur
-                                adipisicing elit. Soluta, itaque!
-                            </li>
-                            <li class="about-container-li">
-                                Lorem ipsum, dolor sit amet consectetur
-                                adipisicing elit. Soluta, itaque!
-                            </li>
-                            <li class="about-container-li">
-                                Lorem ipsum, dolor sit amet consectetur
-                                adipisicing elit. Soluta, itaque!
-                            </li>
-                            <li class="about-container-li">
-                                Lorem ipsum, dolor sit amet consectetur
-                                adipisicing elit. Soluta, itaque!
-                            </li>
-                        </ul>
-                        <p class="about-container-text">
-                            Lorem ipsum dolor sit amet consectetur adipisicing
-                            elit. Illo explicabo numquam, aliquam asperiores
-                            soluta eos. Distinctio corporis tempora
-                            exercitationem quam, aspernatur adipisci
-                            reprehenderit nulla veniam! Repudiandae numquam
-                            dignissimos nisi rem natus consectetur animi unde
-                            placeat laboriosam, at quos sapiente eaque.
-                        </p>
-                    </div>
-                    <h3 class="about-subtitle">Subtitle</h3>
-                    <div class="about-container">
-                        <p class="about-container-text">
-                            Lorem ipsum dolor sit amet consectetur adipisicing
-                            elit. Illo explicabo numquam, aliquam asperiores
-                            soluta eos. Distinctio corporis tempora
-                            exercitationem quam, aspernatur adipisci
-                            reprehenderit nulla veniam! Repudiandae numquam
-                            dignissimos nisi rem natus consectetur animi unde
-                            placeat laboriosam, at quos sapiente eaque.
-                        </p>
-                        <ul class="about-container-ul">
-                            <li class="about-container-li">
-                                Lorem ipsum dolor sit amet consectetur
-                                adipisicing elit. Numquam, exercitationem!
-                            </li>
-                            <li class="about-container-li">
-                                Lorem, ipsum dolor sit amet consectetur
-                                adipisicing elit. Nesciunt, id.
-                            </li>
-                            <li class="about-container-li">
-                                Lorem ipsum, dolor sit amet consectetur
-                                adipisicing elit. Soluta, itaque!
-                            </li>
-                            <li class="about-container-li">
-                                Lorem ipsum, dolor sit amet consectetur
-                                adipisicing elit. Soluta, itaque!
-                            </li>
-                            <li class="about-container-li">
-                                Lorem ipsum, dolor sit amet consectetur
-                                adipisicing elit. Soluta, itaque!
-                            </li>
-                            <li class="about-container-li">
-                                Lorem ipsum, dolor sit amet consectetur
-                                adipisicing elit. Soluta, itaque!
-                            </li>
-                        </ul>
-                        <p class="about-container-text">
-                            Lorem ipsum dolor sit amet consectetur adipisicing
-                            elit. Illo explicabo numquam, aliquam asperiores
-                            soluta eos. Distinctio corporis tempora
-                            exercitationem quam, aspernatur adipisci
-                            reprehenderit nulla veniam! Repudiandae numquam
-                            dignissimos nisi rem natus consectetur animi unde
-                            placeat laboriosam, at quos sapiente eaque.
-                        </p>
-                    </div>
-                </section>
-            </main>
-            <footer class="footer">
-                <p class="footer-copyright">©2024 BookReviewer, Inc.</p>
-            </footer>
-        </div>
-        <script>
-            const handleNavigate = (path) => {
-                window.location.href = path;
-            };
-        </script>
-        <script src="../utils/handleOpenMenu.js"></script>
-    </body>
+                <h3 class="about-subtitle">What We Offer</h3>
+                <div class="about-container">
+                    <ul class="about-container-ul">
+                        <li class="about-container-li">
+                            <strong>Book Management:</strong> Organize and track your reading progress with personalized
+                            bookshelves and reading lists.
+                        </li>
+                        <li class="about-container-li">
+                            <strong>Interactive Reviews:</strong> Write and share detailed reviews to inspire others and
+                            contribute to the literary dialogue.
+                        </li>
+                        <li class="about-container-li">
+                            <strong>Engaging Discussions:</strong> Join discussions, comment on reviews, and connect
+                            with fellow readers.
+                        </li>
+                        <li class="about-container-li">
+                            <strong>Insightful Analytics:</strong> Gain insights into your reading habits with
+                            comprehensive statistics and reports.
+                        </li>
+                        <li class="about-container-li">
+                            <strong>Real-Time Updates:</strong> Stay informed about the latest book releases, author
+                            news, and community updates.
+                        </li>
+                    </ul>
+                </div>
+                <h3 class="about-subtitle">Join Our Community</h3>
+                <div class="about-container">
+                    <p class="about-container-text">
+                        Whether you're an avid reader, a book club enthusiast, or someone looking to explore the world of
+                        literature, we invite you to join our community at Boo. Let's embark on a
+                        literary journey together and celebrate the joy of reading!
+                    </p>
+                </div>
+            </section>
+        </main>
+        <footer class="footer">
+            <p class="footer-copyright">©2024 BookReviewer, Inc.</p>
+        </footer>
+    </div>
+    <script>
+        const handleNavigate = (path) => {
+            window.location.href = path;
+        };
+    </script>
+    <script src="../utils/handleOpenMenu.js"></script>
+</body>
+
 </html>
