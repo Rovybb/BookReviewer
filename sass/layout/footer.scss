@@ -4,11 +4,19 @@
     min-height: 70px;
     width: 100%;
     display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
+    gap: 10px;
+    padding: 20px 0;
 
-    .footer-copyright {
+    &-copyright {
         font-size: $font-size-sm;
+    }
+
+    &-link {
+        font-size: $font-size-sm;
+        text-decoration: none;
     }
 }
 
@@ -16,8 +24,16 @@
     .footer {
         background-color: themed($card-bg);
 
-        .footer-copyright {
+        &-copyright {
             color: themed($text-secondary);
+        }
+
+        &-link {
+            color: themed($text-secondary);
+
+            &:hover {
+                color: themed($text);
+            }
         }
     }
 }
