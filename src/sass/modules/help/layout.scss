@@ -40,9 +40,21 @@
         display: flex;
         flex-direction: column;
 
+        &-question {
+            width: 100%;
+            font-size: $font-size-lg;
+            font-weight: bold;
+            margin-bottom: 4px;
+
+            @media screen and (max-width: $breakpoint-md) {
+                font-size: $font-size-md;
+            }
+        }
+
         &-text {
             width: 100%;
             font-size: $font-size-md;
+            margin-bottom: 8px;
 
             @media screen and (max-width: $breakpoint-md) {
                 font-size: $font-size-sm;
