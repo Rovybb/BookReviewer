@@ -2,9 +2,11 @@
   "name": "web-project-2024",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "./src/server.js",
+  "type": "module",
   "scripts": {
-    "style": "npx sass --watch ./src/sass:./src/styles"
+    "style": "npx sass --watch ./src/static/sass:./src/static/styles",
+    "start": "node ./src/server.js"
   },
   "author": "",
   "license": "MIT"
