@@ -1,6 +1,7 @@
 import * as fs from "node:fs";
 import * as path from "node:path";
 import requestLogger from "../utils/requestLogger.js";
+import { IncomingMessage, ServerResponse } from "node:http";
 
 const MIME_TYPES = {
     default: "application/octet-stream",
@@ -12,6 +13,7 @@ const MIME_TYPES = {
     gif: "image/gif",
     ico: "image/x-icon",
     svg: "image/svg+xml",
+    xml: "application/xml",
 };
 
 const resolveUrl = (url) => {
@@ -49,13 +51,18 @@ const prepareFile = async (url) => {
     const filePath = path.join(...paths);
     const toBool = [() => true, () => false];
     const found = await fs.promises.access(filePath).then(...toBool);
-    // console.log(`Found: ${found}, Path: ${filePath}`);
+    // console.log(`Found: ${found}, Path: ${filePath}`);               // Uncomment for debugging
     const streamPath = found ? filePath : SRC_PATH + "/views/404.html";
     const ext = path.extname(streamPath).substring(1).toLowerCase();
     const stream = fs.createReadStream(streamPath);
     return { found, ext, stream };
 };
 
+/**
+ * Router for handling static files and pages
+ * @param {IncomingMessage} req Client request
+ * @param {ServerResponse} res Server response
+ */
 const pageRouter = async (req, res) => {
     const file = await prepareFile(req.url);
     const statusCode = file.found ? 200 : 404;
@@ -65,4 +72,4 @@ const pageRouter = async (req, res) => {
     requestLogger(req.method, req.url, statusCode);
 };
 
-export { pageRouter };
+export default pageRouter;

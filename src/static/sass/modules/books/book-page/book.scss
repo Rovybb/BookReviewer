@@ -7,6 +7,10 @@
     gap: 20px;
     padding: 75px;
 
+    @media screen and (max-width: $breakpoint-md) {
+        padding: 16px;
+    }
+
     &-image {
         width: 35%;
         margin: 0 auto;
@@ -17,13 +21,12 @@
         font-size: $font-size-xxl;
         font-weight: bold;
 
-        @media screen and (max-width: $breakpoint-md){
+        @media screen and (max-width: $breakpoint-md) {
             font-size: 36px;
         }
 
-        @media screen and (max-width: $breakpoint-sm){
+        @media screen and (max-width: $breakpoint-sm) {
             font-size: $font-size-xl;
-            
         }
     }
 
@@ -31,7 +34,7 @@
         font-size: $font-size-lg;
         font-weight: bold;
 
-        @media screen and (max-width: $breakpoint-sm){
+        @media screen and (max-width: $breakpoint-sm) {
             font-size: $font-size-md;
         }
     }
@@ -48,7 +51,7 @@
         font-size: $font-size-md;
         margin: 20px 0;
 
-        @media screen and (max-width: $breakpoint-sm){
+        @media screen and (max-width: $breakpoint-sm) {
             font-size: $font-size-sm;
         }
     }
@@ -67,15 +70,11 @@
         border-radius: 24px;
         font-size: $font-size-sm;
         font-weight: 700;
-
-        @media screen and (max-width: $breakpoint-sm){
+        
+        @media screen and (max-width: $breakpoint-sm) {
             padding: 8px 12px;
             font-size: $font-size-xs;
         }
-    }
-
-    @media screen and (max-width: $breakpoint-md){
-        padding: 16px;
     }
 }
 
@@ -89,6 +88,10 @@
     margin-top: 40px;
     padding: 0 100px;
 
+    @media screen and (max-width: $breakpoint-md) {
+        padding: 0 16px;
+    }
+    
     &-title-container {
         padding: 0 20px 10px 20px;
     }
@@ -119,17 +122,13 @@
             font-size: $font-size-lg;
         }
     }
+}
 
-    &-comments {
-        width: 100%;
-        display: flex;
-        flex-direction: column;
-        gap: 20px;
-    }
-
-    @media screen and (max-width: $breakpoint-md){
-        padding: 0 16px;
-    }
+.comments {
+    width: 100%;
+    display: flex;
+    flex-direction: column-reverse;
+    gap: 20px;
 }
 
 .comment {
@@ -142,13 +141,20 @@
     &-header {
         display: flex;
         align-items: center;
-        justify-content: space-between;
+        justify-content: flex-start;
         gap: 10px;
 
-        @media screen and (max-width: $breakpoint-sm){
+        &-text {
+            display: flex;
             flex-direction: column;
             gap: 5px;
-            
+        }
+
+        &-image {
+            width: 50px;
+            height: 50px;
+            border-radius: 16px;
+            background-size: cover;
         }
     }
 
@@ -156,7 +162,7 @@
         font-size: $font-size-lg;
         font-weight: bold;
 
-        @media screen and (max-width: $breakpoint-sm){
+        @media screen and (max-width: $breakpoint-sm) {
             font-size: $font-size-md;
         }
     }
@@ -164,7 +170,7 @@
     &-date {
         font-size: $font-size-sm;
 
-        @media screen and (max-width: $breakpoint-sm){
+        @media screen and (max-width: $breakpoint-sm) {
             font-size: $font-size-xs;
         }
     }
@@ -175,16 +181,15 @@
         gap: 5px;
         font-size: $font-size-md;
 
-        @media screen and (max-width: $breakpoint-sm){
+        @media screen and (max-width: $breakpoint-sm) {
             font-size: $font-size-sm;
-            align-self: center;
         }
     }
 
     &-content {
         font-size: $font-size-md;
 
-        @media screen and (max-width: $breakpoint-sm){
+        @media screen and (max-width: $breakpoint-sm) {
             font-size: $font-size-sm;
         }
     }

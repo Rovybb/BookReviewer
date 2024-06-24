@@ -46,6 +46,7 @@
   border-radius: 16px 0 0 16px;
   background-size: cover;
   background-position: center;
+  -webkit-user-drag: none;
 }
 .group-card-text-container {
   height: 100%;

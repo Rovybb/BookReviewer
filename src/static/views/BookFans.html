@@ -35,9 +35,7 @@
     <body class="dark-theme">
         <div class="mobile-menu">
             <span class="fa-solid fa-x mobile-menu-close-button"></span>
-            <span
-                class="mobile-menu-logo"
-                onclick="handleNavigate('/')"
+            <span class="mobile-menu-logo" onclick="handleNavigate('/')"
                 >Book<mark>Reviewer</mark></span
             >
             <ul class="mobile-menu-list">
@@ -94,7 +92,71 @@
                 </div>
             </header>
             <main class="main-content">
-                
+                <div class="banner"></div>
+                <img src="/assets/group.png" alt="Group" class="group-image" />
+                <div class="group-info">
+                    <h2 class="group-name">BookFans</h2>
+                    <span class="group-members-count">Members: 10</span>
+                    <p class="group-description">
+                        Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                        Vero, quis unde. Voluptatem deleniti neque quos fugit
+                        incidunt a tempore ab quasi nulla fuga. Pariatur minima
+                        fugiat id facilis amet expedita ipsam assumenda dolorem,
+                        quaerat inventore. Adipisci, accusamus. Commodi nemo
+                        optio quas non, ullam eum deserunt aliquid praesentium
+                        voluptatum, quisquam dolor quia illum, ab odit
+                        laudantium vero dolore error excepturi consequatur
+                        pariatur voluptate? Architecto corrupti facere quidem
+                        tenetur officiis optio praesentium libero ipsum,
+                        laudantium iste dolor perspiciatis, eveniet fuga totam
+                        deserunt iure atque nam nemo sunt cumque, ad labore
+                        asperiores! Officia vitae a, mollitia ipsum nesciunt
+                        dignissimos labore architecto facilis similique.
+                    </p>
+                </div>
+                <section class="chat-section">
+                    <div class="chat-section-title-container">
+                        <h2 class="chat-section-title">Chat</h2>
+                    </div>
+                    <form class="chat-section-form">
+                        <textarea
+                            class="input-text"
+                            placeholder="Write in chat..."
+                            required
+                        ></textarea>
+                        <button type="submit" class="button">Send</button>
+                    </form>
+                    <div class="messages">
+                        <div class="message">
+                            <div class="message-header">
+                                <img src="/assets/profile_placeholder.jpg" alt="User" class="message-header-image" />
+                                <div class="message-header-text">
+                                    <span class="message-author">John Doe</span>
+                                    <span class="message-date">01-01-2024</span>
+                                </div>
+                            </div>
+                            <p class="message-content">
+                                This is a great manga! I love the art style and
+                                the story is very interesting. I can't wait to
+                                read the next volume.
+                            </p>
+                        </div>
+                        <div class="message">
+                            <div class="message-header">
+                                <img src="/assets/profile_placeholder.jpg" alt="User" class="message-header-image" />
+                                <div class="message-header-text">
+                                    <span class="message-author">John Doe</span>
+                                    <span class="message-date">01-01-2024</span>
+                                </div>
+                            </div>
+                            <p class="message-content">
+                                I've read the whole series and it's amazing! I
+                                highly recommend it to anyone who loves dark
+                                fantasy.
+                            </p>
+                        </div>
+                    </div>
+                </section>
             </main>
             <footer class="footer">
                 <p class="footer-copyright">©2024 BookReviewer, Inc.</p>
