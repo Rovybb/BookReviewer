@@ -1,5 +1,5 @@
 import sql from "mssql";
-import * as bcrypt from "bcryptjs";
+import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 import { queryDatabase } from "../data/dbConnection.js";
 import * as userModel from "../models/userModel.js";
@@ -49,7 +49,7 @@ export const register = async (req, res) => {
             const { email, password } = JSON.parse(body);
             const hashedPassword = await bcrypt.hash(password, 10);
             await queryDatabase(
-                'INSERT INTO Users ( password, role, email) VALUES (@password, "User", @email,)',
+                'INSERT INTO Users ( password, role, email) VALUES (@password, @role, @email,)',
                 [
                     { name: "email", type: sql.NVarChar, value: email },
                     {
@@ -57,7 +57,7 @@ export const register = async (req, res) => {
                         type: sql.NVarChar,
                         value: hashedPassword,
                     },
-                    { name: "role", type: sql.NVarChar, value: role },
+                    { name: "role", type: sql.NVarChar, value: "User" },
                 ]
             );
             res.writeHead(201, { "Content-Type": "application/json" });
