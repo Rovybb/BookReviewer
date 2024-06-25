@@ -5,10 +5,9 @@ const config = {
     password: process.env.DB_PASS,
     database: process.env.DB_NAME,
     server: process.env.DB_SERVER,
-    option: {
-        encrypt: true,
+    options: {
         trustServerCertificate: true,
-    },
+    }
 };
 
 const createConnection = async () => {

@@ -7,7 +7,7 @@ import handleAPIRoutes from "./routers/apiRouter.js";
 await createConnection();
 
 http.createServer(async (req, res) => {
-    if (req.url.startsWith("/api")) {
+    if (req.url.startsWith("/api") || req.url.startsWith("/rss")) {
         await handleAPIRoutes(req, res);
     } else {
         await pageRouter(req, res);
