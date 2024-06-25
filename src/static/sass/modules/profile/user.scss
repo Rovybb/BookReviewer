@@ -1,0 +1,85 @@
+@import "../../boilerplate/theme";
+
+.main-content {
+    justify-content: flex-start;
+}
+
+.banner {
+    width: 990px;
+    height: 200px;
+    background-size: cover;
+    display: flex;
+
+    @media screen and (max-width: $breakpoint-lg) {
+        width: 100%;
+    }
+
+    @media screen and (max-width: $breakpoint-sm) {
+        height: 150px;
+    }
+}
+
+.user-image {
+    width: 100px;
+    height: 100px;
+    border-radius: 16px;
+    background-size: cover;
+    transform: translate(0, -50px);
+    -webkit-user-drag: none;
+}
+
+.user-info {
+    width: 990px;
+    transform: translate(0, -50px);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 5px;
+    padding: 10px;
+
+    @media screen and (max-width: $breakpoint-lg) {
+        width: 100%;
+        padding: 10px 20px;
+    }
+}
+
+.user-name {
+    font-size: $font-size-xl;
+    font-weight: 800;
+}
+
+.update-profile-form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    width: 990px;
+    
+    @media screen and (max-width: $breakpoint-lg) {
+        width: 100%;
+    }
+}
+
+.input-group {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+
+    label {
+        font-size: $font-size-md;
+        font-weight: 600;
+    }
+}
+
+
+
+@include themify($themes) {
+    .banner {
+        background-image: linear-gradient(
+                180deg,
+                #00000000 0%,
+                themed($bg) 100%
+            ),
+            url("/assets/banner.png");
+    }
+}

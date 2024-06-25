@@ -14,6 +14,41 @@ export const items = [
         link: "http://example.com/ma-omor-la-revedere",
         description: "This is my third post",
     },
+    {
+        title: "Fourth Post",
+        link: "http://example.com/fourth-post",
+        description: "This is my fourth post",
+    },
+    {
+        title: "Fifth Post",
+        link: "http://example.com/fifth-post",
+        description: "This is my fifth post",
+    },
+    {
+        title: "Sixth Post",
+        link: "http://example.com/sixth-post",
+        description: "This is my sixth post",
+    },
+    {
+        title: "Seventh Post",
+        link: "http://example.com/seventh-post",
+        description: "This is my seventh post",
+    },
+    {
+        title: "Eighth Post",
+        link: "http://example.com/eighth-post",
+        description: "This is my eighth post",
+    },
+    {
+        title: "Ninth Post",
+        link: "http://example.com/ninth-post",
+        description: "This is my ninth post",
+    },
+    {
+        title: "Tenth Post",
+        link: "http://example.com/tenth-post",
+        description: "This is my tenth post",
+    },
 ];
 
 const createFeed = (items) => {
@@ -21,14 +56,21 @@ const createFeed = (items) => {
     <rss version="2.0">
         <channel>
             <title>Book Reviewer</title>
-            <link>http://example.com</link>
-            <description>Largest comunity of book lovers in the world with over 50 million reviews.<br/>Goodreads is a great place to promote your books.</description>
+            <link>http://localhost:3000</link>
+            <description><![CDATA[Largest comunity of book lovers in the world with over 50 million reviews.<br/>Goodreads is a great place to promote your books.]]></description>
+            <language>en</language>
             ${items.map((item) => `
                 <item>
                     <title>${item.title}</title>
                     <link>${item.link}</link>
                     <description>${item.description}</description>
-                    <enclosure url="http://localhost:3000/assets/Berserk_vol1.jpg" length="0" type="image/png"/>
+                    <author>
+                        <![CDATA[
+                            <a href="http://localhost:3000">Book Reviewer</a>
+                        ]]>
+                    </author>
+                    <category>Books</category>
+                    <enclosure url="http://localhost:3000/assets/banner.png" length="0" type="image/png"/>
                 </item>
                 `).join("\n")}
         </channel>

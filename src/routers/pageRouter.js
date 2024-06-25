@@ -23,6 +23,8 @@ const resolveUrl = (url) => {
         return "./views/about.html";
     } else if (url === "/help") {
         return "./views/help.html";
+    } else if (url === "/profile") {
+        return "./views/profile.html";
     } else if (url === "/login") {
         return "./views/login.html";
     } else if (url === "/register") {
@@ -32,11 +34,11 @@ const resolveUrl = (url) => {
     } else if (url === "/books") {
         return "./views/books.html";
     } else if (url.includes("/books/") && !url.includes(".css")) {
-        return "./views/Berserk_vol1.html";
+        return "./views/book_page.html";
     } else if (url === "/groups") {
         return "./views/groups.html";
     } else if (url.includes("/groups/") && !url.includes(".css")) {
-        return "./views/BookFans.html";
+        return "./views/group_page.html";
     } else if (url === "/documentation") {
         return "./views/doc.html";
     } else {
