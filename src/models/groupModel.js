@@ -1,17 +1,17 @@
-const dataStorage = require('../utils/dataStorage');
-const sql = require('mssql');
+import sql from "mssql";
+import { queryDatabase } from "../data/dbConnection.js";
 
-async function getGroups() {
+export const getGroups = async () => {
     const query = 'SELECT * FROM Groups';
-    return await dataStorage.queryDatabase(query);
-}
+    return await queryDatabase(query);
+};
 
-async function getGroupById(id) {
+export const getGroupById = async (id) => {
     const query = 'SELECT * FROM Groups WHERE id = @id';
-    return await dataStorage.queryDatabase(query, [{ name: 'id', type: sql.Int, value: id }]);
-}
+    return await queryDatabase(query, [{ name: 'id', type: sql.Int, value: id }]);
+};
 
-async function createGroup(group) {
+export const createGroup = async (group) => {
     const query = `
         INSERT INTO Groups (name, description, imageLink) 
         VALUES (@name, @description, @imageLink)
@@ -21,10 +21,10 @@ async function createGroup(group) {
         { name: 'description', type: sql.NVarChar, value: group.description },
         { name: 'imageLink', type: sql.NVarChar, value: group.imageLink },
     ];
-    return await dataStorage.queryDatabase(query, params);
-}
+    return await queryDatabase(query, params);
+};
 
-async function updateGroup(id, group) {
+export const updateGroup = async (id, group) => {
     const query = `
         UPDATE Groups 
         SET name = @name, description = @description, imageLink = @imageLink 
@@ -36,18 +36,10 @@ async function updateGroup(id, group) {
         { name: 'imageLink', type: sql.NVarChar, value: group.imageLink },
         { name: 'id', type: sql.Int, value: id }
     ];
-    return await dataStorage.queryDatabase(query, params);
-}
+    return await queryDatabase(query, params);
+};
 
-async function deleteGroup(id) {
+export const deleteGroup = async (id) => {
     const query = 'DELETE FROM Groups WHERE id = @id';
-    return await dataStorage.queryDatabase(query, [{ name: 'id', type: sql.Int, value: id }]);
-}
-
-module.exports = {
-    getGroups,
-    getGroupById,
-    createGroup,
-    updateGroup,
-    deleteGroup
+    return await queryDatabase(query, [{ name: 'id', type: sql.Int, value: id }]);
 };

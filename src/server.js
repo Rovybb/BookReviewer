@@ -1,8 +1,8 @@
-import 'dotenv/config';
+import "dotenv/config";
 import * as http from "node:http";
 import pageRouter from "./routers/pageRouter.js";
 import { createConnection } from "./data/dbConnection.js";
-import handleAPIRoutes from './routers/apiRouter.js';
+import handleAPIRoutes from "./routers/apiRouter.js";
 
 await createConnection();
 

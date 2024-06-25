@@ -1,168 +1,205 @@
-const sql = require('mssql');
-const bcrypt = require('bcryptjs');
-const jwt = require('jsonwebtoken');
-const dataStorage = require('../utils/dataStorage');
-const config = require('../utils/config');
-const userModel = require('../models/userModel');
+import sql from "mssql";
+import * as bcrypt from "bcryptjs";
+import jwt from "jsonwebtoken";
+import { queryDatabase } from "../data/dbConnection.js";
+import * as userModel from "../models/userModel.js";
+import requestLogger from "../utils/requestLogger.js";
 
-async function getUsers(req, res) {
+export const getUsers = async (req, res) => {
     try {
-        const users = await dataStorage.queryDatabase('SELECT * FROM Users');
-        res.writeHead(200, { 'Content-Type': 'application/json' });
+        const users = await queryDatabase("SELECT * FROM Users");
+        res.writeHead(200, { "Content-Type": "application/json" });
         res.end(JSON.stringify(users));
+        requestLogger(req.method, req.url, 200);
     } catch (err) {
-        res.writeHead(500, { 'Content-Type': 'application/json' });
+        res.writeHead(500, { "Content-Type": "application/json" });
         res.end(JSON.stringify({ message: err.message }));
+        requestLogger(req.method, req.url, 500);
     }
-}
+};
 
-async function getUser(req, res, id) {
+export const getUser = async (req, res, id) => {
     try {
-        const user = await dataStorage.queryDatabase('SELECT * FROM Users WHERE id = @id', [{ name: 'id', type: sql.Int, value: id }]);
+        const user = await queryDatabase("SELECT * FROM Users WHERE id = @id", [
+            { name: "id", type: sql.Int, value: id },
+        ]);
         if (user.length > 0) {
-            res.writeHead(200, { 'Content-Type': 'application/json' });
+            res.writeHead(200, { "Content-Type": "application/json" });
             res.end(JSON.stringify(user[0]));
+            requestLogger(req.method, req.url, 200);
         } else {
-            res.writeHead(404, { 'Content-Type': 'application/json' });
-            res.end(JSON.stringify({ message: 'User not found' }));
+            res.writeHead(404, { "Content-Type": "application/json" });
+            res.end(JSON.stringify({ message: "User not found" }));
+            requestLogger(req.method, req.url, 404);
         }
     } catch (err) {
-        res.writeHead(500, { 'Content-Type': 'application/json' });
+        res.writeHead(500, { "Content-Type": "application/json" });
         res.end(JSON.stringify({ message: err.message }));
+        requestLogger(req.method, req.url, 500);
     }
-}
+};
 
-async function register(req, res) {
+export const register = async (req, res) => {
     try {
-        let body = '';
-        req.on('data', chunk => {
+        let body = "";
+        req.on("data", (chunk) => {
             body += chunk.toString();
         });
-        req.on('end', async () => {
+        req.on("end", async () => {
             const { email, password } = JSON.parse(body);
             const hashedPassword = await bcrypt.hash(password, 10);
-            await dataStorage.queryDatabase('INSERT INTO Users ( password, role, email) VALUES (@password, "User", @email,)', [
-                { name: 'email', type: sql.NVarChar, value: email },
-                { name: 'password', type: sql.NVarChar, value: hashedPassword },
-                { name: 'role', type: sql.NVarChar, value: role }
-            ]);
-            res.writeHead(201, { 'Content-Type': 'application/json' });
-            res.end(JSON.stringify({ message: 'User registered' }));
+            await queryDatabase(
+                'INSERT INTO Users ( password, role, email) VALUES (@password, "User", @email,)',
+                [
+                    { name: "email", type: sql.NVarChar, value: email },
+                    {
+                        name: "password",
+                        type: sql.NVarChar,
+                        value: hashedPassword,
+                    },
+                    { name: "role", type: sql.NVarChar, value: role },
+                ]
+            );
+            res.writeHead(201, { "Content-Type": "application/json" });
+            res.end(JSON.stringify({ message: "User registered" }));
+            requestLogger(req.method, req.url, 201);
         });
     } catch (err) {
-        res.writeHead(500, { 'Content-Type': 'application/json' });
+        res.writeHead(500, { "Content-Type": "application/json" });
         res.end(JSON.stringify({ message: err.message }));
+        requestLogger(req.method, req.url, 500);
     }
-}
+};
 
-
-
-async function login(req, res) {
+export const login = async (req, res) => {
     try {
-        let body = '';
-        req.on('data', chunk => {
+        let body = "";
+        req.on("data", (chunk) => {
             body += chunk.toString();
         });
-        req.on('end', async () => {
+        req.on("end", async () => {
             const { email, password } = JSON.parse(body);
 
-            const validPassword = await bcrypt.compare(password, user[0].password);
+            const validPassword = await bcrypt.compare(
+                password,
+                user[0].password
+            );
             if (validPassword) {
-                const token = jwt.sign({ id: user[0].id, role: user[0].role }, config.jwtSecret, { expiresIn: '1h' });
-                res.writeHead(200, { 'Content-Type': 'application/json' });
+                const token = jwt.sign(
+                    { id: user[0].id, role: user[0].role },
+                    process.env.JWT_SECRET,
+                    { expiresIn: "1h" }
+                );
+                res.writeHead(200, { "Content-Type": "application/json" });
                 res.end(JSON.stringify({ token }));
+                requestLogger(req.method, req.url, 200);
             } else {
-                res.writeHead(401, { 'Content-Type': 'application/json' });
-                res.end(JSON.stringify({ message: 'Invalid credentials' }));
+                res.writeHead(401, { "Content-Type": "application/json" });
+                res.end(JSON.stringify({ message: "Invalid credentials" }));
+                requestLogger(req.method, req.url, 401);
             }
         });
     } catch (err) {
-        res.writeHead(500, { 'Content-Type': 'application/json' });
+        res.writeHead(500, { "Content-Type": "application/json" });
         res.end(JSON.stringify({ message: err.message }));
+        requestLogger(req.method, req.url, 500);
     }
-}
+};
 
-async function updateUser(req, res, id) {
+export const updateUser = async (req, res, id) => {
     try {
-        let body = '';
-        req.on('data', chunk => {
+        let body = "";
+        req.on("data", (chunk) => {
             body += chunk.toString();
         });
-        req.on('end', async () => {
-            const { username, password, role, profilePicture, email } = JSON.parse(body);
+        req.on("end", async () => {
+            const { username, password, role, profilePicture, email } =
+                JSON.parse(body);
             const hashedPassword = await bcrypt.hash(password, 10);
-            await dataStorage.queryDatabase('UPDATE Users SET username = @username, password = @password, email = @email, role = @role, profilePicture = @profilePicture WHERE id = @id', [
-                { name: 'username', type: sql.NVarChar, value: username },
-                { name: 'password', type: sql.NVarChar, value: hashedPassword },
-                { name: 'role', type: sql.NVarChar, value: role },
-                { name: 'profilePicture', type: sql.NVarChar, value: profilePicture },
-                { name: 'email', type: sql.NVarChar, value: email },
-                { name: 'id', type: sql.Int, value: id }
-            ]);
-            res.writeHead(200, { 'Content-Type': 'application/json' });
-            res.end(JSON.stringify({ message: 'User updated' }));
+            await queryDatabase(
+                "UPDATE Users SET username = @username, password = @password, email = @email, role = @role, profilePicture = @profilePicture WHERE id = @id",
+                [
+                    { name: "username", type: sql.NVarChar, value: username },
+                    {
+                        name: "password",
+                        type: sql.NVarChar,
+                        value: hashedPassword,
+                    },
+                    { name: "role", type: sql.NVarChar, value: role },
+                    {
+                        name: "profilePicture",
+                        type: sql.NVarChar,
+                        value: profilePicture,
+                    },
+                    { name: "email", type: sql.NVarChar, value: email },
+                    { name: "id", type: sql.Int, value: id },
+                ]
+            );
+            res.writeHead(200, { "Content-Type": "application/json" });
+            res.end(JSON.stringify({ message: "User updated" }));
+            requestLogger(req.method, req.url, 200);
         });
     } catch (err) {
-        res.writeHead(500, { 'Content-Type': 'application/json' });
+        res.writeHead(500, { "Content-Type": "application/json" });
         res.end(JSON.stringify({ message: err.message }));
+        requestLogger(req.method, req.url, 500);
     }
-}
+};
 
-async function deleteUser(req, res, id) {
+export const deleteUser = async(req, res, id) => {
     try {
-        await dataStorage.queryDatabase('DELETE FROM Users WHERE id = @id', [{ name: 'id', type: sql.Int, value: id }]);
-        res.writeHead(204, { 'Content-Type': 'application/json' });
+        await queryDatabase("DELETE FROM Users WHERE id = @id", [
+            { name: "id", type: sql.Int, value: id },
+        ]);
+        res.writeHead(204, { "Content-Type": "application/json" });
         res.end();
+        requestLogger(req.method, req.url, 204);
     } catch (err) {
-        res.writeHead(500, { 'Content-Type': 'application/json' });
+        res.writeHead(500, { "Content-Type": "application/json" });
         res.end(JSON.stringify({ message: err.message }));
+        requestLogger(req.method, req.url, 500);
     }
-}
+};
 
-async function addBookToLectureList(req, res, userId) {
+export const addBookToLectureList = async (req, res, userId) => {
     try {
-        let body = '';
-        req.on('data', chunk => {
+        let body = "";
+        req.on("data", (chunk) => {
             body += chunk.toString();
         });
-        req.on('end', async () => {
+        req.on("end", async () => {
             const { bookId } = JSON.parse(body);
             await userModel.addBookToLectureList(userId, bookId);
-            res.writeHead(201, { 'Content-Type': 'application/json' });
-            res.end(JSON.stringify({ message: 'Book added to user\'s lecture list' }));
+            res.writeHead(201, { "Content-Type": "application/json" });
+            res.end(
+                JSON.stringify({ message: "Book added to user's lecture list" })
+            );
+            requestLogger(req.method, req.url, 201);
         });
     } catch (err) {
-        res.writeHead(500, { 'Content-Type': 'application/json' });
+        res.writeHead(500, { "Content-Type": "application/json" });
         res.end(JSON.stringify({ message: err.message }));
+        requestLogger(req.method, req.url, 500);
     }
-}
+};
 
-async function deleteFromLectureList(req, res, userId) {
+export const deleteFromLectureList = async (req, res, userId) => {
     try {
-        let body = '';
-        req.on('data', chunk => {
+        let body = "";
+        req.on("data", (chunk) => {
             body += chunk.toString();
         });
-        req.on('end', async () => {
+        req.on("end", async () => {
             const { bookId } = JSON.parse(body);
             await userModel.addBookToLectureList(userId, bookId);
             await userModel.deleteFromLectureList(userId, bookId);
-            res.writeHead(204, { 'Content-Type': 'application/json' });
+            res.writeHead(204, { "Content-Type": "application/json" });
             res.end();
+            requestLogger(req.method, req.url, 204);
         });
     } catch (err) {
-        res.writeHead(500, { 'Content-Type': 'application/json' });
+        res.writeHead(500, { "Content-Type": "application/json" });
         res.end(JSON.stringify({ message: err.message }));
+        requestLogger(req.method, req.url, 500);
     }
-}
-
-module.exports = {
-    getUsers,
-    getUser,
-    register,
-    login,
-    updateUser,
-    deleteUser,
-    addBookToLectureList,
-    deleteFromLectureList
 };

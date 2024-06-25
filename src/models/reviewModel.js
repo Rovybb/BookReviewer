@@ -1,19 +1,19 @@
-const { queryDatabase } = require('../utils/dataStorage');
-const sql = require('mssql');
+import sql from "mssql";
+import { queryDatabase } from "../data/dbConnection.js";
 
-async function getReviews() {
+export const getReviews = async () => {
     const query = 'SELECT * FROM Reviews';
     return await queryDatabase(query);
-}
+};
 
-async function getReviewById(id) {
+export const getReviewById = async (id) => {
     const query = 'SELECT * FROM Reviews WHERE id = @id';
     const params = [{ name: 'id', type: sql.Int, value: id }];
     const result = await queryDatabase(query, params);
     return result[0];
-}
+};
 
-async function addReview(review) {
+export const addReview = async(review) => {
     const query = `
         INSERT INTO Reviews (rating, description, bookId, userId, createdAt)
         VALUES (@rating, @description, @bookId, @userId, @createdAt);
@@ -28,9 +28,9 @@ async function addReview(review) {
     ];
     const result = await queryDatabase(query, params);
     return { ...review, id: result[0].id };
-}
+};
 
-async function updateReview(id, updatedReview) {
+export const updateReview = async (id, updatedReview) => {
     const query = `
         UPDATE Reviews
         SET rating = @rating, description = @description, bookId = @bookId, userId = @userId
@@ -45,19 +45,11 @@ async function updateReview(id, updatedReview) {
     ];
     await queryDatabase(query, params);
     return { id, ...updatedReview };
-}
+};
 
-async function deleteReview(id) {
+export const deleteReview = async (id) => {
     const query = 'DELETE FROM Reviews WHERE id = @id';
     const params = [{ name: 'id', type: sql.Int, value: id }];
     await queryDatabase(query, params);
     return true;
-}
-
-module.exports = {
-    getReviews,
-    getReviewById,
-    addReview,
-    updateReview,
-    deleteReview
 };

@@ -1,19 +1,19 @@
-import { queryDatabase } from '../data/dbConnection.js';
-import sql from 'mssql';
+import sql from "mssql";
+import { queryDatabase } from "../data/dbConnection.js";
 
-async function getUsers() {
+export const getUsers = async () => {
     const query = 'SELECT * FROM Users';
     return await queryDatabase(query);
-}
+};
 
-async function getUserById(id) {
+export const getUserById = async (id) => {
     const query = 'SELECT * FROM Users WHERE id = @id';
     const params = [{ name: 'id', type: sql.Int, value: id }];
     const result = await queryDatabase(query, params);
     return result[0];
-}
+};
 
-async function addUser(user) {
+export const addUser = async (user) => {
     const query = `
         INSERT INTO Users (username,email, password, role, profilePicture)
         VALUES (@username, @email, @password, @role, @profilePicture);
@@ -28,9 +28,9 @@ async function addUser(user) {
     ];
     const result = await queryDatabase(query, params);
     return { ...user, id: result[0].id };
-}
+};
 
-async function updateUser(id, updatedUser) {
+export const updateUser = async (id, updatedUser) => {
     const query = `
         UPDATE Users
         SET username = @username, email = @email,  password = @password, role = @role, profilePicture = @profilePicture
@@ -46,16 +46,16 @@ async function updateUser(id, updatedUser) {
     ];
     await queryDatabase(query, params);
     return { id, ...updatedUser };
-}
+};
 
-async function deleteUser(id) {
+export const deleteUser = async (id) => {
     const query = 'DELETE FROM Users WHERE id = @id';
     const params = [{ name: 'id', type: sql.Int, value: id }];
     await queryDatabase(query, params);
     return true;
-}
+};
 
-async function getListOfLecture(userId) {
+export const getListOfLecture = async (userId) => {
     const query = `
         SELECT Books.*
         FROM UsersBooks
@@ -64,9 +64,9 @@ async function getListOfLecture(userId) {
     `;
     const params = [{ name: 'userId', type: sql.Int, value: userId }];
     return await queryDatabase(query, params);
-}
+};
 
-async function addBookToLectureList(userId, bookId) {
+export const addBookToLectureList = async (userId, bookId) => {
     const query = `
         INSERT INTO UsersBooks (userId, bookId)
         VALUES (@userId, @bookId)
@@ -76,9 +76,9 @@ async function addBookToLectureList(userId, bookId) {
         { name: 'bookId', type: sql.Int, value: bookId }
     ];
     await queryDatabase(query, params);
-}
+};
 
-async function deleteFromLectureList(userId, bookId) {
+export const deleteFromLectureList = async (userId, bookId) => {
     const query = `
         DELETE FROM UsersBooks
         WHERE userId = @userId AND bookId = @bookId
@@ -88,15 +88,4 @@ async function deleteFromLectureList(userId, bookId) {
         { name: 'bookId', type: sql.Int, value: bookId }
     ];
     await queryDatabase(query, params);
-}
-
-module.exports = {
-    getUsers,
-    getUserById,
-    addUser,
-    updateUser,
-    deleteUser,
-    getListOfLecture,
-    addBookToLectureList,
-    deleteFromLectureList
 };

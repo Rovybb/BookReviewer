@@ -1,6 +1,6 @@
-const { getReadingStatistics } = require('./statisticsService');
+import { getReadingStatistics } from './statisticsService.js';
 
-async function getAllNews() {
+export const getAllNews = async () => {
 
     const statistics = await getReadingStatistics();
 
@@ -15,8 +15,9 @@ async function getAllNews() {
         description: `These are the top 5 most read books this week: ${statistics.top5MostReadBooks.map(book => book.title).join(", ")}.`
     }];
     return news;
-}
-const createFeed = (items) => {
+};
+
+export const createFeed = (items) => {
     return `
     <rss version="2.0">
         <channel>
@@ -41,9 +42,4 @@ const createFeed = (items) => {
         </channel>
     </rss>
     `;
-};
-
-module.exports = {
-    getAllNews,
-    createFeed
 };

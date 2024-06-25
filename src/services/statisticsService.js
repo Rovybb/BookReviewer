@@ -1,7 +1,7 @@
-const { queryDatabase } = require('../utils/dataStorage');
-const createCsvWriter = require('csv-writer').createObjectCsvWriter;
+import { queryDatabase } from "../data/dbConnection.js";
+import { createObjectCsvWriter } from "csv-writer";
 
-async function getReadingStatistics() {
+export const getReadingStatistics = async () => {
     const mostReadGenresQuery = `
         SELECT genre, COUNT(*) AS count
         FROM Books
@@ -37,10 +37,10 @@ async function getReadingStatistics() {
         mostReadAuthors,
         top5MostReadBooks
     };
-}
+};
 
-async function exportStatisticsToCSV(statistics, filePath) {
-    const csvWriter = createCsvWriter({
+export const exportStatisticsToCSV = async (statistics, filePath) => {
+    const csvWriter = createObjectCsvWriter({
         path: filePath,
         header: [
             { id: 'metric', title: 'Metric' },
@@ -56,15 +56,10 @@ async function exportStatisticsToCSV(statistics, filePath) {
 
     await csvWriter.writeRecords(records);
     console.log('Statistics exported to CSV successfully.');
-}
+};
 
-async function generateAndExportStatistics(filePath) {
+export const generateAndExportStatistics = async (filePath) => {
     const statistics = await getReadingStatistics();
     await exportStatisticsToCSV(statistics, filePath);
-}
-
-module.exports = {
-    getReadingStatistics,
-    exportStatisticsToCSV,
-    generateAndExportStatistics
 };
+

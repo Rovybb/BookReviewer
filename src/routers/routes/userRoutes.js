@@ -1,32 +1,55 @@
-const { getUsers, getUser, register, login, updateUser, deleteUser, addBookToLectureList } = require('../controllers/userController');
-const { deleteFromLectureList } = require('../models/userModel');
+import {
+    getUsers,
+    getUser,
+    register,
+    login,
+    updateUser,
+    addBookToLectureList,
+    deleteFromLectureList,
+} from "../../controllers/userController.js";
+import requestLogger from "../../utils/requestLogger.js";
 
 function handleUserRoutes(req, res) {
-    if (req.url === '/api/users' && req.method === 'GET') {
+    if (req.url === "/api/users" && req.method === "GET") {
         getUsers(req, res);
-    } else if (req.url.match(/\/api\/users\/([0-9]+)/) && req.method === 'GET') {
-        const id = req.url.split('/')[3];
+    } else if (
+        req.url.match(/\/api\/users\/([0-9]+)/) &&
+        req.method === "GET"
+    ) {
+        const id = req.url.split("/")[3];
         getUser(req, res, id);
-    } else if (req.url === '/api/users/register' && req.method === 'POST') {
+    } else if (req.url === "/api/users/register" && req.method === "POST") {
         register(req, res);
-    } else if (req.url === '/api/users/login' && req.method === 'POST') {
+    } else if (req.url === "/api/users/login" && req.method === "POST") {
         login(req, res);
-    } else if (req.url.match(/\/api\/users\/([0-9]+)/) && req.method === 'PUT') {
-        const id = req.url.split('/')[3];
+    } else if (
+        req.url.match(/\/api\/users\/([0-9]+)/) &&
+        req.method === "PUT"
+    ) {
+        const id = req.url.split("/")[3];
         updateUser(req, res, id);
-    } else if (req.url.match(/\/api\/users\/([0-9]+)/) && req.method === 'DELETE') {
-        const id = req.url.split('/')[3];
+    } else if (
+        req.url.match(/\/api\/users\/([0-9]+)/) &&
+        req.method === "DELETE"
+    ) {
+        const id = req.url.split("/")[3];
         deleteUser(req, res, id);
-    } else if (req.url.match(/\/api\/users\/booklist\/([0-9]+)/) && req.method === 'POST') {
-        const id = req.url.split('/')[4];
+    } else if (
+        req.url.match(/\/api\/users\/booklist\/([0-9]+)/) &&
+        req.method === "POST"
+    ) {
+        const id = req.url.split("/")[4];
         addBookToLectureList(req, res, id);
-    } else if (req.url.match(/\/api\/users\/booklist\/([0-9]+)/) && req.method === 'DELETE') {
-        const id = req.url.split('/')[4];
+    } else if (
+        req.url.match(/\/api\/users\/booklist\/([0-9]+)/) &&
+        req.method === "DELETE"
+    ) {
+        const id = req.url.split("/")[4];
         deleteFromLectureList(req, res, id);
-    }
-    else {
-        res.writeHead(404, { 'Content-Type': 'application/json' });
-        res.end(JSON.stringify({ message: 'User Route Not Found' }));
+    } else {
+        res.writeHead(404, { "Content-Type": "application/json" });
+        res.end(JSON.stringify({ message: "User Route Not Found" }));
+        requestLogger(req.method, req.url, 404);
     }
 }
 

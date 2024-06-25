@@ -1,19 +1,19 @@
-const { queryDatabase } = require('../utils/dataStorage');
-const sql = require('mssql');
+import sql from "mssql";
+import { queryDatabase } from "../data/dbConnection.js";
 
-async function getGroupMessages(groupId) {
+export const getGroupMessages = async (groupId) => {
     const query = 'SELECT * FROM GroupMessages WHERE groupId = @groupId';
     const params = [{ name: 'groupId', type: sql.Int, value: groupId }];
     return await queryDatabase(query, params);
-}
+};
 
-async function getGroupMessageById(id) {
+export const getGroupMessageById = async (id) => {
     const query = 'SELECT * FROM GroupMessages WHERE id = @id';
     const params = [{ name: 'id', type: sql.Int, value: id }];
     return await queryDatabase(query, params);
-}
+};
 
-async function createGroupMessage(groupMessage) {
+export const createGroupMessage = async (groupMessage) => {
     const query = `
         INSERT INTO GroupMessages (groupId, userId, message, createdAt)
         VALUES (@groupId, @userId, @message, @createdAt);
@@ -27,9 +27,9 @@ async function createGroupMessage(groupMessage) {
     ];
     const result = await queryDatabase(query, params);
     return { ...groupMessage, id: result[0].id };
-}
+};
 
-async function updateGroupMessage(id, groupMessage) {
+export const updateGroupMessage = async (id, groupMessage) => {
     const query = `
         UPDATE GroupMessages
         SET message = @message
@@ -41,16 +41,16 @@ async function updateGroupMessage(id, groupMessage) {
     ];
     await queryDatabase(query, params);
     return { id, ...groupMessage };
-}
+};
 
-async function deleteGroupMessage(id) {
+export const deleteGroupMessage = async (id) => {
     const query = 'DELETE FROM GroupMessages WHERE id = @id';
     const params = [{ name: 'id', type: sql.Int, value: id }];
     await queryDatabase(query, params);
     return true;
-}
+};
 
-async function isUserInGroup(userId, groupId) {
+export const isUserInGroup = async (userId, groupId) => {
     const query = `
         SELECT 1 FROM UsersGroups
         WHERE userId = @userId AND groupId = @groupId
@@ -61,13 +61,4 @@ async function isUserInGroup(userId, groupId) {
     ];
     const result = await queryDatabase(query, params);
     return result.length > 0;
-}
-
-module.exports = {
-    getGroupMessages,
-    getGroupMessageById,
-    createGroupMessage,
-    updateGroupMessage,
-    deleteGroupMessage,
-    isUserInGroup
 };

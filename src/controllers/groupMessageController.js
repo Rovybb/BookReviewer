@@ -1,92 +1,108 @@
-const groupMessageModel = require('../models/groupMessageModel');
+import * as groupMessageModel from "../models/groupMessageModel.js";
+import requestLogger from "../utils/requestLogger.js";
 
-async function getGroupMessages(req, res, groupId) {
+export const getGroupMessages = async (req, res, groupId) => {
     try {
         const groupMessages = await groupMessageModel.getGroupMessages(groupId);
-        res.writeHead(200, { 'Content-Type': 'application/json' });
+        res.writeHead(200, { "Content-Type": "application/json" });
         res.end(JSON.stringify(groupMessages));
+        requestLogger(req.method, req.url, 200);
     } catch (err) {
-        res.writeHead(500, { 'Content-Type': 'application/json' });
+        res.writeHead(500, { "Content-Type": "application/json" });
         res.end(JSON.stringify({ message: err.message }));
+        requestLogger(req.method, req.url, 500);
     }
-}
+};
 
-async function getGroupMessage(req, res, id) {
+export const getGroupMessage = async (req, res, id) => {
     try {
         const groupMessage = await groupMessageModel.getGroupMessageById(id);
         if (groupMessage.length > 0) {
-            res.writeHead(200, { 'Content-Type': 'application/json' });
+            res.writeHead(200, { "Content-Type": "application/json" });
             res.end(JSON.stringify(groupMessage[0]));
+            requestLogger(req.method, req.url, 200);
         } else {
-            res.writeHead(404, { 'Content-Type': 'application/json' });
-            res.end(JSON.stringify({ message: 'GroupMessage not found' }));
+            res.writeHead(404, { "Content-Type": "application/json" });
+            res.end(JSON.stringify({ message: "GroupMessage not found" }));
+            requestLogger(req.method, req.url, 404);
         }
     } catch (err) {
-        res.writeHead(500, { 'Content-Type': 'application/json' });
+        res.writeHead(500, { "Content-Type": "application/json" });
         res.end(JSON.stringify({ message: err.message }));
+        requestLogger(req.method, req.url, 500);
     }
-}
+};
 
-async function createGroupMessage(req, res) {
+export const createGroupMessage = async (req, res) => {
     try {
-        let body = '';
-        req.on('data', chunk => {
+        let body = "";
+        req.on("data", (chunk) => {
             body += chunk.toString();
         });
-        req.on('end', async () => {
+        req.on("end", async () => {
             const groupMessage = JSON.parse(body);
             const { groupId, userId, message } = groupMessage;
 
-            const isUserInGroup = await groupMessageModel.isUserInGroup(userId, groupId);
+            const isUserInGroup = await groupMessageModel.isUserInGroup(
+                userId,
+                groupId
+            );
             if (!isUserInGroup) {
-                res.writeHead(403, { 'Content-Type': 'application/json' });
-                res.end(JSON.stringify({ message: 'User not a member of the group' }));
+                res.writeHead(403, { "Content-Type": "application/json" });
+                res.end(
+                    JSON.stringify({
+                        message: "User not a member of the group",
+                    })
+                );
+                requestLogger(req.method, req.url, 403);
                 return;
             }
 
-            const newGroupMessage = await groupMessageModel.createGroupMessage({ groupId, userId, message });
-            res.writeHead(201, { 'Content-Type': 'application/json' });
+            const newGroupMessage = await groupMessageModel.createGroupMessage({
+                groupId,
+                userId,
+                message,
+            });
+            res.writeHead(201, { "Content-Type": "application/json" });
             res.end(JSON.stringify(newGroupMessage));
+            requestLogger(req.method, req.url, 201);
         });
     } catch (err) {
-        res.writeHead(500, { 'Content-Type': 'application/json' });
+        res.writeHead(500, { "Content-Type": "application/json" });
         res.end(JSON.stringify({ message: err.message }));
+        requestLogger(req.method, req.url, 500);
     }
-}
+};
 
-async function updateGroupMessage(req, res, id) {
+export const updateGroupMessage = async (req, res, id) => {
     try {
-        let body = '';
-        req.on('data', chunk => {
+        let body = "";
+        req.on("data", (chunk) => {
             body += chunk.toString();
         });
-        req.on('end', async () => {
+        req.on("end", async () => {
             const groupMessage = JSON.parse(body);
             await groupMessageModel.updateGroupMessage(id, groupMessage);
-            res.writeHead(200, { 'Content-Type': 'application/json' });
-            res.end(JSON.stringify({ message: 'GroupMessage updated' }));
+            res.writeHead(200, { "Content-Type": "application/json" });
+            res.end(JSON.stringify({ message: "GroupMessage updated" }));
+            requestLogger(req.method, req.url, 200);
         });
     } catch (err) {
-        res.writeHead(500, { 'Content-Type': 'application/json' });
+        res.writeHead(500, { "Content-Type": "application/json" });
         res.end(JSON.stringify({ message: err.message }));
+        requestLogger(req.method, req.url, 500);
     }
-}
+};
 
-async function deleteGroupMessage(req, res, id) {
+export const deleteGroupMessage = async (req, res, id) => {
     try {
         await groupMessageModel.deleteGroupMessage(id);
-        res.writeHead(204, { 'Content-Type': 'application/json' });
+        res.writeHead(204, { "Content-Type": "application/json" });
         res.end();
+        requestLogger(req.method, req.url, 204);
     } catch (err) {
-        res.writeHead(500, { 'Content-Type': 'application/json' });
+        res.writeHead(500, { "Content-Type": "application/json" });
         res.end(JSON.stringify({ message: err.message }));
+        requestLogger(req.method, req.url, 500);
     }
-}
-
-module.exports = {
-    getGroupMessages,
-    getGroupMessage,
-    createGroupMessage,
-    updateGroupMessage,
-    deleteGroupMessage
 };
