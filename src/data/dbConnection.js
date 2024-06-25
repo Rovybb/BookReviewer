@@ -20,4 +20,17 @@ const createConnection = async () => {
     }
 };
 
-export default createConnection;
+async function queryDatabase(query, params = []) {
+    try {
+        let request = new sql.Request();
+        params.forEach(param => {
+            request.input(param.name, param.type, param.value);
+        });
+        let result = await request.query(query);
+        return result.recordset;
+    } catch (err) {
+        throw new Error(err.message);
+    }
+}
+
+export { createConnection, queryDatabase };
