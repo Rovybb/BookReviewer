@@ -86,14 +86,22 @@ export const deleteGroup = async (req, res, id) => {
     }
 };
 
-export const joinGroup = async (userId, groupId) => {
-    const query = `
-        INSERT INTO UsersGroups (userId, groupId)
-        VALUES (@userId, @groupId)
-    `;
-    const params = [
-        { name: "userId", type: sql.Int, value: userId },
-        { name: "groupId", type: sql.Int, value: groupId },
-    ];
-    await queryDatabase(query, params);
+export const joinGroup = async (req, res, id) => {
+    try {
+        let body = "";
+        req.on("data", (chunk) => {
+            body += chunk.toString();
+        });
+        req.on("end", async () => {
+            const { userId } = JSON.parse(body);
+            await groupModel.joinGroup(userId, id);
+            res.writeHead(201, { "Content-Type": "application/json" });
+            res.end(JSON.stringify({ message: "User joined group" }));
+            requestLogger(req.method, req.url, 201);
+        });
+    } catch (err) {
+        res.writeHead(500, { "Content-Type": "application/json" });
+        res.end(JSON.stringify({ message: err.message }));
+        requestLogger(req.method, req.url, 500);
+    }
 };

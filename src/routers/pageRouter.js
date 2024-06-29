@@ -63,7 +63,7 @@ const prepareFile = async (url) => {
 /**
  * Router for handling static files and pages
  * @param {IncomingMessage} req Client request
- * @param {ServerResponse} res Server response
+ * @param {ServerResponse<IncomingMessage>} res Server response
  */
 const pageRouter = async (req, res) => {
     const file = await prepareFile(req.url);

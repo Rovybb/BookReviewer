@@ -43,3 +43,15 @@ export const deleteGroup = async (id) => {
     const query = 'DELETE FROM Groups WHERE id = @id';
     return await queryDatabase(query, [{ name: 'id', type: sql.Int, value: id }]);
 };
+
+export const joinGroup = async (userId, groupId) => {
+    const query = `
+        INSERT INTO UsersGroups (userId, groupId)
+        VALUES (@userId, @groupId)
+    `;
+    const params = [
+        { name: 'userId', type: sql.Int, value: userId },
+        { name: 'groupId', type: sql.Int, value: groupId }
+    ];
+    return await queryDatabase(query, params);
+};

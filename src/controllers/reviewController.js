@@ -44,7 +44,7 @@ export const addReview = async (req, res) => {
             body += chunk.toString();
         });
         req.on("end", async () => {
-            const { rating, description, bookId } = JSON.parse(body);
+            const { rating, description, bookId, userId } = JSON.parse(body);
             const query = `
                 INSERT INTO Reviews (rating, description, bookId, userId, createdAt)
                 VALUES (@rating, @description, @bookId, @userId, @createdAt);
@@ -54,7 +54,7 @@ export const addReview = async (req, res) => {
                 { name: "rating", type: sql.Int, value: rating },
                 { name: "description", type: sql.NVarChar, value: description },
                 { name: "bookId", type: sql.Int, value: bookId },
-                { name: "userId", type: sql.Int, value: req.user.id },
+                { name: "userId", type: sql.Int, value: userId },
                 { name: "createdAt", type: sql.DateTime, value: new Date() },
             ];
             const result = await queryDatabase(query, params);
@@ -78,7 +78,7 @@ export const updateReview = async (req, res, id) => {
             body += chunk.toString();
         });
         req.on("end", async () => {
-            const { rating, description, bookId } = JSON.parse(body);
+            const { rating, description, bookId, userId } = JSON.parse(body);
             const query = `
                 UPDATE Reviews
                 SET rating = @rating, description = @description, bookId = @bookId, userId = @userId
@@ -88,7 +88,7 @@ export const updateReview = async (req, res, id) => {
                 { name: "rating", type: sql.Int, value: rating },
                 { name: "description", type: sql.NVarChar, value: description },
                 { name: "bookId", type: sql.Int, value: bookId },
-                { name: "userId", type: sql.Int, value: req.user.id },
+                { name: "userId", type: sql.Int, value: userId },
                 { name: "id", type: sql.Int, value: id },
             ];
             await queryDatabase(query, params);

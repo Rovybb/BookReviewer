@@ -4,6 +4,7 @@ import {
     register,
     login,
     updateUser,
+    deleteUser,
     addBookToLectureList,
     deleteFromLectureList,
 } from "../../controllers/userController.js";

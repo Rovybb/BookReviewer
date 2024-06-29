@@ -13,6 +13,13 @@ export const getUserById = async (id) => {
     return result[0];
 };
 
+export const getUserByEmail = async (email) => {
+    const query = 'SELECT * FROM Users WHERE email = @email';
+    const params = [{ name: 'email', type: sql.NVarChar, value: email }];
+    const result = await queryDatabase(query, params);
+    return result[0];
+};
+
 export const addUser = async (user) => {
     const query = `
         INSERT INTO Users (username,email, password, role, profilePicture)

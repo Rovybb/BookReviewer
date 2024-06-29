@@ -4,6 +4,7 @@ import jwt from "jsonwebtoken";
 import { queryDatabase } from "../data/dbConnection.js";
 import * as userModel from "../models/userModel.js";
 import requestLogger from "../utils/requestLogger.js";
+import usernameGenerator from "../utils/usernameGenerator.js";
 
 export const getUsers = async (req, res) => {
     try {
@@ -49,7 +50,7 @@ export const register = async (req, res) => {
             const { email, password } = JSON.parse(body);
             const hashedPassword = await bcrypt.hash(password, 10);
             await queryDatabase(
-                'INSERT INTO Users ( password, role, email) VALUES (@password, @role, @email,)',
+                'INSERT INTO Users (password, role, email, username) VALUES (@password, @role, @email, @username)',
                 [
                     { name: "email", type: sql.NVarChar, value: email },
                     {
@@ -58,6 +59,7 @@ export const register = async (req, res) => {
                         value: hashedPassword,
                     },
                     { name: "role", type: sql.NVarChar, value: "User" },
+                    { name: "username", type: sql.NVarChar, value: usernameGenerator() },
                 ]
             );
             res.writeHead(201, { "Content-Type": "application/json" });
@@ -80,13 +82,15 @@ export const login = async (req, res) => {
         req.on("end", async () => {
             const { email, password } = JSON.parse(body);
 
+            const user = await userModel.getUserByEmail(email);
+
             const validPassword = await bcrypt.compare(
                 password,
-                user[0].password
+                user.password
             );
             if (validPassword) {
                 const token = jwt.sign(
-                    { id: user[0].id, role: user[0].role },
+                    { id: user.id, role: user.role },
                     process.env.JWT_SECRET,
                     { expiresIn: "1h" }
                 );
