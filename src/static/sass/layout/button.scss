@@ -13,6 +13,21 @@
     font-weight: 700;
     font-family: inherit;
     border: none;
+
+    &:has(.button-image) {
+        padding: 0;
+        width: 38px;
+        border-radius: 50%;
+    }
+}
+
+.button-image {
+    width: 100%;
+    border-radius: 50%;
+
+    &:hover {
+        filter: brightness(0.8);
+    }
 }
 
 @include themify($themes) {

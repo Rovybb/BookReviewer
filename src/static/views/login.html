@@ -43,32 +43,39 @@
                                 Welcome to BookReviewer!
                             </h2>
                             <h1 class="auth-card-title">Login</h1>
-                            <form action="" class="auth-form-container">
-                                <label
-                                    for="email"
-                                    class="input-text-label hidden"
-                                    >Email</label
-                                >
-                                <input
-                                    type="email"
-                                    id="email"
-                                    class="input-text"
-                                    placeholder="Email"
-                                    required
-                                />
-                                <label
-                                    for="password"
-                                    class="input-text-label hidden"
-                                    >Password</label
-                                >
-                                <input
-                                    type="password"
-                                    id="password"
-                                    class="input-text"
-                                    placeholder="Password"
-                                    required
-                                />
-                                <button class="button" type="submit">
+                            <form class="auth-card-form-container">
+                                <div class="input-group" id="emailGroup">
+                                    <label
+                                        for="email"
+                                        class="input-text-label hidden"
+                                        >Email</label
+                                    >
+                                    <input
+                                        type="email"
+                                        id="email"
+                                        class="input-text"
+                                        placeholder="Email"
+                                        autocomplete="email"
+                                        required
+                                    />
+                                    <span class="input-error" id="emailError">Test</span>
+                                </div>
+                                <div class="input-group" id="passwordGroup">
+                                    <label
+                                        for="password"
+                                        class="input-text-label hidden"
+                                        >Password</label
+                                    >
+                                    <input
+                                        type="password"
+                                        id="password"
+                                        class="input-text"
+                                        placeholder="Password"
+                                        required
+                                    />
+                                    <span class="input-error" id="passwordError"></span>
+                                </div>
+                                <button class="button" type="submit" id="loginButton">
                                     Login
                                 </button>
                             </form>
@@ -87,5 +94,6 @@
             </main>
         </div>
         <script src="/utils/handleNavigate.js"></script>
+        <script src="/connections/loginConnection.js"></script>
     </body>
 </html>

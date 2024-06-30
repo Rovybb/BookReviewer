@@ -10,17 +10,17 @@ import { IncomingMessage, ServerResponse } from "node:http";
  * @param {ServerResponse<IncomingMessage>} res - The response object.
  * @param {Function} next - The next middleware function.
  */
-const verifyToken = (req, res, next) => {
-    const token = req.header("Authorization");
+const verifyToken = async (req, res, next) => {
+    const token = req.headers.authorization?.split(" ")[1];
     if (!token) {
         res.writeHead(403, { "Content-Type": "application/json" });
         res.end(JSON.stringify({ error: "Access denied" }));
-        requestLogger(req.method, req.url, 403);
+        requestLogger(req.method, req.url, 401);
         return;
     }
     try {
         const decoded = jwt.verify(token, process.env.JWT_SECRET);
-        next(req, res, decoded);
+        await next(req, res, decoded.id);
     } catch (error) {
         res.writeHead(401, { "Content-Type": "application/json" });
         res.end(JSON.stringify({ error: "Invalid token" }));

@@ -1,13 +1,23 @@
-.input-text-label {
-  font-size: 16px;
+.input-group {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
 }
-.input-text-label.hidden {
+.input-group.error .input-error {
+  display: block;
+}
+.input-group.error .input-text {
+  border-color: #be0000;
+}
+.input-group.error .input-text:focus {
+  border-color: #7c0101;
+}
+
+.input-error {
   display: none;
-}
-@media screen and (max-width: 576px) {
-  .input-text-label {
-    font-size: 14px;
-  }
+  color: #be0000;
+  font-size: 14px;
+  font-weight: 600;
 }
 
 .input-text {
@@ -22,11 +32,21 @@
     font-size: 14px;
   }
 }
+.input-text-label {
+  font-size: 16px;
+}
+.input-text-label.hidden {
+  display: none;
+}
+@media screen and (max-width: 576px) {
+  .input-text-label {
+    font-size: 14px;
+  }
+}
 
 .input-file {
   display: none;
 }
-
 .input-file-label {
   width: 100%;
   height: 100px;
@@ -43,32 +63,18 @@
     font-size: 14px;
   }
 }
-
-.plus-svg {
-  width: 16px;
-  height: 16px;
-  cursor: pointer;
-}
-@media screen and (max-width: 576px) {
-  .plus-svg {
-    font-size: 14px;
-  }
-}
-
 .input-file-label-text {
   font-size: 12px;
   font-weight: 600;
 }
-
-.input-file-preview {
+.input-filepreview {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   gap: 8px;
 }
-
-.input-file-preview-img {
+.input-filepreview-img {
   width: 75px;
   height: 75px;
   object-fit: cover;

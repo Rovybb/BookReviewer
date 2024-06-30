@@ -24,6 +24,10 @@
         <link rel="manifest" href="/public/site.webmanifest" />
         <link rel="stylesheet" href="/styles/layout/index.css" />
         <link rel="stylesheet" href="/styles/modules/auth/index.css" />
+        <script
+            src="https://kit.fontawesome.com/3811cdfa76.js"
+            crossorigin="anonymous"
+        ></script>
     </head>
     <body class="dark-theme">
         <div class="container">
@@ -43,46 +47,137 @@
                                 Welcome to BookReviewer!
                             </h2>
                             <h1 class="auth-card-title">Register</h1>
-                            <form action="/register/appearance" class="auth-form-container"> <!-- TO DO: change the action in the future -->
-                                <label
-                                    for="email"
-                                    class="input-text-label hidden"
-                                    >Email</label
-                                >
-                                <input
-                                    type="email"
-                                    id="email"
-                                    class="input-text"
-                                    placeholder="Email"
-                                    required
-                                />
-                                <label
-                                    for="password"
-                                    class="input-text-label hidden"
-                                    >Password</label
-                                >
-                                <input
-                                    type="password"
-                                    id="password"
-                                    class="input-text"
-                                    placeholder="Password"
-                                    required
-                                />
-                                <label
-                                    for="confirm-password"
-                                    class="input-text-label hidden"
-                                    >Confirm Password</label
-                                >
-                                <input
-                                    type="password"
-                                    id="confirm-password"
-                                    class="input-text"
-                                    placeholder="Confirm Password"
-                                    required
-                                />
-                                <button class="button" type="submit">
-                                    Next
-                                </button>
+                            <form class="auth-card-form-container">
+                                <div class="step" id="step1">
+                                    <div class="input-group" id="emailGroup">
+                                        <label
+                                            for="email"
+                                            class="input-text-label hidden"
+                                            >Email</label
+                                        >
+                                        <input
+                                            type="email"
+                                            id="email"
+                                            class="input-text"
+                                            placeholder="Email"
+                                            autocomplete="email"
+                                            required
+                                        />
+                                        <span
+                                            class="input-error"
+                                            id="emailError"
+                                        ></span>
+                                    </div>
+                                    <div class="input-group" id="passwordGroup">
+                                        <label
+                                            for="password"
+                                            class="input-text-label hidden"
+                                            >Password</label
+                                        >
+                                        <input
+                                            type="password"
+                                            id="password"
+                                            class="input-text"
+                                            placeholder="Password"
+                                            required
+                                        />
+                                        <span
+                                            class="input-error"
+                                            id="passwordError"
+                                        ></span>
+                                    </div>
+                                    <div
+                                        class="input-group"
+                                        id="confirmPasswordGroup"
+                                    >
+                                        <label
+                                            for="confirmPassword"
+                                            class="input-text-label hidden"
+                                            >Confirm Password</label
+                                        >
+                                        <input
+                                            type="password"
+                                            id="confirmPassword"
+                                            class="input-text"
+                                            placeholder="Confirm Password"
+                                            required
+                                        />
+                                        <span
+                                            class="input-error"
+                                            id="confirmPasswordError"
+                                        ></span>
+                                    </div>
+                                    <button
+                                        class="button"
+                                        type="submit"
+                                        id="nextButton"
+                                    >
+                                        Next
+                                    </button>
+                                </div>
+                                <div class="step hidden" id="step2">
+                                    <div class="input-group" id="usernameGroup">
+                                        <label
+                                            for="username"
+                                            class="input-text-label hidden"
+                                            >Username</label
+                                        >
+                                        <input
+                                            type="text"
+                                            id="username"
+                                            class="input-text"
+                                            placeholder="Username"
+                                            autocomplete="username"
+                                            required
+                                        />
+                                        <span
+                                            class="input-error"
+                                            id="usernameError"
+                                        ></span>
+                                    </div>
+                                    <div
+                                        class="input-group"
+                                        id="profilePictureGroup"
+                                    >
+                                        <label
+                                            for="profilePicture"
+                                            class="input-file-label"
+                                        >
+                                            <div class="input-file-preview">
+                                                <i class="fa-solid fa-plus"></i>
+                                                <span
+                                                    class="input-file-label-text"
+                                                    >Add Profile Picture</span
+                                                >
+                                            </div>
+                                        </label>
+                                        <input
+                                            type="file"
+                                            accept="image/png, image/jpg, image/gif, image/jpeg"
+                                            id="profilePicture"
+                                            class="input-file"
+                                            placeholder="Profile Picture"
+                                            onchange="handlePreview()"
+                                            required
+                                        />
+                                        <div class="button-row">
+                                            <button
+                                                class="button button--bordered"
+                                                type="button"
+                                                id="backButton"
+                                            >
+                                                Back
+                                            </button>
+                                            <button
+                                                class="button"
+                                                type="button"
+                                                id="registerButton"
+                                            >
+                                                Register
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
                             </form>
                         </div>
                         <p class="auth-card-tou">
@@ -99,5 +194,7 @@
             </main>
         </div>
         <script src="/utils/handleNavigate.js"></script>
+        <script src="/utils/handlePreview.js"></script>
+        <script src="/connections/registerConnection.js"></script>
     </body>
 </html>

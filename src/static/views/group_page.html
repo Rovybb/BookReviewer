@@ -31,6 +31,7 @@
             src="https://kit.fontawesome.com/3811cdfa76.js"
             crossorigin="anonymous"
         ></script>
+        <script src="/connections/headerButtonConnection.js"></script>
     </head>
     <body class="dark-theme">
         <div class="mobile-menu">
@@ -81,12 +82,9 @@
                     </ul>
                 </nav>
                 <button
-                    id="button--login"
+                    id="loginButton"
                     class="button button--bordered"
-                    onclick="handleNavigate('/login')"
-                >
-                    Login
-                </button>
+                ></button>
                 <div class="mobile-menu-button">
                     <span class="fa fa-bars"></span>
                 </div>
@@ -130,7 +128,11 @@
                     <div class="messages">
                         <div class="message">
                             <div class="message-header">
-                                <img src="/assets/profile_placeholder.jpg" alt="User" class="message-header-image" />
+                                <img
+                                    src="/assets/profile_placeholder.jpg"
+                                    alt="User"
+                                    class="message-header-image"
+                                />
                                 <div class="message-header-text">
                                     <span class="message-author">John Doe</span>
                                     <span class="message-date">01-01-2024</span>
@@ -144,7 +146,11 @@
                         </div>
                         <div class="message">
                             <div class="message-header">
-                                <img src="/assets/profile_placeholder.jpg" alt="User" class="message-header-image" />
+                                <img
+                                    src="/assets/profile_placeholder.jpg"
+                                    alt="User"
+                                    class="message-header-image"
+                                />
                                 <div class="message-header-text">
                                     <span class="message-author">John Doe</span>
                                     <span class="message-date">01-01-2024</span>

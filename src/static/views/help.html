@@ -1,148 +1,209 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Book Reviewer</title>
-    <link rel="apple-touch-icon" sizes="180x180" href="/public/apple-touch-icon.png" />
-    <link rel="icon" type="image/png" sizes="32x32" href="/public/favicon-32x32.png" />
-    <link rel="icon" type="image/png" sizes="16x16" href="/public/favicon-16x16.png" />
-    <link rel="manifest" href="/public/site.webmanifest" />
-    <link rel="stylesheet" href="/styles/layout/index.css" />
-    <link rel="stylesheet" href="/styles/modules/help/index.css" />
-    <script src="https://kit.fontawesome.com/3811cdfa76.js" crossorigin="anonymous"></script>
-</head>
-<body class="dark-theme">
-    <div class="mobile-menu">
-        <span class="fa-solid fa-x mobile-menu-close-button"></span>
-        <span class="mobile-menu-logo" onclick="handleNavigate('/')">Book<mark>Reviewer</mark></span>
-        <ul class="mobile-menu-list">
-            <li class="mobile-menu-list-item">
-                <a href="/" class="menu-list-link">Home</a>
-            </li>
-            <li class="mobile-menu-list-item">
-                <a href="/about" class="menu-list-link">About</a>
-            </li>
-            <li class="mobile-menu-list-item">
-                <a href="/books" class="menu-list-link">Books</a>
-            </li>
-            <li class="mobile-menu-list-item">
-                <a href="/groups" class="menu-list-link">Groups</a>
-            </li>
-            <li class="mobile-menu-list-item">
-                <a href="/login" class="menu-list-link">Login</a>
-            </li>
-        </ul>
-    </div>
-    <div class="container">
-        <header class="header">
-            <span class="logo logo--clickable" onclick="handleNavigate('/')">
-                Book<mark>Reviewer</mark>
-            </span>
-            <nav class="nav">
-                <ul class="nav-list">
-                    <li class="nav-item">
-                        <a href="/" class="nav-link">Home</a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="/about" class="nav-link">About</a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="/books" class="nav-link">Books</a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="/groups" class="nav-link">Groups</a>
-                    </li>
-                </ul>
-            </nav>
-            <button id="button--login" class="button button--bordered" onclick="handleNavigate('/login')">
-                Login
-            </button>
-            <div class="mobile-menu-button">
-                <span class="fa fa-bars"></span>
-            </div>
-        </header>
-        <main class="main-content">
-            <section class="help">
-                <h2 class="help-title">Help & Support</h2>
-                <div class="help-container">
-                    <p class="help-container-text">
-                        Welcome to the Help & Support page of BookReviewer. We're here to assist you with any
-                        questions or issues you may have regarding our platform. Below are some common topics and
-                        answers to help you make the most of your experience:
-                    </p>
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Book Reviewer</title>
+        <link
+            rel="apple-touch-icon"
+            sizes="180x180"
+            href="/public/apple-touch-icon.png"
+        />
+        <link
+            rel="icon"
+            type="image/png"
+            sizes="32x32"
+            href="/public/favicon-32x32.png"
+        />
+        <link
+            rel="icon"
+            type="image/png"
+            sizes="16x16"
+            href="/public/favicon-16x16.png"
+        />
+        <link rel="manifest" href="/public/site.webmanifest" />
+        <link rel="stylesheet" href="/styles/layout/index.css" />
+        <link rel="stylesheet" href="/styles/modules/help/index.css" />
+        <script
+            src="https://kit.fontawesome.com/3811cdfa76.js"
+            crossorigin="anonymous"
+        ></script>
+        <script src="/connections/headerButtonConnection.js"></script>
+    </head>
+    <body class="dark-theme">
+        <div class="mobile-menu">
+            <span class="fa-solid fa-x mobile-menu-close-button"></span>
+            <span class="mobile-menu-logo" onclick="handleNavigate('/')"
+                >Book<mark>Reviewer</mark></span
+            >
+            <ul class="mobile-menu-list">
+                <li class="mobile-menu-list-item">
+                    <a href="/" class="menu-list-link">Home</a>
+                </li>
+                <li class="mobile-menu-list-item">
+                    <a href="/about" class="menu-list-link">About</a>
+                </li>
+                <li class="mobile-menu-list-item">
+                    <a href="/books" class="menu-list-link">Books</a>
+                </li>
+                <li class="mobile-menu-list-item">
+                    <a href="/groups" class="menu-list-link">Groups</a>
+                </li>
+                <li class="mobile-menu-list-item">
+                    <a href="/login" class="menu-list-link">Login</a>
+                </li>
+            </ul>
+        </div>
+        <div class="container">
+            <header class="header">
+                <span
+                    class="logo logo--clickable"
+                    onclick="handleNavigate('/')"
+                >
+                    Book<mark>Reviewer</mark>
+                </span>
+                <nav class="nav">
+                    <ul class="nav-list">
+                        <li class="nav-item">
+                            <a href="/" class="nav-link">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="/about" class="nav-link">About</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="/books" class="nav-link">Books</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="/groups" class="nav-link">Groups</a>
+                        </li>
+                    </ul>
+                </nav>
+                <button
+                    id="loginButton"
+                    class="button button--bordered"
+                ></button>
+                <div class="mobile-menu-button">
+                    <span class="fa fa-bars"></span>
                 </div>
-                <h3 class="help-subtitle">Getting Started</h3>
-                <div class="help-container">
-                    <p class="help-container-question">
-                        <i class="fa-solid fa-circle-dot"></i> How do I login to my account?
-                    <p class="help-container-text">
-                        To login to your account, click on the "Log In" button located at the top right corner of the
-                        homepage. Enter your registered email address and password, then click "Log In."
-                    </p>
-                    <p class="help-container-question">
-                        <i class="fa-solid fa-circle-dot"></i> What if I don’t have an account?
-                    </p>
-                    <p class="help-container-text">
-                        To create an account on Boo, click on the "Register" button located at the middle of the login.
-                        Fill in the required information, such as your email address, and password, and then click
-                        "Next"
-                    </p>
-                </div>
-                <h3 class="help-subtitle">Book Management</h3>
-                <div class="help-container">
-                    <p class="help-container-question"><i class="fa-solid fa-circle-dot"></i> How do I add a book to my library?</p>
-                    <p class="help-container-text">To add a book to your library, search for the desired book using the
-                        search bar or press the „Books” page on the header. Once you've found the book, click on it to
-                        view the details. Then, click the "Add to Library" button to add it to your personal library.
-                    </p>
-                    <p class="help-container-question"><i class="fa-solid fa-circle-dot"></i> How do I mark a book as "currently reading" or "read"?</p>
-                    <p class="help-container-text">Navigate to your library and locate the book you want to update.
-                        Click on the book to view its details, then select the appropriate status (e.g., "Currently
-                        Reading," "Read") from the options provided.</p>
-                </div>
-                <h3 class="help-subtitle">Reviews and Discussions</h3>
-                <div class="help-container">
-                    <p class="help-container-question">
-                        <i class="fa-solid fa-circle-dot"></i> How do I write a book review?
-                    </p>
-                    <p class="help-container-text">
-                        To write a book review, navigate to the book's page in your library
-                        or search for it on the website. Scroll down to the review section and click on "Write a
-                        Review." Provide your rating, write your review, and click "Submit" to publish it.
-                    </p>
-                </div>
-                <h3 class="help-subtitle">Account Management</h3>
-                <div class="help-container">
-                    <p class="help-container-question">
-                        <i class="fa-solid fa-circle-dot"></i> How do I update my profile information?
-                    <p class="help-container-text">
-                        Click on your profile picture or username to access your profile settings. From there, you can
-                        update your name, email address, password, and other account details.
-                    </p>
-                    <p class="help-container-question">
-                        <i class="fa-solid fa-circle-dot"></i> How do I delete my account?
-                    </p>
-                    <p class="help-container-text">
-                        To delete your account, please contact our support team at bookreviewer@email.com for assistance.
-                    </p>
-                </div>
-                <h3 class="help-subtitle">Contact Us</h3>
-                <div class="help-container">
-                    <p class="help-container-text">If you have any other questions or need further assistance, please
-                        don't hesitate to reach out to our support team at bookreviewer@email.com. We're here to help and ensure
-                        that you have a seamless experience on BookReviewer.</p>
-                </div>
-            </section>
-        </main>
-        <footer class="footer">
-            <p class="footer-copyright">©2024 BookReviewer, Inc.</p>
-            <a href="/about" class="footer-link">About us</a>
-            <a href="/help" class="footer-link">Help</a>
-        </footer>
-    </div>
-    <script src="/utils/handleNavigate.js"></script>
-    <script src="/utils/handleOpenMenu.js"></script>
-    <script src="/utils/handleTheme.js"></script>
-</body>
+            </header>
+            <main class="main-content">
+                <section class="help">
+                    <h2 class="help-title">Help & Support</h2>
+                    <div class="help-container">
+                        <p class="help-container-text">
+                            Welcome to the Help & Support page of BookReviewer.
+                            We're here to assist you with any questions or
+                            issues you may have regarding our platform. Below
+                            are some common topics and answers to help you make
+                            the most of your experience:
+                        </p>
+                    </div>
+                    <h3 class="help-subtitle">Getting Started</h3>
+                    <div class="help-container">
+                        <p class="help-container-question">
+                            <i class="fa-solid fa-circle-dot"></i> How do I
+                            login to my account?
+                        </p>
+
+                        <p class="help-container-text">
+                            To login to your account, click on the "Log In"
+                            button located at the top right corner of the
+                            homepage. Enter your registered email address and
+                            password, then click "Log In."
+                        </p>
+                        <p class="help-container-question">
+                            <i class="fa-solid fa-circle-dot"></i> What if I
+                            don’t have an account?
+                        </p>
+                        <p class="help-container-text">
+                            To create an account on Boo, click on the "Register"
+                            button located at the middle of the login. Fill in
+                            the required information, such as your email
+                            address, and password, and then click "Next"
+                        </p>
+                    </div>
+                    <h3 class="help-subtitle">Book Management</h3>
+                    <div class="help-container">
+                        <p class="help-container-question">
+                            <i class="fa-solid fa-circle-dot"></i> How do I add
+                            a book to my library?
+                        </p>
+                        <p class="help-container-text">
+                            To add a book to your library, search for the
+                            desired book using the search bar or press the
+                            „Books” page on the header. Once you've found the
+                            book, click on it to view the details. Then, click
+                            the "Add to Library" button to add it to your
+                            personal library.
+                        </p>
+                        <p class="help-container-question">
+                            <i class="fa-solid fa-circle-dot"></i> How do I mark
+                            a book as "currently reading" or "read"?
+                        </p>
+                        <p class="help-container-text">
+                            Navigate to your library and locate the book you
+                            want to update. Click on the book to view its
+                            details, then select the appropriate status (e.g.,
+                            "Currently Reading," "Read") from the options
+                            provided.
+                        </p>
+                    </div>
+                    <h3 class="help-subtitle">Reviews and Discussions</h3>
+                    <div class="help-container">
+                        <p class="help-container-question">
+                            <i class="fa-solid fa-circle-dot"></i> How do I
+                            write a book review?
+                        </p>
+                        <p class="help-container-text">
+                            To write a book review, navigate to the book's page
+                            in your library or search for it on the website.
+                            Scroll down to the review section and click on
+                            "Write a Review." Provide your rating, write your
+                            review, and click "Submit" to publish it.
+                        </p>
+                    </div>
+                    <h3 class="help-subtitle">Account Management</h3>
+                    <div class="help-container">
+                        <p class="help-container-question">
+                            <i class="fa-solid fa-circle-dot"></i> How do I
+                            update my profile information?
+                        </p>
+
+                        <p class="help-container-text">
+                            Click on your profile picture or username to access
+                            your profile settings. From there, you can update
+                            your name, email address, password, and other
+                            account details.
+                        </p>
+                        <p class="help-container-question">
+                            <i class="fa-solid fa-circle-dot"></i> How do I
+                            delete my account?
+                        </p>
+                        <p class="help-container-text">
+                            To delete your account, please contact our support
+                            team at bookreviewer@email.com for assistance.
+                        </p>
+                    </div>
+                    <h3 class="help-subtitle">Contact Us</h3>
+                    <div class="help-container">
+                        <p class="help-container-text">
+                            If you have any other questions or need further
+                            assistance, please don't hesitate to reach out to
+                            our support team at bookreviewer@email.com. We're
+                            here to help and ensure that you have a seamless
+                            experience on BookReviewer.
+                        </p>
+                    </div>
+                </section>
+            </main>
+            <footer class="footer">
+                <p class="footer-copyright">©2024 BookReviewer, Inc.</p>
+                <a href="/about" class="footer-link">About us</a>
+                <a href="/help" class="footer-link">Help</a>
+            </footer>
+        </div>
+        <script src="/utils/handleNavigate.js"></script>
+        <script src="/utils/handleOpenMenu.js"></script>
+        <script src="/utils/handleTheme.js"></script>
+    </body>
 </html>

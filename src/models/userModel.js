@@ -9,15 +9,13 @@ export const getUsers = async () => {
 export const getUserById = async (id) => {
     const query = 'SELECT * FROM Users WHERE id = @id';
     const params = [{ name: 'id', type: sql.Int, value: id }];
-    const result = await queryDatabase(query, params);
-    return result[0];
+    return await queryDatabase(query, params);
 };
 
 export const getUserByEmail = async (email) => {
     const query = 'SELECT * FROM Users WHERE email = @email';
     const params = [{ name: 'email', type: sql.NVarChar, value: email }];
-    const result = await queryDatabase(query, params);
-    return result[0];
+    return await queryDatabase(query, params);
 };
 
 export const addUser = async (user) => {

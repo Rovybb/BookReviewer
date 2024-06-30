@@ -1,9 +1,9 @@
 @import "colors";
 
-// Define your font stack
+// Font stack
 $primary-font: "Satoshi-Variable", sans-serif;
 
-// Define your font sizes
+// Font sizes
 $font-size-hg: 80px;
 $font-size-xxl: 48px;
 $font-size-xl: 24px;
@@ -12,8 +12,13 @@ $font-size-md: 16px;
 $font-size-sm: 14px;
 $font-size-xs: 12px;
 
-// Define your breakpoints
+// Breakpoints
 $breakpoint-sm: 576px;
 $breakpoint-md: 768px;
 $breakpoint-lg: 992px;
 $breakpoint-xl: 1200px;
+
+
+// Common colors
+$error: #be0000;
+$error-focussed: #7c0101;

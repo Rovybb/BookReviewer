@@ -1,5 +1,6 @@
 import * as fs from "node:fs";
 import * as path from "node:path";
+import jwt from "jsonwebtoken";
 import requestLogger from "../utils/requestLogger.js";
 import { IncomingMessage, ServerResponse } from "node:http";
 
@@ -15,6 +16,8 @@ const MIME_TYPES = {
     svg: "image/svg+xml",
     xml: "application/xml",
 };
+
+const protectedRoutes = ["/profile"];
 
 const resolveUrl = (url) => {
     if (url === "/" || url === "") {
@@ -60,18 +63,52 @@ const prepareFile = async (url) => {
     return { found, ext, stream };
 };
 
-/**
- * Router for handling static files and pages
- * @param {IncomingMessage} req Client request
- * @param {ServerResponse<IncomingMessage>} res Server response
- */
-const pageRouter = async (req, res) => {
+const sendData = async (req, res) => {
     const file = await prepareFile(req.url);
     const statusCode = file.found ? 200 : 404;
     const mimeType = MIME_TYPES[file.ext] || MIME_TYPES.default;
     res.writeHead(statusCode, { "Content-Type": mimeType });
     file.stream.pipe(res);
     requestLogger(req.method, req.url, statusCode);
+};
+
+/**
+ * Router for handling static files and pages
+ * @param {IncomingMessage} req Client request
+ * @param {ServerResponse<IncomingMessage>} res Server response
+ */
+const pageRouter = async (req, res) => {
+    if (protectedRoutes.includes(req.url)) {
+        const cookieHeader = req.headers.cookie;
+        if (!cookieHeader) {
+            res.writeHead(401, { "Content-Type": "text/plain" });
+            res.end("Unauthorized");
+            requestLogger(req.method, req.url, 401);
+            return;
+        }
+
+        let token;
+        const cookies = cookieHeader.split(";").map((cookie) => cookie.trim());
+        const tokenCookie = cookies.find((cookie) => cookie.startsWith("token="));
+        if (tokenCookie) {
+            token = tokenCookie.split("=")[1];
+        } else {
+            res.writeHead(401, { "Content-Type": "text/plain" });
+            res.end("Unauthorized");
+            requestLogger(req.method, req.url, 401);
+            return;
+        }
+
+        try {
+            jwt.verify(token, process.env.JWT_SECRET);
+            await sendData(req, res);
+        } catch (error) {
+            res.writeHead(401, { "Content-Type": "text/plain" });
+            res.end("Unauthorized");
+            requestLogger(req.method, req.url, 401);
+        }
+    }
+    else await sendData(req, res);
 };
 
 export default pageRouter;

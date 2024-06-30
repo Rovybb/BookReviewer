@@ -49,6 +49,24 @@
     font-weight: 800;
 }
 
+.user-actions {
+    width: 990px;
+    display: flex;
+    gap: 10px;
+    transform: translate(0, -50px);
+    padding: 0 10px;
+    
+    @media screen and (max-width: $breakpoint-lg) {
+        width: 100%;
+    }
+    
+    @media screen and (max-width: $breakpoint-sm){
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+}
+
 .update-profile-form {
     display: flex;
     flex-direction: column;

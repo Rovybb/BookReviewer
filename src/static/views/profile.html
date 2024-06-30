@@ -31,6 +31,7 @@
             src="https://kit.fontawesome.com/3811cdfa76.js"
             crossorigin="anonymous"
         ></script>
+        <script src="/connections/profileConnection.js"></script>
     </head>
     <body class="dark-theme">
         <div class="mobile-menu">
@@ -81,9 +82,8 @@
                     </ul>
                 </nav>
                 <button
-                    id="button--login"
                     class="button button--bordered"
-                    onclick="handleNavigate('/')"
+                    onclick="handleLogout()"
                 >
                     Logout
                 </button>
@@ -93,21 +93,14 @@
             </header>
             <main class="main-content">
                 <div class="banner"></div>
-                <img src="/assets/profile_placeholder.jpg" alt="Group" class="user-image" />
+                <img src="/assets/profile_placeholder.jpg" alt="Profile picture" class="user-image" />
                 <div class="user-info">
-                    <h2 class="user-name">John Doe</h2>
+                    <h2 class="user-name"></h2>
                 </div>
-                <form class="update-profile-form">
-                    <div class="input-group">
-                        <label for="username" class="input-label">Username</label>
-                        <input
-                            type="text"
-                            id="username"
-                            class="input"
-                            placeholder="Username"
-                        />
-                    </div>
-                </form>
+                <div class="user-actions">
+                    <button class="button button--bordered">Edit Profile</button>
+                    <button class="button button--bordered">Change Password</button>
+                </div>
             </main>
             <footer class="footer">
                 <p class="footer-copyright">©2024 BookReviewer, Inc.</p>

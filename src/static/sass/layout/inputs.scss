@@ -1,15 +1,30 @@
 @import "../boilerplate/theme";
 
-.input-text-label {
-    font-size: $font-size-md;
+.input-group {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
 
-    &.hidden {
-        display: none;
-    }
+    &.error {
+        .input-error {
+            display: block;
+        }
 
-    @media screen and (max-width: $breakpoint-sm){
-        font-size: $font-size-sm;
+        .input-text {
+            border-color: $error;
+
+            &:focus {
+                border-color: $error-focussed;
+            }
+        }
     }
+}
+
+.input-error {
+    display: none;
+    color: $error;
+    font-size: $font-size-sm;
+    font-weight: 600;
 }
 
 .input-text {
@@ -19,59 +34,61 @@
     font-size: $font-size-md;
     border-radius: 8px;
 
-    @media screen and (max-width: $breakpoint-sm){
+    @media screen and (max-width: $breakpoint-sm) {
         font-size: $font-size-sm;
+    }
+
+    &-label {
+        font-size: $font-size-md;
+
+        &.hidden {
+            display: none;
+        }
+
+        @media screen and (max-width: $breakpoint-sm) {
+            font-size: $font-size-sm;
+        }
     }
 }
 
 .input-file {
     display: none;
-}
 
-.input-file-label {
-    width: 100%;
-    height: 100px;
-    font-size: $font-size-md;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    border-radius: 8px;
-    cursor: pointer;
+    &-label {
+        width: 100%;
+        height: 100px;
+        font-size: $font-size-md;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        border-radius: 8px;
+        cursor: pointer;
+    
+        @media screen and (max-width: $breakpoint-sm) {
+            font-size: $font-size-sm;
+        }
 
-    @media screen and (max-width: $breakpoint-sm){
-        font-size: $font-size-sm;
+        &-text {
+            font-size: $font-size-xs;
+            font-weight: 600;
+        }
     }
-}
 
-.plus-svg {
-    width: $font-size-md;
-    height: $font-size-md;
-    cursor: pointer;
+    &preview {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
 
-    @media screen and (max-width: $breakpoint-sm){
-        font-size: $font-size-sm;
+        &-img {
+            width: 75px;
+            height: 75px;
+            object-fit: cover;
+            border-radius: 8px;
+        }
     }
-}
-
-.input-file-label-text {
-    font-size: $font-size-xs;
-    font-weight: 600;
-}
-
-.input-file-preview {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 8px;
-}
-
-.input-file-preview-img {
-    width: 75px;
-    height: 75px;
-    object-fit: cover;
-    border-radius: 8px;
 }
 
 @include themify($themes) {
@@ -98,7 +115,6 @@
         &:hover {
             background-color: themed($hover);
         }
-        
     }
 
     .plus-svg {

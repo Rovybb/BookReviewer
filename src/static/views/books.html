@@ -23,18 +23,20 @@
         />
         <link rel="manifest" href="/public/site.webmanifest" />
         <link rel="stylesheet" href="/styles/layout/index.css" />
-        <link rel="stylesheet" href="/styles/modules/books/search-book/index.css" />
+        <link
+            rel="stylesheet"
+            href="/styles/modules/books/search-book/index.css"
+        />
         <script
             src="https://kit.fontawesome.com/3811cdfa76.js"
             crossorigin="anonymous"
         ></script>
+        <script src="/connections/headerButtonConnection.js"></script>
     </head>
     <body class="dark-theme">
         <div class="mobile-menu">
             <span class="fa-solid fa-x mobile-menu-close-button"></span>
-            <span
-                class="mobile-menu-logo"
-                onclick="handleNavigate('/')"
+            <span class="mobile-menu-logo" onclick="handleNavigate('/')"
                 >Book<mark>Reviewer</mark></span
             >
             <ul class="mobile-menu-list">
@@ -80,85 +82,245 @@
                     </ul>
                 </nav>
                 <button
-                    id="button--login"
+                    id="loginButton"
                     class="button button--bordered"
-                    onclick="handleNavigate('/login')"
-                >
-                    Login
-                </button>
+                ></button>
                 <div class="mobile-menu-button">
                     <span class="fa fa-bars"></span>
                 </div>
             </header>
             <main class="main-content">
                 <form action="" class="search-form">
-                    <input type="text" class="search-input" placeholder="Search books">
+                    <input
+                        type="text"
+                        class="search-input"
+                        placeholder="Search books"
+                    />
                     <button class="search-button">
                         <span class="fa-solid fa-search"></span>
                     </button>
                 </form>
                 <div class="books-grid">
-                    <div class="books-grid-card" onclick="handleNavigate('/books/Berserk_vol1')">
-                        <img src="/assets/Berserk_vol1.jpg" alt="Berserk, Vol.1" class="books-grid-card-image" title="Berserk, Vol.1">
+                    <div
+                        class="books-grid-card"
+                        onclick="handleNavigate('/books/Berserk_vol1')"
+                    >
+                        <img
+                            src="/assets/Berserk_vol1.jpg"
+                            alt="Berserk, Vol.1"
+                            class="books-grid-card-image"
+                            title="Berserk, Vol.1"
+                        />
                     </div>
-                    <div class="books-grid-card" onclick="handleNavigate('/books/Berserk_vol1')">
-                        <img src="/assets/Berserk_vol1.jpg" alt="Berserk, Vol.1" class="books-grid-card-image" title="Berserk, Vol.1">
+                    <div
+                        class="books-grid-card"
+                        onclick="handleNavigate('/books/Berserk_vol1')"
+                    >
+                        <img
+                            src="/assets/Berserk_vol1.jpg"
+                            alt="Berserk, Vol.1"
+                            class="books-grid-card-image"
+                            title="Berserk, Vol.1"
+                        />
                     </div>
-                    <div class="books-grid-card" onclick="handleNavigate('/books/Berserk_vol1')">
-                        <img src="/assets/Berserk_vol1.jpg" alt="Berserk, Vol.1" class="books-grid-card-image" title="Berserk, Vol.1">
+                    <div
+                        class="books-grid-card"
+                        onclick="handleNavigate('/books/Berserk_vol1')"
+                    >
+                        <img
+                            src="/assets/Berserk_vol1.jpg"
+                            alt="Berserk, Vol.1"
+                            class="books-grid-card-image"
+                            title="Berserk, Vol.1"
+                        />
                     </div>
-                    <div class="books-grid-card" onclick="handleNavigate('/books/Berserk_vol1')">
-                        <img src="/assets/Berserk_vol1.jpg" alt="Berserk, Vol.1" class="books-grid-card-image" title="Berserk, Vol.1">
+                    <div
+                        class="books-grid-card"
+                        onclick="handleNavigate('/books/Berserk_vol1')"
+                    >
+                        <img
+                            src="/assets/Berserk_vol1.jpg"
+                            alt="Berserk, Vol.1"
+                            class="books-grid-card-image"
+                            title="Berserk, Vol.1"
+                        />
                     </div>
-                    <div class="books-grid-card" onclick="handleNavigate('/books/Berserk_vol1')">
-                        <img src="/assets/Berserk_vol1.jpg" alt="Berserk, Vol.1" class="books-grid-card-image" title="Berserk, Vol.1">
+                    <div
+                        class="books-grid-card"
+                        onclick="handleNavigate('/books/Berserk_vol1')"
+                    >
+                        <img
+                            src="/assets/Berserk_vol1.jpg"
+                            alt="Berserk, Vol.1"
+                            class="books-grid-card-image"
+                            title="Berserk, Vol.1"
+                        />
                     </div>
-                    <div class="books-grid-card" onclick="handleNavigate('/books/Berserk_vol1')">
-                        <img src="/assets/Berserk_vol1.jpg" alt="Berserk, Vol.1" class="books-grid-card-image" title="Berserk, Vol.1">
+                    <div
+                        class="books-grid-card"
+                        onclick="handleNavigate('/books/Berserk_vol1')"
+                    >
+                        <img
+                            src="/assets/Berserk_vol1.jpg"
+                            alt="Berserk, Vol.1"
+                            class="books-grid-card-image"
+                            title="Berserk, Vol.1"
+                        />
                     </div>
-                    <div class="books-grid-card" onclick="handleNavigate('/books/Berserk_vol1')">
-                        <img src="/assets/Berserk_vol1.jpg" alt="Berserk, Vol.1" class="books-grid-card-image" title="Berserk, Vol.1">
+                    <div
+                        class="books-grid-card"
+                        onclick="handleNavigate('/books/Berserk_vol1')"
+                    >
+                        <img
+                            src="/assets/Berserk_vol1.jpg"
+                            alt="Berserk, Vol.1"
+                            class="books-grid-card-image"
+                            title="Berserk, Vol.1"
+                        />
                     </div>
-                    <div class="books-grid-card" onclick="handleNavigate('/books/Berserk_vol1')">
-                        <img src="/assets/Berserk_vol1.jpg" alt="Berserk, Vol.1" class="books-grid-card-image" title="Berserk, Vol.1">
+                    <div
+                        class="books-grid-card"
+                        onclick="handleNavigate('/books/Berserk_vol1')"
+                    >
+                        <img
+                            src="/assets/Berserk_vol1.jpg"
+                            alt="Berserk, Vol.1"
+                            class="books-grid-card-image"
+                            title="Berserk, Vol.1"
+                        />
                     </div>
-                    <div class="books-grid-card" onclick="handleNavigate('/books/Berserk_vol1')">
-                        <img src="/assets/Berserk_vol1.jpg" alt="Berserk, Vol.1" class="books-grid-card-image" title="Berserk, Vol.1">
+                    <div
+                        class="books-grid-card"
+                        onclick="handleNavigate('/books/Berserk_vol1')"
+                    >
+                        <img
+                            src="/assets/Berserk_vol1.jpg"
+                            alt="Berserk, Vol.1"
+                            class="books-grid-card-image"
+                            title="Berserk, Vol.1"
+                        />
                     </div>
-                    <div class="books-grid-card" onclick="handleNavigate('/books/Berserk_vol1')">
-                        <img src="/assets/Berserk_vol1.jpg" alt="Berserk, Vol.1" class="books-grid-card-image" title="Berserk, Vol.1">
+                    <div
+                        class="books-grid-card"
+                        onclick="handleNavigate('/books/Berserk_vol1')"
+                    >
+                        <img
+                            src="/assets/Berserk_vol1.jpg"
+                            alt="Berserk, Vol.1"
+                            class="books-grid-card-image"
+                            title="Berserk, Vol.1"
+                        />
                     </div>
-                    <div class="books-grid-card" onclick="handleNavigate('/books/Berserk_vol1')">
-                        <img src="/assets/Berserk_vol1.jpg" alt="Berserk, Vol.1" class="books-grid-card-image" title="Berserk, Vol.1">
+                    <div
+                        class="books-grid-card"
+                        onclick="handleNavigate('/books/Berserk_vol1')"
+                    >
+                        <img
+                            src="/assets/Berserk_vol1.jpg"
+                            alt="Berserk, Vol.1"
+                            class="books-grid-card-image"
+                            title="Berserk, Vol.1"
+                        />
                     </div>
-                    <div class="books-grid-card" onclick="handleNavigate('/books/Berserk_vol1')">
-                        <img src="/assets/Berserk_vol1.jpg" alt="Berserk, Vol.1" class="books-grid-card-image" title="Berserk, Vol.1">
+                    <div
+                        class="books-grid-card"
+                        onclick="handleNavigate('/books/Berserk_vol1')"
+                    >
+                        <img
+                            src="/assets/Berserk_vol1.jpg"
+                            alt="Berserk, Vol.1"
+                            class="books-grid-card-image"
+                            title="Berserk, Vol.1"
+                        />
                     </div>
-                    <div class="books-grid-card" onclick="handleNavigate('/books/Berserk_vol1')">
-                        <img src="/assets/Berserk_vol1.jpg" alt="Berserk, Vol.1" class="books-grid-card-image" title="Berserk, Vol.1">
+                    <div
+                        class="books-grid-card"
+                        onclick="handleNavigate('/books/Berserk_vol1')"
+                    >
+                        <img
+                            src="/assets/Berserk_vol1.jpg"
+                            alt="Berserk, Vol.1"
+                            class="books-grid-card-image"
+                            title="Berserk, Vol.1"
+                        />
                     </div>
-                    <div class="books-grid-card" onclick="handleNavigate('/books/Berserk_vol1')">
-                        <img src="/assets/Berserk_vol1.jpg" alt="Berserk, Vol.1" class="books-grid-card-image" title="Berserk, Vol.1">
+                    <div
+                        class="books-grid-card"
+                        onclick="handleNavigate('/books/Berserk_vol1')"
+                    >
+                        <img
+                            src="/assets/Berserk_vol1.jpg"
+                            alt="Berserk, Vol.1"
+                            class="books-grid-card-image"
+                            title="Berserk, Vol.1"
+                        />
                     </div>
-                    <div class="books-grid-card" onclick="handleNavigate('/books/Berserk_vol1')">
-                        <img src="/assets/Berserk_vol1.jpg" alt="Berserk, Vol.1" class="books-grid-card-image" title="Berserk, Vol.1">
+                    <div
+                        class="books-grid-card"
+                        onclick="handleNavigate('/books/Berserk_vol1')"
+                    >
+                        <img
+                            src="/assets/Berserk_vol1.jpg"
+                            alt="Berserk, Vol.1"
+                            class="books-grid-card-image"
+                            title="Berserk, Vol.1"
+                        />
                     </div>
-                    <div class="books-grid-card" onclick="handleNavigate('/books/Berserk_vol1')">
-                        <img src="/assets/Berserk_vol1.jpg" alt="Berserk, Vol.1" class="books-grid-card-image" title="Berserk, Vol.1">
+                    <div
+                        class="books-grid-card"
+                        onclick="handleNavigate('/books/Berserk_vol1')"
+                    >
+                        <img
+                            src="/assets/Berserk_vol1.jpg"
+                            alt="Berserk, Vol.1"
+                            class="books-grid-card-image"
+                            title="Berserk, Vol.1"
+                        />
                     </div>
-                    <div class="books-grid-card" onclick="handleNavigate('/books/Berserk_vol1')">
-                        <img src="/assets/Berserk_vol1.jpg" alt="Berserk, Vol.1" class="books-grid-card-image" title="Berserk, Vol.1">
+                    <div
+                        class="books-grid-card"
+                        onclick="handleNavigate('/books/Berserk_vol1')"
+                    >
+                        <img
+                            src="/assets/Berserk_vol1.jpg"
+                            alt="Berserk, Vol.1"
+                            class="books-grid-card-image"
+                            title="Berserk, Vol.1"
+                        />
                     </div>
-                    <div class="books-grid-card" onclick="handleNavigate('/books/Berserk_vol1')">
-                        <img src="/assets/Berserk_vol1.jpg" alt="Berserk, Vol.1" class="books-grid-card-image" title="Berserk, Vol.1">
+                    <div
+                        class="books-grid-card"
+                        onclick="handleNavigate('/books/Berserk_vol1')"
+                    >
+                        <img
+                            src="/assets/Berserk_vol1.jpg"
+                            alt="Berserk, Vol.1"
+                            class="books-grid-card-image"
+                            title="Berserk, Vol.1"
+                        />
                     </div>
-                    <div class="books-grid-card" onclick="handleNavigate('/books/Berserk_vol1')">
-                        <img src="/assets/Berserk_vol1.jpg" alt="Berserk, Vol.1" class="books-grid-card-image" title="Berserk, Vol.1">
+                    <div
+                        class="books-grid-card"
+                        onclick="handleNavigate('/books/Berserk_vol1')"
+                    >
+                        <img
+                            src="/assets/Berserk_vol1.jpg"
+                            alt="Berserk, Vol.1"
+                            class="books-grid-card-image"
+                            title="Berserk, Vol.1"
+                        />
                     </div>
-                    <div class="books-grid-card" onclick="handleNavigate('/books/Berserk_vol1')">
-                        <img src="/assets/Berserk_vol1.jpg" alt="Berserk, Vol.1" class="books-grid-card-image" title="Berserk, Vol.1">
+                    <div
+                        class="books-grid-card"
+                        onclick="handleNavigate('/books/Berserk_vol1')"
+                    >
+                        <img
+                            src="/assets/Berserk_vol1.jpg"
+                            alt="Berserk, Vol.1"
+                            class="books-grid-card-image"
+                            title="Berserk, Vol.1"
+                        />
                     </div>
-                    
                 </div>
             </main>
             <footer class="footer">

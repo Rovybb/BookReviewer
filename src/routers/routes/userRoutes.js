@@ -1,6 +1,7 @@
 import {
     getUsers,
     getUser,
+    getUserByEmail,
     register,
     login,
     updateUser,
@@ -9,6 +10,7 @@ import {
     deleteFromLectureList,
 } from "../../controllers/userController.js";
 import requestLogger from "../../utils/requestLogger.js";
+import { verifyToken } from "../../services/authService.js";
 
 function handleUserRoutes(req, res) {
     if (req.url === "/api/users" && req.method === "GET") {
@@ -19,6 +21,11 @@ function handleUserRoutes(req, res) {
     ) {
         const id = req.url.split("/")[3];
         getUser(req, res, id);
+    } else if (req.url === "/api/users/me" && req.method === "GET") {
+        verifyToken(req, res, getUser);
+    } else if (req.url.startsWith("/api/users/email") && req.method === "GET") {
+        const email = req.url.split("/")[4];
+        getUserByEmail(req, res, email);
     } else if (req.url === "/api/users/register" && req.method === "POST") {
         register(req, res);
     } else if (req.url === "/api/users/login" && req.method === "POST") {

@@ -24,6 +24,10 @@
         <link rel="manifest" href="/public/site.webmanifest" />
         <link rel="stylesheet" href="/styles/layout/index.css" />
         <link rel="stylesheet" href="/styles/modules/auth/index.css" />
+        <script
+            src="https://kit.fontawesome.com/3811cdfa76.js"
+            crossorigin="anonymous"
+        ></script>
     </head>
     <body class="dark-theme">
         <div class="container">
@@ -43,62 +47,59 @@
                                 Welcome to BookReviewer!
                             </h2>
                             <h1 class="auth-card-title">Register</h1>
-                            <form action="" class="auth-form-container">
-                                <label
-                                    for="username"
-                                    class="input-text-label hidden"
-                                    >Username</label
+                            <form action="" class="auth-card-form-container">
+                                <div class="input-group" id="usernameGroup">
+                                    <label
+                                        for="username"
+                                        class="input-text-label hidden"
+                                        >Username</label
+                                    >
+                                    <input
+                                        type="text"
+                                        id="username"
+                                        class="input-text"
+                                        placeholder="Username"
+                                        autocomplete="username"
+                                        required
+                                    />
+                                </div>
+                                <div
+                                    class="input-group"
+                                    id="profilePictureGroup"
                                 >
-                                <input
-                                    type="text"
-                                    id="username"
-                                    class="input-text"
-                                    placeholder="Username"
-                                    required
-                                />
-                                <label
-                                    for="profile-pic"
-                                    class="input-file-label"
-                                >
-                                    <div class="input-file-preview">
-                                        <svg
-                                            fill="#000000"
-                                            class="plus-svg"
-                                            version="1.1"
-                                            id="Plus"
-                                            xmlns="http://www.w3.org/2000/svg"
-                                            xmlns:xlink="http://www.w3.org/1999/xlink"
-                                            width="800px"
-                                            height="800px"
-                                            viewBox="0 0 45.402 45.402"
-                                            xml:space="preserve"
-                                        >
-                                            <g>
-                                                <path
-                                                    d="M41.267,18.557H26.832V4.134C26.832,1.851,24.99,0,22.707,0c-2.283,0-4.124,1.851-4.124,4.135v14.432H4.141
-                                            c-2.283,0-4.139,1.851-4.138,4.135c-0.001,1.141,0.46,2.187,1.207,2.934c0.748,0.749,1.78,1.222,2.92,1.222h14.453V41.27
-                                            c0,1.142,0.453,2.176,1.201,2.922c0.748,0.748,1.777,1.211,2.919,1.211c2.282,0,4.129-1.851,4.129-4.133V26.857h14.435
-                                            c2.283,0,4.134-1.867,4.133-4.15C45.399,20.425,43.548,18.557,41.267,18.557z"
-                                                />
-                                            </g>
-                                        </svg>
-                                        <span class="input-file-label-text"
-                                            >Add Profile Picture</span
-                                        >
-                                    </div>
-                                </label>
-                                <input
-                                    type="file"
-                                    accept="image/png, image/jpg, image/gif, image/jpeg"
-                                    id="profile-pic"
-                                    class="input-file"
-                                    placeholder="Profile Picture"
-                                    onchange="handlePreview()"
-                                    required
-                                />
-                                <button class="button" type="submit">
-                                    Register
-                                </button>
+                                    <label
+                                        for="profilePicture"
+                                        class="input-file-label"
+                                    >
+                                        <div class="input-file-preview">
+                                            <i class="fa-solid fa-plus"></i>
+                                            <span class="input-file-label-text"
+                                                >Add Profile Picture</span
+                                            >
+                                        </div>
+                                    </label>
+                                    <input
+                                        type="file"
+                                        accept="image/png, image/jpg, image/gif, image/jpeg"
+                                        id="profilePicture"
+                                        class="input-file"
+                                        placeholder="Profile Picture"
+                                        onchange="handlePreview()"
+                                        required
+                                    />
+                                </div>
+                                <div class="button-row">
+                                    <button
+                                        class="button button--bordered"
+                                        type="submit"
+                                        id="registerButton"
+                                    >
+                                        Back
+                                    </button>
+                                    <button class="button" type="submit">
+                                        Register
+                                    </button>
+                                </div>
                             </form>
                         </div>
                         <p class="auth-card-tou">
