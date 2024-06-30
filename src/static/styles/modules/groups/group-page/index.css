@@ -62,13 +62,14 @@
 
 .chat-section {
   width: 100%;
+  max-width: 1200px;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   gap: 20px;
   margin: 40px 0 75px 0;
-  padding: 0 100px;
+  padding: 0 64px;
 }
 @media screen and (max-width: 768px) {
   .chat-section {

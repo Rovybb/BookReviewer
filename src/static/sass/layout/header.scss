@@ -12,10 +12,7 @@
         font-size: $font-size-xl;
         font-weight: 800;
         justify-self: flex-start;
-
-        &--clickable {
-            cursor: pointer;
-        }
+        cursor: pointer;
     }
 
     .button {

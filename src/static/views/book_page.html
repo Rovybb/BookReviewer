@@ -91,128 +91,210 @@
             </header>
             <main class="main-content">
                 <div class="book-card">
-                    <img
-                        src="/assets/Berserk_vol1.jpg"
-                        alt="Berserk, Vol.1"
-                        class="book-card-image"
-                    />
-                    <h1 class="book-card-title">Berserk, Vol.1</h1>
-                    <p class="book-card-author">by Kentaro Miura</p>
-                    <button class="button">+Add</button>
-                    <div class="book-card-rating">
-                        <span class="fa fa-star --filled"></span>
-                        <span class="fa fa-star --filled"></span>
-                        <span class="fa fa-star --filled"></span>
-                        <span class="fa fa-star --filled"></span>
-                        <span class="fa fa-star"></span>
+                    <div class="book-card-image">
+                        <img
+                            src="/assets/Berserk_vol1.jpg"
+                            alt="Berserk, Vol.1"
+                        />
+                        <button class="button">+Add</button>
+                    </div>
+                    <div class="book-card-details">
+                        <h1 class="book-card-title">Berserk, Vol.1</h1>
+                        <p class="book-card-author">by Kentaro Miura</p>
+                        <div class="book-card-rating">
+                            <span class="fa fa-star --filled"></span>
+                            <span class="fa fa-star --filled"></span>
+                            <span class="fa fa-star --filled"></span>
+                            <span class="fa fa-star --filled"></span>
+                            <span class="fa fa-star"></span>
+                        </div>
+                        <div class="book-card-tag">
+                            <i class="fa-solid fa-tag"></i
+                            ><span id="bookGenre">Adventure</span>
+                        </div>
                     </div>
                     <p class="book-card-description">
-                        Guts, the Black Swordsman, wanders around in a medieval
-                        world slaying demons as they are attracted to a demonic
-                        mark on his neck. To his help he has inhuman strength
-                        gained from a harsh childhood lived with mercenaries, a
-                        gigantic sword, an iron prosthetic left hand and the elf
-                        Puck. In his search for vengeance on the one who gave
-                        him the mark, he meets many interesting persons and
-                        creatures, whom all is affected by him in one way or
-                        another.
+                        Guts, the Black Swordsman, wanders around in a
+                        medieval world slaying demons as they are attracted
+                        to a demonic mark on his neck. To his help he has
+                        inhuman strength gained from a harsh childhood lived
+                        with mercenaries, a gigantic sword, an iron
+                        prosthetic left hand and the elf Puck. In his search
+                        for vengeance on the one who gave him the mark, he
+                        meets many interesting persons and creatures, whom
+                        all is affected by him in one way or another.
                     </p>
-                    <div class="book-card-tags">
-                        <span class="book-card-tag">Dark Fantasy</span>
-                        <span class="book-card-tag">Manga</span>
-                        <span class="book-card-tag">Action</span>
-                        <span class="book-card-tag">Adventure</span>
-                        <span class="book-card-tag">Drama</span>
-                        <span class="book-card-tag">Horror</span>
-                        <span class="book-card-tag">Mature</span>
-                        <span class="book-card-tag">Seinen</span>
-                    </div>
-                    <section class="comment-section">
-                        <div class="comment-section-title-container">
-                            <h2 class="comment-section-title">Reviews</h2>
-                        </div>
-                        <form class="comment-section-form">
-                            <textarea
-                                class="input-text"
-                                placeholder="Write a review..."
-                                required
-                            ></textarea>
-                            <div class="comment-section-form-rating">
-                                <span class="fa fa-star"></span>
-                                <span class="fa fa-star"></span>
-                                <span class="fa fa-star"></span>
-                                <span class="fa fa-star"></span>
-                                <span class="fa fa-star"></span>
-                            </div>
-                            <button type="submit" class="button">Submit</button>
-                        </form>
-                        <div class="comments">
-                            <div class="comment">
-                                <div class="comment-header">
-                                    <img
-                                        src="/assets/profile_placeholder.jpg"
-                                        alt="User"
-                                        class="comment-header-image"
-                                    />
-                                    <div class="comment-header-text">
-                                        <span class="comment-author"
-                                            >Jane Doe</span
-                                        >
-                                        <span class="comment-date"
-                                            >01-01-2024</span
-                                        >
-                                    </div>
-                                </div>
-                                <div class="comment-rating">
-                                    <span class="fa fa-star --filled"></span>
-                                    <span class="fa fa-star --filled"></span>
-                                    <span class="fa fa-star --filled"></span>
-                                    <span class="fa fa-star --filled"></span>
-                                    <span class="fa fa-star --filled"></span>
-                                </div>
-                                <p class="comment-content">
-                                    This is a great manga! I love the art style
-                                    and the story is very interesting. I can't
-                                    wait to read the next volume.
-                                </p>
-                            </div>
-                            <div class="comment">
-                                <div class="comment-header">
-                                    <img
-                                        src="/assets/profile_placeholder.jpg"
-                                        alt="User"
-                                        class="comment-header-image"
-                                    />
-                                    <div class="comment-header-text">
-                                        <span class="comment-author"
-                                            >Jane Doe</span
-                                        >
-                                        <span class="comment-date"
-                                            >01-01-2024</span
-                                        >
-                                    </div>
-                                </div>
-                                <div class="comment-rating">
-                                    <span class="fa fa-star --filled"></span>
-                                    <span class="fa fa-star --filled"></span>
-                                    <span class="fa fa-star --filled"></span>
-                                    <span class="fa fa-star --filled"></span>
-                                    <span class="fa fa-star --filled"></span>
-                                </div>
-                                <p class="comment-content">
-                                    I've read the whole series and it's amazing!
-                                    I highly recommend it to anyone who loves
-                                    dark fantasy.
-                                </p>
-                            </div>
-                        </div>
-                    </section>
                 </div>
+                <section class="comment-section">
+                    <div class="comment-section-title-container">
+                        <h2 class="comment-section-title">Reviews</h2>
+                    </div>
+                    <form class="comment-section-form">
+                        <textarea
+                            class="input-text"
+                            placeholder="Write a review..."
+                            required
+                        ></textarea>
+                        <div class="comment-section-form-rating">
+                            <span class="fa fa-star"></span>
+                            <span class="fa fa-star"></span>
+                            <span class="fa fa-star"></span>
+                            <span class="fa fa-star"></span>
+                            <span class="fa fa-star"></span>
+                        </div>
+                        <button type="submit" class="button">Submit</button>
+                    </form>
+                    <div class="comments">
+                        <div class="comment">
+                            <div class="comment-header">
+                                <img
+                                    src="/assets/profile_placeholder.jpg"
+                                    alt="User"
+                                    class="comment-header-image"
+                                />
+                                <div class="comment-header-text">
+                                    <span class="comment-author">Jane Doe</span>
+                                    <span class="comment-date">01-01-2024</span>
+                                </div>
+                            </div>
+                            <div class="comment-rating">
+                                <span class="fa fa-star --filled"></span>
+                                <span class="fa fa-star --filled"></span>
+                                <span class="fa fa-star --filled"></span>
+                                <span class="fa fa-star --filled"></span>
+                                <span class="fa fa-star --filled"></span>
+                            </div>
+                            <p class="comment-content">
+                                This is a great manga! I love the art style and
+                                the story is very interesting. I can't wait to
+                                read the next volume.
+                            </p>
+                        </div>
+                        <div class="comment">
+                            <div class="comment-header">
+                                <img
+                                    src="/assets/profile_placeholder.jpg"
+                                    alt="User"
+                                    class="comment-header-image"
+                                />
+                                <div class="comment-header-text">
+                                    <span class="comment-author">Jane Doe</span>
+                                    <span class="comment-date">01-01-2024</span>
+                                </div>
+                            </div>
+                            <div class="comment-rating">
+                                <span class="fa fa-star --filled"></span>
+                                <span class="fa fa-star --filled"></span>
+                                <span class="fa fa-star --filled"></span>
+                                <span class="fa fa-star --filled"></span>
+                                <span class="fa fa-star --filled"></span>
+                            </div>
+                            <p class="comment-content">
+                                I've read the whole series and it's amazing! I
+                                highly recommend it to anyone who loves dark
+                                fantasy.
+                            </p>
+                        </div>
+                    </div>
+                </section>
             </main>
             <footer class="footer">
-                <p class="footer-copyright">©2024 BookReviewer, Inc.</p>
-                <a href="/about" class="footer-link">About us</a>
-                <a href="/help" class="footer-link">Help</a>
+                <div class="footer-container">
+                    <div class="footer-logo">
+                        <a href="/" class="footer-logo-link">
+                            <span class="logo">Book<mark>Reviewer</mark></span>
+                        </a>
+                    </div>
+                    <nav class="footer-nav">
+                        <div class="footer-column">
+                            <h5 class="footer-column-title">Explore</h5>
+                            <ul class="footer-column-list">
+                                <li>
+                                    <a href="/books" class="footer-column-link"
+                                        >Books</a
+                                    >
+                                </li>
+                                <li>
+                                    <a href="/groups" class="footer-column-link"
+                                        >Groups</a
+                                    >
+                                </li>
+                                <li>
+                                    <a href="/" class="footer-column-link"
+                                        >News</a
+                                    >
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="footer-column">
+                            <h5 class="footer-column-title">Info</h5>
+                            <ul class="footer-column-list">
+                                <li>
+                                    <a href="/about" class="footer-column-link"
+                                        >About</a
+                                    >
+                                </li>
+                                <li>
+                                    <a href="/help" class="footer-column-link"
+                                        >Help</a
+                                    >
+                                </li>
+                                <li>
+                                    <a href="/help" class="footer-column-link"
+                                        >Contact</a
+                                    >
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="footer-column">
+                            <h5 class="footer-column-title">Resources</h5>
+                            <ul class="footer-column-list">
+                                <li>
+                                    <a
+                                        href="/documentation"
+                                        class="footer-column-link"
+                                        >Documentation</a
+                                    >
+                                </li>
+                                <li>
+                                    <a href="/" class="footer-column-link"
+                                        >API</a
+                                    >
+                                </li>
+                            </ul>
+                        </div>
+                    </nav>
+                    <div class="footer-copyright">
+                        <ul class="footer-buttons">
+                            <li>
+                                <button
+                                    class="footer-button"
+                                    onclick="handleNavigate('/rss.xml')"
+                                >
+                                    <i class="fa-solid fa-rss"></i>
+                                </button>
+                            </li>
+                            <li>
+                                <button
+                                    class="footer-button"
+                                    onclick="toggleTheme()"
+                                >
+                                    <i
+                                        class="fa-solid fa-moon"
+                                        id="themeButtonIcon"
+                                    ></i
+                                    ><i
+                                        class="fa-solid fa-sun"
+                                        id="themeButtonIcon"
+                                    ></i>
+                                </button>
+                            </li>
+                        </ul>
+                        <p class="footer-copyright-info">
+                            &copy; 2024 BookReviewer. All rights reserved.
+                        </p>
+                    </div>
+                </div>
             </footer>
         </div>
         <script src="/utils/handleNavigate.js"></script>

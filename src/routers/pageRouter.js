@@ -31,9 +31,7 @@ const resolveUrl = (url) => {
     } else if (url === "/login") {
         return "./views/login.html";
     } else if (url === "/register") {
-        return "./views/register_step1.html";
-    } else if (url.includes("/register/appearance")) {
-        return "./views/register_step2.html";
+        return "./views/register.html";
     } else if (url === "/books") {
         return "./views/books.html";
     } else if (url.includes("/books/") && !url.includes(".css")) {
