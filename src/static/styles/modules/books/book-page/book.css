@@ -80,6 +80,11 @@
   gap: 5px;
   font-size: 20px;
 }
+.book-card-rating-text {
+  margin-top: -12px;
+  font-size: 16px;
+  font-weight: 700;
+}
 .book-card-description {
   grid-area: description;
   font-size: 16px;

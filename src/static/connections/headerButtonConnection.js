@@ -1,4 +1,4 @@
-window.onload = async () => {
+const loadProfileButton = async () => {
     const loginButton = document.getElementById("loginButton");
     const loginButtonMobile = document.querySelector(
         ".menu-list-link[href='/login']"
@@ -48,3 +48,4 @@ window.onload = async () => {
         console.error(error);
     }
 };
+loadProfileButton();

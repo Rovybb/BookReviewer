@@ -1,9 +1,12 @@
+const bookPageTemplate = (book) => {
+    return `
 <!DOCTYPE html>
 <html lang="en">
     <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Book Reviewer</title>
+        <title>${book.title}</title>
+        <meta name="description" content="${book.description}" />
         <link
             rel="apple-touch-icon"
             sizes="180x180"
@@ -25,7 +28,7 @@
         <link rel="stylesheet" href="/styles/layout/index.css" />
         <link
             rel="stylesheet"
-            href="/styles/modules/profile/index.css"
+            href="/styles/modules/books/book-page/index.css"
         />
         <script
             src="https://kit.fontawesome.com/3811cdfa76.js"
@@ -40,7 +43,7 @@
             >
             <ul class="mobile-menu-list">
                 <li class="mobile-menu-list-item">
-                    <a href="/" class="menu-list-link">Home</a>
+                    <a href="/index" class="menu-list-link">Home</a>
                 </li>
                 <li class="mobile-menu-list-item">
                     <a href="/about" class="menu-list-link">About</a>
@@ -52,7 +55,7 @@
                     <a href="/groups" class="menu-list-link">Groups</a>
                 </li>
                 <li class="mobile-menu-list-item">
-                    <a href="/" class="menu-list-link">Logout</a>
+                    <a href="/login" class="menu-list-link">Login</a>
                 </li>
             </ul>
         </div>
@@ -81,25 +84,111 @@
                     </ul>
                 </nav>
                 <button
+                    id="loginButton"
                     class="button button--bordered"
-                    onclick="handleLogout()"
-                >
-                    Logout
-                </button>
+                ></button>
                 <div class="mobile-menu-button">
                     <span class="fa fa-bars"></span>
                 </div>
             </header>
             <main class="main-content">
-                <div class="banner"></div>
-                <img src="/assets/profile_placeholder.jpg" alt="Profile picture" class="user-image" />
-                <div class="user-info">
-                    <h2 class="user-name"></h2>
+                <div class="book-card">
+                    <div class="book-card-image">
+                        <img
+                            src="${book.imageLink}"
+                            alt="${book.title}"
+                        />
+                        <button class="button">+Add</button>
+                    </div>
+                    <div class="book-card-details">
+                        <h1 class="book-card-title">${book.title}</h1>
+                        <p class="book-card-author">by ${book.author}</p>
+                        <div class="book-card-rating">
+                            ${Array.from({ length: book.rating }, (_, i) => `<span class="fa fa-star --filled"></span>`).join('')}
+                            ${Array.from({ length: 5 - book.rating }, (_, i) => `<span class="fa fa-star"></span>`).join('')}
+                        </div>
+                        <span class="book-card-rating-text">${book.rating} / 5</span>
+                        <div class="book-card-tag">
+                            <i class="fa-solid fa-tag"></i
+                            ><span id="bookGenre">${book.genre}</span>
+                        </div>
+                    </div>
+                    <p class="book-card-description">
+                        ${book.description}
+                    </p>
                 </div>
-                <div class="user-actions">
-                    <button class="button button--bordered">Edit Profile</button>
-                    <button class="button button--bordered">Change Password</button>
-                </div>
+                <section class="comment-section">
+                    <div class="comment-section-title-container">
+                        <h2 class="comment-section-title">Reviews</h2>
+                    </div>
+                    <form class="comment-section-form">
+                        <textarea
+                            class="input-text"
+                            placeholder="Write a review..."
+                            required
+                        ></textarea>
+                        <div class="comment-section-form-rating">
+                            <span class="fa fa-star"></span>
+                            <span class="fa fa-star"></span>
+                            <span class="fa fa-star"></span>
+                            <span class="fa fa-star"></span>
+                            <span class="fa fa-star"></span>
+                        </div>
+                        <button type="submit" class="button">Submit</button>
+                    </form>
+                    <div class="comments">
+                        <div class="comment">
+                            <div class="comment-header">
+                                <img
+                                    src="/assets/profile_placeholder.jpg"
+                                    alt="User"
+                                    class="comment-header-image"
+                                />
+                                <div class="comment-header-text">
+                                    <span class="comment-author">Jane Doe</span>
+                                    <span class="comment-date">01-01-2024</span>
+                                </div>
+                            </div>
+                            <div class="comment-rating">
+                                <span class="fa fa-star --filled"></span>
+                                <span class="fa fa-star --filled"></span>
+                                <span class="fa fa-star --filled"></span>
+                                <span class="fa fa-star --filled"></span>
+                                <span class="fa fa-star --filled"></span>
+                            </div>
+                            <p class="comment-content">
+                                This is a great manga! I love the art style and
+                                the story is very interesting. I can't wait to
+                                read the next volume.
+                            </p>
+                        </div>
+                        <div class="comment">
+                            <div class="comment-header">
+                                <img
+                                    src="/assets/profile_placeholder.jpg"
+                                    alt="User"
+                                    class="comment-header-image"
+                                />
+                                <div class="comment-header-text">
+                                    <span class="comment-author">Jane Doe</span>
+                                    <span class="comment-date">01-01-2024</span>
+                                </div>
+                            </div>
+                            <div class="comment-rating">
+                                <span class="fa fa-star --filled"></span>
+                                <span class="fa fa-star --filled"></span>
+                                <span class="fa fa-star --filled"></span>
+                                <span class="fa fa-star --filled"></span>
+                                <span class="fa fa-star --filled"></span>
+                            </div>
+                            <p class="comment-content">
+                                I've read the whole series and it's amazing! I
+                                highly recommend it to anyone who loves dark
+                                fantasy.
+                            </p>
+                        </div>
+                    </div>
+                </section>
             </main>
             <footer class="footer">
                 <div class="footer-container">
@@ -160,9 +249,7 @@
                                     >
                                 </li>
                                 <li>
-                                    <a
-                                        href="/"
-                                        class="footer-column-link"
+                                    <a href="/" class="footer-column-link"
                                         >API</a
                                     >
                                 </li>
@@ -172,12 +259,18 @@
                     <div class="footer-copyright">
                         <ul class="footer-buttons">
                             <li>
-                                <button class="footer-button" onclick="handleNavigate('/rss.xml')">
+                                <button
+                                    class="footer-button"
+                                    onclick="handleNavigate('/rss.xml')"
+                                >
                                     <i class="fa-solid fa-rss"></i>
                                 </button>
                             </li>
                             <li>
-                                <button class="footer-button" onclick="toggleTheme()">
+                                <button
+                                    class="footer-button"
+                                    onclick="toggleTheme()"
+                                >
                                     <i
                                         class="fa-solid fa-moon"
                                         id="themeButtonIcon"
@@ -196,9 +289,13 @@
                 </div>
             </footer>
         </div>
-        <script src="/connections/profileConnection.js"></script>
+        <script src="/connections/headerButtonConnection.js"></script>
         <script src="/utils/handleNavigate.js"></script>
         <script src="/utils/handleOpenMenu.js"></script>
         <script src="/utils/handleTheme.js"></script>
     </body>
 </html>
+    `;
+};
+
+export default bookPageTemplate;

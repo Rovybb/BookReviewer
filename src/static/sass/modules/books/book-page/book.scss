@@ -81,6 +81,12 @@
         justify-content: center;
         gap: 5px;
         font-size: $font-size-lg;
+
+        &-text {
+            margin-top: -12px;
+            font-size: $font-size-md;
+            font-weight: 700;
+        }
     }
 
     &-description {

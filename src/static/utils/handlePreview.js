@@ -1,5 +1,5 @@
 const handlePreview = () => {
-    const fileInput = document.getElementById("profile-pic");
+    const fileInput = document.getElementById("profilePicture");
     const file = fileInput.files[0];
     const reader = new FileReader();
 

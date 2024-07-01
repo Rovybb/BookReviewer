@@ -9,8 +9,7 @@ export const getReviews = async () => {
 export const getReviewById = async (id) => {
     const query = 'SELECT * FROM Reviews WHERE id = @id';
     const params = [{ name: 'id', type: sql.Int, value: id }];
-    const result = await queryDatabase(query, params);
-    return result[0];
+    return await queryDatabase(query, params);
 };
 
 export const addReview = async(review) => {
@@ -26,8 +25,7 @@ export const addReview = async(review) => {
         { name: 'userId', type: sql.Int, value: review.userId },
         { name: 'createdAt', type: sql.DateTime, value: new Date() }
     ];
-    const result = await queryDatabase(query, params);
-    return { ...review, id: result[0].id };
+    await queryDatabase(query, params);
 };
 
 export const updateReview = async (id, updatedReview) => {
@@ -44,12 +42,10 @@ export const updateReview = async (id, updatedReview) => {
         { name: 'userId', type: sql.Int, value: updatedReview.userId }
     ];
     await queryDatabase(query, params);
-    return { id, ...updatedReview };
 };
 
 export const deleteReview = async (id) => {
     const query = 'DELETE FROM Reviews WHERE id = @id';
     const params = [{ name: 'id', type: sql.Int, value: id }];
     await queryDatabase(query, params);
-    return true;
 };

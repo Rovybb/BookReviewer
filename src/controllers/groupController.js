@@ -8,8 +8,9 @@ export const getGroups = async (req, res) => {
         res.end(JSON.stringify(groups));
         requestLogger(req.method, req.url, 200);
     } catch (err) {
+        console.error(err);
         res.writeHead(500, { "Content-Type": "application/json" });
-        res.end(JSON.stringify({ message: err.message }));
+        res.end(JSON.stringify({ error: err.message }));
         requestLogger(req.method, req.url, 500);
     }
 };
@@ -23,12 +24,13 @@ export const getGroup = async (req, res, id) => {
             requestLogger(req.method, req.url, 200);
         } else {
             res.writeHead(404, { "Content-Type": "application/json" });
-            res.end(JSON.stringify({ message: "Group not found" }));
+            res.end(JSON.stringify({ error: "Group not found" }));
             requestLogger(req.method, req.url, 404);
         }
     } catch (err) {
+        console.error(err);
         res.writeHead(500, { "Content-Type": "application/json" });
-        res.end(JSON.stringify({ message: err.message }));
+        res.end(JSON.stringify({ error: err.message }));
         requestLogger(req.method, req.url, 500);
     }
 };
@@ -47,8 +49,9 @@ export const createGroup = async (req, res) => {
             requestLogger(req.method, req.url, 201);
         });
     } catch (err) {
+        console.error(err);
         res.writeHead(500, { "Content-Type": "application/json" });
-        res.end(JSON.stringify({ message: err.message }));
+        res.end(JSON.stringify({ error: err.message }));
         requestLogger(req.method, req.url, 500);
     }
 };
@@ -67,8 +70,9 @@ export const updateGroup = async (req, res, id) => {
             requestLogger(req.method, req.url, 200);
         });
     } catch (err) {
+        console.error(err);
         res.writeHead(500, { "Content-Type": "application/json" });
-        res.end(JSON.stringify({ message: err.message }));
+        res.end(JSON.stringify({ error: err.message }));
         requestLogger(req.method, req.url, 500);
     }
 };
@@ -80,8 +84,9 @@ export const deleteGroup = async (req, res, id) => {
         res.end();
         requestLogger(req.method, req.url, 204);
     } catch (err) {
+        console.error(err);
         res.writeHead(500, { "Content-Type": "application/json" });
-        res.end(JSON.stringify({ message: err.message }));
+        res.end(JSON.stringify({ error: err.message }));
         requestLogger(req.method, req.url, 500);
     }
 };
@@ -100,8 +105,9 @@ export const joinGroup = async (req, res, id) => {
             requestLogger(req.method, req.url, 201);
         });
     } catch (err) {
+        console.error(err);
         res.writeHead(500, { "Content-Type": "application/json" });
-        res.end(JSON.stringify({ message: err.message }));
+        res.end(JSON.stringify({ error: err.message }));
         requestLogger(req.method, req.url, 500);
     }
 };

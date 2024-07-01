@@ -3,6 +3,7 @@ import * as path from "node:path";
 import jwt from "jsonwebtoken";
 import requestLogger from "../utils/requestLogger.js";
 import { IncomingMessage, ServerResponse } from "node:http";
+import bookPageGenerator from "./generators/bookPageGenerator.js";
 
 const MIME_TYPES = {
     default: "application/octet-stream",
@@ -34,9 +35,7 @@ const resolveUrl = (url) => {
         return "./views/register.html";
     } else if (url === "/books") {
         return "./views/books.html";
-    } else if (url.includes("/books/") && !url.includes(".css")) {
-        return "./views/book_page.html";
-    } else if (url === "/groups") {
+    }  else if (url === "/groups") {
         return "./views/groups.html";
     } else if (url.includes("/groups/") && !url.includes(".css")) {
         return "./views/group_page.html";
@@ -61,13 +60,45 @@ const prepareFile = async (url) => {
     return { found, ext, stream };
 };
 
-const sendData = async (req, res) => {
+export const sendData = async (req, res) => {
     const file = await prepareFile(req.url);
     const statusCode = file.found ? 200 : 404;
     const mimeType = MIME_TYPES[file.ext] || MIME_TYPES.default;
     res.writeHead(statusCode, { "Content-Type": mimeType });
     file.stream.pipe(res);
     requestLogger(req.method, req.url, statusCode);
+};
+
+const handleProtectedRoutes = async (req, res) => {
+    const cookieHeader = req.headers.cookie;
+    if (!cookieHeader) {
+        res.writeHead(401, { "Content-Type": "text/plain" });
+        res.end("Unauthorized");
+        requestLogger(req.method, req.url, 401);
+        return;
+    }
+
+    let token;
+    const cookies = cookieHeader.split(";").map((cookie) => cookie.trim());
+    const tokenCookie = cookies.find((cookie) => cookie.startsWith("token="));
+
+    if (tokenCookie) {
+        token = tokenCookie.split("=")[1];
+    } else {
+        res.writeHead(401, { "Content-Type": "text/plain" });
+        res.end("Unauthorized");
+        requestLogger(req.method, req.url, 401);
+        return;
+    }
+
+    try {
+        jwt.verify(token, process.env.JWT_SECRET);
+        await sendData(req, res);
+    } catch (error) {
+        res.writeHead(401, { "Content-Type": "text/plain" });
+        res.end("Unauthorized");
+        requestLogger(req.method, req.url, 401);
+    }
 };
 
 /**
@@ -77,36 +108,12 @@ const sendData = async (req, res) => {
  */
 const pageRouter = async (req, res) => {
     if (protectedRoutes.includes(req.url)) {
-        const cookieHeader = req.headers.cookie;
-        if (!cookieHeader) {
-            res.writeHead(401, { "Content-Type": "text/plain" });
-            res.end("Unauthorized");
-            requestLogger(req.method, req.url, 401);
-            return;
-        }
-
-        let token;
-        const cookies = cookieHeader.split(";").map((cookie) => cookie.trim());
-        const tokenCookie = cookies.find((cookie) => cookie.startsWith("token="));
-        if (tokenCookie) {
-            token = tokenCookie.split("=")[1];
-        } else {
-            res.writeHead(401, { "Content-Type": "text/plain" });
-            res.end("Unauthorized");
-            requestLogger(req.method, req.url, 401);
-            return;
-        }
-
-        try {
-            jwt.verify(token, process.env.JWT_SECRET);
-            await sendData(req, res);
-        } catch (error) {
-            res.writeHead(401, { "Content-Type": "text/plain" });
-            res.end("Unauthorized");
-            requestLogger(req.method, req.url, 401);
-        }
-    }
-    else await sendData(req, res);
+        await handleProtectedRoutes(req, res);
+    } else if (req.url.match(/\/books\/([0-9]+)/)) {
+        await bookPageGenerator(req, res);
+    } else if (req.url.match(/\/groups\/([0-9]+)/)) {
+        await sendData(req, res);
+    } else await sendData(req, res);
 };
 
 export default pageRouter;

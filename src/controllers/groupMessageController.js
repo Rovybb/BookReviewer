@@ -8,8 +8,9 @@ export const getGroupMessages = async (req, res, groupId) => {
         res.end(JSON.stringify(groupMessages));
         requestLogger(req.method, req.url, 200);
     } catch (err) {
+        console.error(err);
         res.writeHead(500, { "Content-Type": "application/json" });
-        res.end(JSON.stringify({ message: err.message }));
+        res.end(JSON.stringify({ error: err.message }));
         requestLogger(req.method, req.url, 500);
     }
 };
@@ -23,12 +24,13 @@ export const getGroupMessage = async (req, res, id) => {
             requestLogger(req.method, req.url, 200);
         } else {
             res.writeHead(404, { "Content-Type": "application/json" });
-            res.end(JSON.stringify({ message: "GroupMessage not found" }));
+            res.end(JSON.stringify({ error: "GroupMessage not found" }));
             requestLogger(req.method, req.url, 404);
         }
     } catch (err) {
+        console.error(err);
         res.writeHead(500, { "Content-Type": "application/json" });
-        res.end(JSON.stringify({ message: err.message }));
+        res.end(JSON.stringify({ error: err.message }));
         requestLogger(req.method, req.url, 500);
     }
 };
@@ -51,25 +53,26 @@ export const createGroupMessage = async (req, res) => {
                 res.writeHead(403, { "Content-Type": "application/json" });
                 res.end(
                     JSON.stringify({
-                        message: "User not a member of the group",
+                        error: "User not a member of the group",
                     })
                 );
                 requestLogger(req.method, req.url, 403);
                 return;
             }
 
-            const newGroupMessage = await groupMessageModel.createGroupMessage({
+            await groupMessageModel.createGroupMessage({
                 groupId,
                 userId,
                 message,
             });
             res.writeHead(201, { "Content-Type": "application/json" });
-            res.end(JSON.stringify(newGroupMessage));
+            res.end(JSON.stringify({ message: "Message craeted" }));
             requestLogger(req.method, req.url, 201);
         });
     } catch (err) {
+        console.error(err);
         res.writeHead(500, { "Content-Type": "application/json" });
-        res.end(JSON.stringify({ message: err.message }));
+        res.end(JSON.stringify({ error: err.message }));
         requestLogger(req.method, req.url, 500);
     }
 };
@@ -84,12 +87,13 @@ export const updateGroupMessage = async (req, res, id) => {
             const groupMessage = JSON.parse(body);
             await groupMessageModel.updateGroupMessage(id, groupMessage);
             res.writeHead(200, { "Content-Type": "application/json" });
-            res.end(JSON.stringify({ message: "GroupMessage updated" }));
+            res.end(JSON.stringify({ message: "Message updated" }));
             requestLogger(req.method, req.url, 200);
         });
     } catch (err) {
+        console.error(err);
         res.writeHead(500, { "Content-Type": "application/json" });
-        res.end(JSON.stringify({ message: err.message }));
+        res.end(JSON.stringify({ error: err.message }));
         requestLogger(req.method, req.url, 500);
     }
 };
@@ -101,8 +105,9 @@ export const deleteGroupMessage = async (req, res, id) => {
         res.end();
         requestLogger(req.method, req.url, 204);
     } catch (err) {
+        console.error(err);
         res.writeHead(500, { "Content-Type": "application/json" });
-        res.end(JSON.stringify({ message: err.message }));
+        res.end(JSON.stringify({ error: err.message }));
         requestLogger(req.method, req.url, 500);
     }
 };

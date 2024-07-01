@@ -1,4 +1,4 @@
-window.onload = async () => {
+const loadProfile = async () => {
     const userImage = document.querySelector('.user-image');
     const username = document.querySelector('.user-name');
 
@@ -25,3 +25,5 @@ const handleLogout = async () => {
     document.cookie = 'token=;max-age=0';
     window.location.href = '/login';
 };
+
+loadProfile();

@@ -3,16 +3,22 @@
 }
 
 .books-grid {
+  width: 100%;
+  max-width: 1200px;
   margin: 30px 0;
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(125px, 1fr));
   gap: 20px;
   padding: 0 20px;
+}
+@media screen and (max-width: 768px) {
+  .books-grid {
+    grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+  }
 }
 .books-grid-card {
   width: 100%;
   aspect-ratio: 1/1.5;
-  padding: auto;
   cursor: pointer;
 }
 .books-grid-card-image {
