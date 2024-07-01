@@ -96,37 +96,23 @@ export const register = async (req, res) => {
             body += chunk.toString();
         });
         req.on("end", async () => {
-            const { email, password, username, profilePicture } = JSON.parse(body);
+            const { username, email, password, profilePicture } = JSON.parse(body);
             const hashedPassword = await bcrypt.hash(password, 10);
-            await queryDatabase(
-                "INSERT INTO Users (password, role, email, username, profilePicture) VALUES (@password, @role, @email, @username, @profilePicture)",
-                [
-                    { name: "email", type: sql.NVarChar, value: email },
-                    {
-                        name: "password",
-                        type: sql.NVarChar,
-                        value: hashedPassword,
-                    },
-                    { name: "role", type: sql.NVarChar, value: "User" },
-                    {
-                        name: "username",
-                        type: sql.NVarChar,
-                        value: username ? username : usernameGenerator(),
-                    },
-                    {
-                        name: "profilePicture",
-                        type: sql.NVarChar,
-                        value: profilePicture ? profilePicture : null,
-                    },
-                ]
-            );
+            await userModel.addUser({
+                username: username,
+                email: email,
+                password: hashedPassword,
+                role: "User",
+                profilePicture: profilePicture,
+            });
             res.writeHead(201, { "Content-Type": "application/json" });
             res.end(JSON.stringify({ message: "User registered" }));
             requestLogger(req.method, req.url, 201);
         });
     } catch (err) {
+        console.error(err);
         res.writeHead(500, { "Content-Type": "application/json" });
-        res.end(JSON.stringify({ message: err.message }));
+        res.end(JSON.stringify({ error: err.message }));
         requestLogger(req.method, req.url, 500);
     }
 };
@@ -160,8 +146,9 @@ export const login = async (req, res) => {
             }
         });
     } catch (err) {
+        console.error(err);
         res.writeHead(500, { "Content-Type": "application/json" });
-        res.end(JSON.stringify({ message: err.message }));
+        res.end(JSON.stringify({ error: err.message }));
         requestLogger(req.method, req.url, 500);
     }
 };
@@ -173,50 +160,37 @@ export const updateUser = async (req, res, id) => {
             body += chunk.toString();
         });
         req.on("end", async () => {
-            const { username, password, role, profilePicture, email } =
+            const { username, password, profilePicture, email } =
                 JSON.parse(body);
             const hashedPassword = await bcrypt.hash(password, 10);
-            await queryDatabase(
-                "UPDATE Users SET username = @username, password = @password, email = @email, role = @role, profilePicture = @profilePicture WHERE id = @id",
-                [
-                    { name: "username", type: sql.NVarChar, value: username },
-                    {
-                        name: "password",
-                        type: sql.NVarChar,
-                        value: hashedPassword,
-                    },
-                    { name: "role", type: sql.NVarChar, value: role },
-                    {
-                        name: "profilePicture",
-                        type: sql.NVarChar,
-                        value: profilePicture,
-                    },
-                    { name: "email", type: sql.NVarChar, value: email },
-                    { name: "id", type: sql.Int, value: id },
-                ]
-            );
+            await userModel.updateUser(id, {
+                username: username,
+                email: email,
+                password: hashedPassword,
+                profilePicture: profilePicture,
+            });
             res.writeHead(200, { "Content-Type": "application/json" });
             res.end(JSON.stringify({ message: "User updated" }));
             requestLogger(req.method, req.url, 200);
         });
     } catch (err) {
+        console.error(err);
         res.writeHead(500, { "Content-Type": "application/json" });
-        res.end(JSON.stringify({ message: err.message }));
+        res.end(JSON.stringify({ error: err.message }));
         requestLogger(req.method, req.url, 500);
     }
 };
 
 export const deleteUser = async (req, res, id) => {
     try {
-        await queryDatabase("DELETE FROM Users WHERE id = @id", [
-            { name: "id", type: sql.Int, value: id },
-        ]);
+        await userModel.deleteUser(id);
         res.writeHead(204, { "Content-Type": "application/json" });
         res.end();
         requestLogger(req.method, req.url, 204);
     } catch (err) {
+        console.error(err);
         res.writeHead(500, { "Content-Type": "application/json" });
-        res.end(JSON.stringify({ message: err.message }));
+        res.end(JSON.stringify({ error: err.message }));
         requestLogger(req.method, req.url, 500);
     }
 };
@@ -237,8 +211,9 @@ export const addBookToLectureList = async (req, res, userId) => {
             requestLogger(req.method, req.url, 201);
         });
     } catch (err) {
+        console.error(err);
         res.writeHead(500, { "Content-Type": "application/json" });
-        res.end(JSON.stringify({ message: err.message }));
+        res.end(JSON.stringify({ error: err.message }));
         requestLogger(req.method, req.url, 500);
     }
 };
@@ -251,15 +226,15 @@ export const deleteFromLectureList = async (req, res, userId) => {
         });
         req.on("end", async () => {
             const { bookId } = JSON.parse(body);
-            await userModel.addBookToLectureList(userId, bookId);
             await userModel.deleteFromLectureList(userId, bookId);
             res.writeHead(204, { "Content-Type": "application/json" });
             res.end();
             requestLogger(req.method, req.url, 204);
         });
     } catch (err) {
+        console.error(err);
         res.writeHead(500, { "Content-Type": "application/json" });
-        res.end(JSON.stringify({ message: err.message }));
+        res.end(JSON.stringify({ error: err.message }));
         requestLogger(req.method, req.url, 500);
     }
 };

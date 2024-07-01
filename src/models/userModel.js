@@ -20,7 +20,7 @@ export const getUserByEmail = async (email) => {
 
 export const addUser = async (user) => {
     const query = `
-        INSERT INTO Users (username,email, password, role, profilePicture)
+        INSERT INTO Users (username, email, password, role, profilePicture)
         VALUES (@username, @email, @password, @role, @profilePicture);
         SELECT SCOPE_IDENTITY() AS id;
     `;
@@ -37,14 +37,13 @@ export const addUser = async (user) => {
 export const updateUser = async (id, updatedUser) => {
     const query = `
         UPDATE Users
-        SET username = @username, email = @email,  password = @password, role = @role, profilePicture = @profilePicture
+        SET username = @username, email = @email,  password = @password, profilePicture = @profilePicture
         WHERE id = @id
     `;
     const params = [
         { name: 'username', type: sql.NVarChar, value: updatedUser.username },
         { name: 'email', type: sql.NVarChar, value: updatedUser.email },
         { name: 'password', type: sql.NVarChar, value: updatedUser.password },
-        { name: 'role', type: sql.NVarChar, value: updatedUser.role },
         { name: 'profilePicture', type: sql.NVarChar, value: updatedUser.profilePicture },
         { name: 'id', type: sql.Int, value: id }
     ];

@@ -104,8 +104,8 @@ const bookPageTemplate = (book) => {
                         <h1 class="book-card-title">${book.title}</h1>
                         <p class="book-card-author">by ${book.author}</p>
                         <div class="book-card-rating">
-                            ${Array.from({ length: book.rating }, (_, i) => `<span class="fa fa-star --filled"></span>`).join('')}
-                            ${Array.from({ length: 5 - book.rating }, (_, i) => `<span class="fa fa-star"></span>`).join('')}
+                            ${Array.from({ length: Math.round(book.rating) }, (_, i) => `<span class="fa fa-star --filled"></span>`).join('')}
+                            ${Array.from({ length: 5 - Math.round(book.rating) }, (_, i) => `<span class="fa fa-star"></span>`).join('')}
                         </div>
                         <span class="book-card-rating-text">${book.rating} / 5</span>
                         <div class="book-card-tag">
