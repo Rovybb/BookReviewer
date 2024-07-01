@@ -31,8 +31,7 @@ export const addUser = async (user) => {
         { name: 'role', type: sql.NVarChar, value: user.role },
         { name: 'profilePicture', type: sql.NVarChar, value: user.profilePicture }
     ];
-    const result = await queryDatabase(query, params);
-    return { ...user, id: result[0].id };
+    await queryDatabase(query, params);
 };
 
 export const updateUser = async (id, updatedUser) => {
@@ -50,14 +49,12 @@ export const updateUser = async (id, updatedUser) => {
         { name: 'id', type: sql.Int, value: id }
     ];
     await queryDatabase(query, params);
-    return { id, ...updatedUser };
 };
 
 export const deleteUser = async (id) => {
     const query = 'DELETE FROM Users WHERE id = @id';
     const params = [{ name: 'id', type: sql.Int, value: id }];
     await queryDatabase(query, params);
-    return true;
 };
 
 export const getListOfLecture = async (userId) => {

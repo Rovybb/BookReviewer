@@ -23,8 +23,9 @@ export const getUsers = async (req, res) => {
         );
         requestLogger(req.method, req.url, 200);
     } catch (err) {
+        console.error(err);
         res.writeHead(500, { "Content-Type": "application/json" });
-        res.end(JSON.stringify({ message: err.message }));
+        res.end(JSON.stringify({ error: err.message }));
         requestLogger(req.method, req.url, 500);
     }
 };
@@ -47,12 +48,13 @@ export const getUser = async (req, res, id) => {
             requestLogger(req.method, req.url, 200);
         } else {
             res.writeHead(404, { "Content-Type": "application/json" });
-            res.end(JSON.stringify({ message: "User not found" }));
+            res.end(JSON.stringify({ error: "User not found" }));
             requestLogger(req.method, req.url, 404);
         }
     } catch (err) {
+        console.error(err);
         res.writeHead(500, { "Content-Type": "application/json" });
-        res.end(JSON.stringify({ message: err.message }));
+        res.end(JSON.stringify({ error: err.message }));
         requestLogger(req.method, req.url, 500);
     }
 };
@@ -80,6 +82,7 @@ export const getUserByEmail = async (req, res, email) => {
         }
     }
     catch (err) {
+        console.error(err);
         res.writeHead(500, { "Content-Type": "application/json" });
         res.end(JSON.stringify({ error: err.message }));
         requestLogger(req.method, req.url, 500);

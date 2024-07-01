@@ -25,8 +25,7 @@ export const createGroupMessage = async (groupMessage) => {
         { name: 'message', type: sql.NVarChar, value: groupMessage.message },
         { name: 'createdAt', type: sql.DateTime, value: new Date() }
     ];
-    const result = await queryDatabase(query, params);
-    return { ...groupMessage, id: result[0].id };
+    await queryDatabase(query, params);
 };
 
 export const updateGroupMessage = async (id, groupMessage) => {
@@ -40,14 +39,12 @@ export const updateGroupMessage = async (id, groupMessage) => {
         { name: 'id', type: sql.Int, value: id }
     ];
     await queryDatabase(query, params);
-    return { id, ...groupMessage };
 };
 
 export const deleteGroupMessage = async (id) => {
     const query = 'DELETE FROM GroupMessages WHERE id = @id';
     const params = [{ name: 'id', type: sql.Int, value: id }];
     await queryDatabase(query, params);
-    return true;
 };
 
 export const isUserInGroup = async (userId, groupId) => {

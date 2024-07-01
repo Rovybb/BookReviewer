@@ -21,7 +21,7 @@ export const createGroup = async (group) => {
         { name: 'description', type: sql.NVarChar, value: group.description },
         { name: 'imageLink', type: sql.NVarChar, value: group.imageLink },
     ];
-    return await queryDatabase(query, params);
+    await queryDatabase(query, params);
 };
 
 export const updateGroup = async (id, group) => {
@@ -36,12 +36,12 @@ export const updateGroup = async (id, group) => {
         { name: 'imageLink', type: sql.NVarChar, value: group.imageLink },
         { name: 'id', type: sql.Int, value: id }
     ];
-    return await queryDatabase(query, params);
+    await queryDatabase(query, params);
 };
 
 export const deleteGroup = async (id) => {
     const query = 'DELETE FROM Groups WHERE id = @id';
-    return await queryDatabase(query, [{ name: 'id', type: sql.Int, value: id }]);
+    await queryDatabase(query, [{ name: 'id', type: sql.Int, value: id }]);
 };
 
 export const joinGroup = async (userId, groupId) => {
@@ -53,5 +53,5 @@ export const joinGroup = async (userId, groupId) => {
         { name: 'userId', type: sql.Int, value: userId },
         { name: 'groupId', type: sql.Int, value: groupId }
     ];
-    return await queryDatabase(query, params);
+    await queryDatabase(query, params);
 };
