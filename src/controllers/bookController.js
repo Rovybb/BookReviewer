@@ -42,7 +42,15 @@ export const addBook = async (req, res) => {
             body += chunk.toString();
         });
         req.on("end", async () => {
-            const book = JSON.parse(body);
+            let book;
+            try {
+                book = JSON.parse(body);
+            } catch (error) {
+                res.writeHead(400, { "Content-Type": "application/json" });
+                res.end(JSON.stringify({ error: "Invalid JSON" }));
+                requestLogger(req.method, req.url, 400);
+                return;
+            }
             await bookModel.addBook(book);
             res.writeHead(201, { "Content-Type": "application/json" });
             res.end(JSON.stringify({ message: "Book added" }));

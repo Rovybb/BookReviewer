@@ -92,53 +92,53 @@
                         <h3 class="admin-panel-title">Add book</h3>
                         <form class="admin-panel-form">
                             <div class="admin-panel-left-section">
-                                <div class="input-group" id="titleGroup">
-                                    <label for="title" class="input-text-label"
+                                <div class="input-group" id="addBookTitleGroup">
+                                    <label for="addBookTitle" class="input-text-label"
                                         >Title</label
                                     >
                                     <input
                                         type="text"
-                                        id="title"
+                                        id="addBookTitle"
                                         class="input-text"
                                         placeholder="Title"
                                         required
                                     />
                                     <span
                                         class="input-error"
-                                        id="titleError"
+                                        id="addBookTitleError"
                                     ></span>
                                 </div>
-                                <div class="input-group" id="authorGroup">
-                                    <label for="author" class="input-text-label"
+                                <div class="input-group" id="addBookAuthorGroup">
+                                    <label for="addBookAuthor" class="input-text-label"
                                         >Author</label
                                     >
                                     <input
                                         type="text"
-                                        id="author"
+                                        id="addBookAuthor"
                                         class="input-text"
                                         placeholder="Author"
                                         required
                                     />
                                     <span
                                         class="input-error"
-                                        id="authorError"
+                                        id="addBookAuthorError"
                                     ></span>
                                 </div>
-                                <div class="input-group" id="descriptionGroup">
+                                <div class="input-group" id="addBookDescriptionGroup">
                                     <label
-                                        for="description"
+                                        for="addBookDescription"
                                         class="input-text-label"
                                         >Description</label
                                     >
                                     <textarea
                                         type="text"
-                                        id="description"
+                                        id="addBookDescription"
                                         class="input-text input-text-area"
                                         placeholder="Description"
                                     ></textarea>
                                     <span
                                         class="input-error"
-                                        id="descriptionError"
+                                        id="addBookDescriptionError"
                                     ></span>
                                 </div>
                             </div>
@@ -146,13 +146,13 @@
                                 <div class="admin-panel-right-section-inputs">
                                     <div
                                         class="input-group"
-                                        id="bookImageGroup"
+                                        id="addBookImageGroup"
                                     >
                                         <span class="input-text-label"
                                             >Book Image</span
                                         >
                                         <label
-                                            for="bookImage"
+                                            for="addBookImage"
                                             class="input-file-label"
                                         >
                                             <div class="input-file-preview">
@@ -166,22 +166,22 @@
                                         <input
                                             type="file"
                                             accept="image/png, image/jpg, image/gif, image/jpeg"
-                                            id="bookImage"
+                                            id="addBookImage"
                                             class="input-file"
                                             placeholder="Book Image"
-                                            onchange="handlePreview('#bookImageGroup')"
+                                            onchange="handlePreview('#addBookImageGroup')"
                                         />
                                     </div>
-                                    <div class="input-group" id="genreGroup">
+                                    <div class="input-group" id="addBookGenreGroup">
                                         <label
-                                            for="genre"
+                                            for="addBookGenre"
                                             class="input-text-label"
                                             >Genre</label
                                         >
                                         <div class="input-select">
-                                            <select id="genre">
+                                            <select id="addBookGenre">
                                                 <option value="">
-                                                    Select genre:
+                                                    Select genre
                                                 </option>
                                                 <option value="Action">Action</option>
                                                 <option value="Adventure">Adventure</option>
@@ -197,11 +197,11 @@
                                         </div>
                                         <span
                                             class="input-error"
-                                            id="genreError"
+                                            id="addBookGenreError"
                                         ></span>
                                     </div>
                                 </div>
-                                <button class="button" type="submit">
+                                <button class="button" type="submit" id="addBookSubmitButton">
                                     Add book
                                 </button>
                             </div>
@@ -314,5 +314,6 @@
         <script src="/utils/handleNavigate.js"></script>
         <script src="/utils/handleOpenMenu.js"></script>
         <script src="/utils/handleTheme.js"></script>
+        <script src="/connections/admin/addBookConnection.js"></script>
     </body>
 </html>

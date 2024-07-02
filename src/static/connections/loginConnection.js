@@ -93,4 +93,5 @@ const handleSubmit = async (event) => {
 
 emailField.addEventListener("blur", validateEmail);
 passwordField.addEventListener("blur", validatePassword);
+
 loginButton.addEventListener("click", handleSubmit);
