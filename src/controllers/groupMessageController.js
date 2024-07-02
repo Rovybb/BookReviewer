@@ -42,7 +42,15 @@ export const createGroupMessage = async (req, res) => {
             body += chunk.toString();
         });
         req.on("end", async () => {
-            const groupMessage = JSON.parse(body);
+            let groupMessage;
+            try {
+                groupMessage = JSON.parse(body);
+            } catch (error) {
+                res.writeHead(400, { "Content-Type": "application/json" });
+                res.end(JSON.stringify({ error: "Invalid JSON" }));
+                requestLogger(req.method, req.url, 400);
+                return;
+            }
             const { groupId, userId, message } = groupMessage;
 
             const isUserInGroup = await groupMessageModel.isUserInGroup(
@@ -84,7 +92,15 @@ export const updateGroupMessage = async (req, res, id) => {
             body += chunk.toString();
         });
         req.on("end", async () => {
-            const groupMessage = JSON.parse(body);
+           let groupMessage;
+            try {
+                groupMessage = JSON.parse(body);
+            } catch (error) {
+                res.writeHead(400, { "Content-Type": "application/json" });
+                res.end(JSON.stringify({ error: "Invalid JSON" }));
+                requestLogger(req.method, req.url, 400);
+                return;
+            }
             await groupMessageModel.updateGroupMessage(id, groupMessage);
             res.writeHead(200, { "Content-Type": "application/json" });
             res.end(JSON.stringify({ message: "Message updated" }));

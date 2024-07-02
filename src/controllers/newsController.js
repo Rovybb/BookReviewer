@@ -1,11 +1,11 @@
-import * as groupModel from "../models/groupModel.js";
+import * as newsModel from "../models/newsModel.js";
 import requestLogger from "../utils/requestLogger.js";
 
-export const getGroups = async (req, res) => {
+export const getNews = async (req, res) => {
     try {
-        const groups = await groupModel.getGroups();
+        const news = await newsModel.getNews();
         res.writeHead(200, { "Content-Type": "application/json" });
-        res.end(JSON.stringify(groups));
+        res.end(JSON.stringify(news));
         requestLogger(req.method, req.url, 200);
     } catch (err) {
         console.error(err);
@@ -13,49 +13,41 @@ export const getGroups = async (req, res) => {
         res.end(JSON.stringify({ error: err.message }));
         requestLogger(req.method, req.url, 500);
     }
-};
+}
 
-export const getGroup = async (req, res, id) => {
+export const getNew = async (req, res, id) => {
     try {
-        const group = await groupModel.getGroupById(id);
-        if (group.length > 0) {
-            res.writeHead(200, { "Content-Type": "application/json" });
-            res.end(JSON.stringify(group[0]));
-            requestLogger(req.method, req.url, 200);
-        } else {
-            res.writeHead(404, { "Content-Type": "application/json" });
-            res.end(JSON.stringify({ error: "Group not found" }));
-            requestLogger(req.method, req.url, 404);
-        }
+        const news = await newsModel.getNew(id);
+        res.writeHead(200, { "Content-Type": "application/json" });
+        res.end(JSON.stringify(news));
+        requestLogger(req.method, req.url, 200);
     } catch (err) {
         console.error(err);
         res.writeHead(500, { "Content-Type": "application/json" });
         res.end(JSON.stringify({ error: err.message }));
         requestLogger(req.method, req.url, 500);
     }
-};
+}
 
-export const createGroup = async (req, res) => {
+export const addNews = async (req, res) => {
     try {
         let body = "";
         req.on("data", (chunk) => {
             body += chunk.toString();
         });
         req.on("end", async () => {
-
-            let group;
+            let news;
             try {
-                group = JSON.parse(body);
-            }
-            catch (error) {
+                news = JSON.parse(body);
+            } catch (error) {
                 res.writeHead(400, { "Content-Type": "application/json" });
                 res.end(JSON.stringify({ error: "Invalid JSON" }));
                 requestLogger(req.method, req.url, 400);
                 return;
             }
-            await groupModel.createGroup(group);
+            await newsModel.addNews(news);
             res.writeHead(201, { "Content-Type": "application/json" });
-            res.end(JSON.stringify({ message: "Group created" }));
+            res.end(JSON.stringify({ message: "News added" }));
             requestLogger(req.method, req.url, 201);
         });
     } catch (err) {
@@ -64,28 +56,27 @@ export const createGroup = async (req, res) => {
         res.end(JSON.stringify({ error: err.message }));
         requestLogger(req.method, req.url, 500);
     }
-};
+}
 
-export const updateGroup = async (req, res, id) => {
+export const updateNews = async (req, res, id) => {
     try {
         let body = "";
         req.on("data", (chunk) => {
             body += chunk.toString();
         });
         req.on("end", async () => {
-            let group;
+            let news;
             try {
-                group = JSON.parse(body);
-            }
-            catch (error) {
+                news = JSON.parse(body);
+            } catch (error) {
                 res.writeHead(400, { "Content-Type": "application/json" });
                 res.end(JSON.stringify({ error: "Invalid JSON" }));
                 requestLogger(req.method, req.url, 400);
                 return;
             }
-            await groupModel.updateGroup(id, group);
+            await newsModel.updateNews(id, news);
             res.writeHead(200, { "Content-Type": "application/json" });
-            res.end(JSON.stringify({ message: "Group updated" }));
+            res.end(JSON.stringify({ message: "News updated" }));
             requestLogger(req.method, req.url, 200);
         });
     } catch (err) {
@@ -94,11 +85,11 @@ export const updateGroup = async (req, res, id) => {
         res.end(JSON.stringify({ error: err.message }));
         requestLogger(req.method, req.url, 500);
     }
-};
+}
 
-export const deleteGroup = async (req, res, id) => {
+export const deleteNews = async (req, res, id) => {
     try {
-        await groupModel.deleteGroup(id);
+        await newsModel.deleteNews(id);
         res.writeHead(204, { "Content-Type": "application/json" });
         res.end();
         requestLogger(req.method, req.url, 204);
@@ -108,34 +99,4 @@ export const deleteGroup = async (req, res, id) => {
         res.end(JSON.stringify({ error: err.message }));
         requestLogger(req.method, req.url, 500);
     }
-};
-
-export const joinGroup = async (req, res, id) => {
-    try {
-        let body = "";
-        req.on("data", (chunk) => {
-            body += chunk.toString();
-        });
-        req.on("end", async () => {
-            let user;
-            try {
-                user = JSON.parse(body);
-            } catch (error) {
-                res.writeHead(400, { "Content-Type": "application/json" });
-                res.end(JSON.stringify({ error: "Invalid JSON" }));
-                requestLogger(req.method, req.url, 400);
-                return;
-            }
-            const userId = user.userId;
-            await groupModel.joinGroup(userId, id);
-            res.writeHead(201, { "Content-Type": "application/json" });
-            res.end(JSON.stringify({ message: "User joined group" }));
-            requestLogger(req.method, req.url, 201);
-        });
-    } catch (err) {
-        console.error(err);
-        res.writeHead(500, { "Content-Type": "application/json" });
-        res.end(JSON.stringify({ error: err.message }));
-        requestLogger(req.method, req.url, 500);
-    }
-};
+}

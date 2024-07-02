@@ -42,7 +42,16 @@ export const addReview = async (req, res) => {
             body += chunk.toString();
         });
         req.on("end", async () => {
-            const review = JSON.parse(body);
+            let review;
+            try {
+                review = JSON.parse(body);
+            }
+            catch (error) {
+                res.writeHead(400, { "Content-Type": "application/json" });
+                res.end(JSON.stringify({ error: "Invalid JSON" }));
+                requestLogger(req.method, req.url, 400);
+                return;
+            }
             await reviewModel.addReview(review);
             res.writeHead(201, { "Content-Type": "application/json" });
             res.end(JSON.stringify({ message: "Review added" }));
@@ -63,7 +72,15 @@ export const updateReview = async (req, res, id) => {
             body += chunk.toString();
         });
         req.on("end", async () => {
-            const review = JSON.parse(body);
+            let review;
+            try {
+                review = JSON.parse(body);
+            } catch (error) {
+                res.writeHead(400, { "Content-Type": "application/json" });
+                res.end(JSON.stringify({ error: "Invalid JSON" }));
+                requestLogger(req.method, req.url, 400);
+                return;
+            }
             await reviewModel.updateReview(id, review);
             res.writeHead(200, { "Content-Type": "application/json" });
             res.end(JSON.stringify({ message: "Review updated" }));

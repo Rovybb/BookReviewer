@@ -4,6 +4,7 @@ import handleUserRoutes from './routes/userRoutes.js';
 import handleStatisticsRoutes from './routes/statisticsRoutes.js';
 import handleGroupRoutes from './routes/groupRoutes.js';
 import handleGroupMessageRoutes from './routes/groupMessageRoutes.js';
+import handleNewsRoutes from './routes/newsRoutes.js';
 import { getAllNews, createFeed } from '../services/newsService.js';
 import requestLogger from '../utils/requestLogger.js';
 
@@ -28,7 +29,11 @@ const handleAPIRoutes = async (req, res) => {
     }
     else if (req.url.startsWith('/api/statistics')) {
         handleStatisticsRoutes(req, res);
-    } else {
+    }
+    else if (req.url.startsWith('/api/news')) {
+        handleNewsRoutes(req, res);
+    }
+    else {
         res.writeHead(404, { 'Content-Type': 'application/json' });
         res.end(JSON.stringify({ message: 'Route Not Found' }));
     }

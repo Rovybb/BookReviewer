@@ -96,7 +96,16 @@ export const register = async (req, res) => {
             body += chunk.toString();
         });
         req.on("end", async () => {
-            const { username, email, password, profilePicture } = JSON.parse(body);
+            let user;
+            try {
+                user = JSON.parse(body);
+            } catch (error) {
+                res.writeHead(400, { "Content-Type": "application/json" });
+                res.end(JSON.stringify({ error: "Invalid JSON" }));
+                requestLogger(req.method, req.url, 400);
+                return;
+            }
+            const { username, email, password, profilePicture } = user;
             const hashedPassword = await bcrypt.hash(password, 10);
             await userModel.addUser({
                 username: username || usernameGenerator(),
@@ -124,8 +133,18 @@ export const login = async (req, res) => {
             body += chunk.toString();
         });
         req.on("end", async () => {
-            const { email, password } = JSON.parse(body);
 
+            let creds;
+            try {
+                creds = JSON.parse(body);
+            }
+            catch (error) {
+                res.writeHead(400, { "Content-Type": "application/json" });
+                res.end(JSON.stringify({ error: "Invalid JSON" }));
+                requestLogger(req.method, req.url, 400);
+                return;
+            }
+            const { email, password } = creds;
             const queryResponse = await userModel.getUserByEmail(email);
             const user = queryResponse[0];
 
@@ -167,6 +186,16 @@ export const updateUser = async (req, res, id) => {
             body += chunk.toString();
         });
         req.on("end", async () => {
+            let creds;
+            try {
+                creds = JSON.parse(body);
+            }
+            catch (error) {
+                res.writeHead(400, { "Content-Type": "application/json" });
+                res.end(JSON.stringify({ error: "Invalid JSON" }));
+                requestLogger(req.method, req.url, 400);
+                return;
+            }
             const { username, password, profilePicture, email } =
                 JSON.parse(body);
             const hashedPassword = await bcrypt.hash(password, 10);
