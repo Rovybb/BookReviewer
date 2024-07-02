@@ -1,6 +1,7 @@
-const booksGrid = document.querySelector('.books-grid');
-const searchInput = document.getElementById('search');
-const searchButton = document.querySelector('.search-button');
+const booksGrid = document.querySelector(".books-grid");
+const searchInput = document.getElementById("search");
+const searchButton = document.querySelector(".search-button");
+const genreSelect = document.getElementById("genre");
 
 const buildBookCard = (book) => {
     return `
@@ -21,15 +22,21 @@ const buildBookCard = (book) => {
 const handleSearch = async (event) => {
     event && event.preventDefault();
     try {
-        const response = await fetch(`/api/books?search=${searchInput.value}&genre=`);
+        const response = await fetch(
+            `/api/books?search=${searchInput.value}&genre=${genreSelect.value}`
+        );
         const books = await response.json();
 
-        booksGrid.innerHTML = books.map(buildBookCard).join('');
+        booksGrid.innerHTML = books.map(buildBookCard).join("");
     } catch (error) {
         console.error(error);
     }
 };
 
-searchButton.addEventListener('click', handleSearch);
+searchButton.addEventListener("click", handleSearch);
+const selectOptions = document.querySelector(".select-items").getElementsByTagName("div");
+for (let i = 0; i < selectOptions.length; i++) {
+    selectOptions[i].addEventListener("click", handleSearch);
+}
 
 handleSearch();

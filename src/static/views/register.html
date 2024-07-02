@@ -3,7 +3,7 @@
     <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Book Reviewer</title>
+        <title>Sign in</title>
         <link
             rel="apple-touch-icon"
             sizes="180x180"
@@ -46,7 +46,7 @@
                             <h2 class="auth-card-subtitle">
                                 Welcome to BookReviewer!
                             </h2>
-                            <h1 class="auth-card-title">Register</h1>
+                            <h1 class="auth-card-title">Sign in</h1>
                             <form class="auth-card-form-container">
                                 <div class="step" id="step1">
                                     <div class="input-group" id="emailGroup">
@@ -130,10 +130,6 @@
                                             autocomplete="username"
                                             required
                                         />
-                                        <span
-                                            class="input-error"
-                                            id="usernameError"
-                                        ></span>
                                     </div>
                                     <div
                                         class="input-group"
@@ -157,25 +153,24 @@
                                             id="profilePicture"
                                             class="input-file"
                                             placeholder="Profile Picture"
-                                            onchange="handlePreview()"
-                                            required
+                                            onchange="handlePreview('#profilePictureGroup')"
                                         />
-                                        <div class="button-row">
-                                            <button
-                                                class="button button--bordered"
-                                                type="button"
-                                                id="backButton"
-                                            >
-                                                Back
-                                            </button>
-                                            <button
-                                                class="button"
-                                                type="button"
-                                                id="registerButton"
-                                            >
-                                                Register
-                                            </button>
-                                        </div>
+                                    </div>
+                                    <div class="button-row">
+                                        <button
+                                            class="button button--bordered"
+                                            type="button"
+                                            id="backButton"
+                                        >
+                                            Back
+                                        </button>
+                                        <button
+                                            class="button"
+                                            type="button"
+                                            id="registerButton"
+                                        >
+                                            Register
+                                        </button>
                                     </div>
                                 </div>
                             </form>

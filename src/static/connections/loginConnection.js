@@ -75,13 +75,16 @@ const handleSubmit = async (event) => {
             body: JSON.stringify({ email, password }),
         });
 
+        const data = await response.json();
         if (response.status === 200) {
-            const data = await response.json();
             document.cookie = `token=${data.token};max-age=3600`;
             window.location.href = "/";
+        } else if (response.status === 401) {
+            passwordGroup.classList.add("error");
+            passwordError.textContent = "Invalid email or password";
+            passwordField.value = "";
         } else {
-            const data = await response.json();
-            alert(data.error);
+            throw new Error(data.error);
         }
     } catch (error) {
         console.error(error);

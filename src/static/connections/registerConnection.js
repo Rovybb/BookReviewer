@@ -108,21 +108,6 @@ const validateConfirmPassword = () => {
     return true;
 };
 
-const validateUsername = () => {
-    usernameField.removeEventListener("blur", validateUsername);
-    usernameField.addEventListener("input", validateUsername);
-
-    if (usernameField.value === "") {
-        usernameGroup.classList.add("error");
-        usernameError.textContent = "Username cannot be empty";
-        return false;
-    }
-
-    usernameGroup.classList.remove("error");
-    usernameError.textContent = "";
-    return true;
-};
-
 const validateFormStep1 = async () => {
     const isEmailValid = validateEmail();
     let isEmailNotUsed = false;
@@ -137,11 +122,6 @@ const validateFormStep1 = async () => {
         isPasswordValid &&
         isConfirmPasswordValid
     );
-};
-
-const validateFormStep2 = () => {
-    const isUsernameValid = validateUsername();
-    return isUsernameValid;
 };
 
 const verifyFirstStep = async (event) => {
@@ -160,6 +140,8 @@ const verifyFirstStep = async (event) => {
 
 const goBack = (event) => {
     event.preventDefault();
+    passwordField.value = "";
+    confirmPasswordField.value = "";
     firstStepForm.classList.remove("hidden");
     secondStepForm.classList.add("hidden");
     nextButton.type = "submit";
@@ -169,7 +151,7 @@ const goBack = (event) => {
 
 const handleSubmit = async (event) => {
     event.preventDefault();
-    if (!validateFormStep2()) {
+    if (!validateFormStep1()) {
         return;
     }
 
@@ -210,7 +192,6 @@ emailField.addEventListener("blur", validateEmail);
 emailField.addEventListener("blur", validateEmailNotInUse);
 passwordField.addEventListener("blur", validatePassword);
 confirmPasswordField.addEventListener("blur", validateConfirmPassword);
-usernameField.addEventListener("blur", validateUsername);
 
 nextButton.addEventListener("click", verifyFirstStep);
 backButton.addEventListener("click", goBack);

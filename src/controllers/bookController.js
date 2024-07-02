@@ -3,7 +3,7 @@ import requestLogger from "../utils/requestLogger.js";
 
 export const searchBooks = async (req, res, search, genre) => {
     try {
-        const books = await bookModel.searchBooks(search, genre);
+        const books = await bookModel.searchBooks(search, genre.split("%20").join(" "));
         res.writeHead(200, { "Content-Type": "application/json" });
         res.end(JSON.stringify(books));
         requestLogger(req.method, req.url, 200);

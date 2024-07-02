@@ -1,0 +1,109 @@
+@import "../boilerplate/theme";
+
+.input-select {
+    position: relative;
+    font-size: $font-size-md;
+
+    @media screen and (max-width: $breakpoint-sm) {
+        font-size: $font-size-sm;
+    }
+
+    select {
+        display: none;
+    }
+}
+
+.select-selected:after {
+    position: absolute;
+    content: "";
+    top: 18px;
+    right: 10px;
+    width: 0;
+    height: 0;
+    border: 6px solid transparent;
+
+    @media screen and (max-width: $breakpoint-sm) {
+        top: 14px;
+        right: 8px;
+        border-width: 5px;
+    }
+}
+
+.select-selected.select-arrow-active:after {
+    top: 7px;
+}
+
+.select-items div,
+.select-selected {
+    padding: 8px 12px;
+    cursor: pointer;
+    user-select: none;
+
+    @media screen and (max-width: $breakpoint-sm) {
+        padding: 6px 10px;
+    }
+}
+
+.select-selected {
+    border-radius: 8px;
+    border: 1px solid;
+}
+
+.select-selected.select-arrow-active {
+    border-radius: 8px 8px 0 0;
+}
+
+.select-items {
+    position: absolute;
+    border-radius: 0 0 8px 8px;
+    border: 1px solid;
+    max-height: 150px;
+    overflow: auto;
+    top: 100%;
+    left: 0;
+    right: 0;
+    z-index: 99;
+}
+
+.select-hide {
+    display: none;
+}
+
+@include themify($themes) {
+    .select-selected {
+        background-color: themed($card-bg);
+        color: themed($text);
+        border-color: themed($border);
+
+        &:hover {
+            background-color: themed($hover);
+        }
+    }
+
+    .select-selected:after {
+        border-color: themed($border) transparent transparent transparent;
+    }
+
+    .select-selected.select-arrow-active:after {
+        border-color: transparent transparent themed($border) transparent;
+    }
+
+    .select-items div,
+    .select-selected {
+        color: themed($text);
+    }
+
+    .select-selected.select-arrow-active {
+        border-color: themed($border) themed($border) transparent themed($border);
+    }
+
+    .select-items {
+        background-color: themed($card-bg);
+        border-color: transparent themed($border) themed($border) themed($border);
+    }
+
+    .select-items div:hover,
+    .same-as-selected {
+        background-color: themed($hover);
+    }
+}

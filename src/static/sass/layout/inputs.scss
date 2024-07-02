@@ -38,8 +38,14 @@
         font-size: $font-size-sm;
     }
 
+    &.input-text-area {
+        resize: none;
+        height: 100px;
+    }
+
     &-label {
         font-size: $font-size-md;
+        font-weight: 600;
 
         &.hidden {
             display: none;
@@ -115,9 +121,5 @@
         &:hover {
             background-color: themed($hover);
         }
-    }
-
-    .plus-svg {
-        fill: themed($text);
     }
 }

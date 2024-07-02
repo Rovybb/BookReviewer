@@ -1,0 +1,73 @@
+.main-content {
+  justify-content: flex-start;
+}
+
+.admin-title {
+  font-size: 36px;
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+
+.admin-panels-wrapper {
+  width: 100%;
+  padding: 0 30px;
+  margin-bottom: 40px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 20px;
+}
+
+.admin-panel {
+  width: 100%;
+  max-width: 800px;
+  padding: 20px;
+  border-radius: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+.admin-panel-title {
+  font-size: 24px;
+  font-weight: bold;
+}
+.admin-panel-form {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+.admin-panel-form .input-group {
+  max-width: 300px;
+}
+.admin-panel-left-section {
+  flex: 1 1 300px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+.admin-panel-right-section {
+  flex: 1 1 300px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 20px;
+}
+.admin-panel-right-section-inputs {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+.admin-panel-right-section .button {
+  align-self: flex-end;
+}
+
+.light-theme .admin-panel {
+  background-color: #dfb6b2;
+}
+
+.dark-theme .admin-panel {
+  background-color: #1F1023;
+}
+
+/*# sourceMappingURL=index.css.map */

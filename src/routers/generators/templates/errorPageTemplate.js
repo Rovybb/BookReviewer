@@ -1,9 +1,11 @@
+const errorPageTemplate = (error) => {
+    return `
 <!DOCTYPE html>
 <html lang="en">
     <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Book Reviewer</title>
+        <title>${error.title} - BookReviewer</title>
         <link
             rel="apple-touch-icon"
             sizes="180x180"
@@ -23,10 +25,7 @@
         />
         <link rel="manifest" href="/public/site.webmanifest" />
         <link rel="stylesheet" href="/styles/layout/index.css" />
-        <link
-            rel="stylesheet"
-            href="/styles/modules/books/book-page/index.css"
-        />
+        <link rel="stylesheet" href="/styles/modules/error/index.css" />
         <script
             src="https://kit.fontawesome.com/3811cdfa76.js"
             crossorigin="anonymous"
@@ -89,7 +88,8 @@
                 </div>
             </header>
             <main class="main-content">
-                <h2>404</h2>
+                <h2 class="error-title">${error.title}</h2>
+                <p class="error-message">${error.message}</p>
             </main>
             <footer class="footer">
                 <div class="footer-container">
@@ -192,3 +192,7 @@
         <script src="/utils/handleTheme.js"></script>
     </body>
 </html>
+    `;
+};
+
+export default errorPageTemplate;

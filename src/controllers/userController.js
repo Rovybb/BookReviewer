@@ -99,11 +99,11 @@ export const register = async (req, res) => {
             const { username, email, password, profilePicture } = JSON.parse(body);
             const hashedPassword = await bcrypt.hash(password, 10);
             await userModel.addUser({
-                username: username,
+                username: username || usernameGenerator(),
                 email: email,
                 password: hashedPassword,
                 role: "User",
-                profilePicture: profilePicture,
+                profilePicture: profilePicture || null,
             });
             res.writeHead(201, { "Content-Type": "application/json" });
             res.end(JSON.stringify({ message: "User registered" }));
@@ -128,6 +128,13 @@ export const login = async (req, res) => {
 
             const queryResponse = await userModel.getUserByEmail(email);
             const user = queryResponse[0];
+
+            if (!user) {
+                res.writeHead(401, { "Content-Type": "application/json" });
+                res.end(JSON.stringify({ error: "Invalid email" }));
+                requestLogger(req.method, req.url, 401);
+                return;
+            }
 
             const validPassword = await bcrypt.compare(password, user.password);
             if (validPassword) {

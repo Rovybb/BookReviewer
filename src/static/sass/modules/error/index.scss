@@ -1,0 +1,35 @@
+@import "../../boilerplate/theme.scss";
+
+.error-title {
+    font-size: $font-size-xl;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.error-message {
+    font-size: $font-size-md;
+    font-weight: 600;
+
+    a {
+        text-decoration: none;
+        font-weight: 700;
+    }
+}
+
+@include themify($themes) {
+    .error-title {
+        color: themed($text);
+    }
+
+    .error-message {
+        color: themed($text);
+
+        a {
+            color: themed($link);
+
+            &:hover {
+                color: themed($text-secondary);
+            }
+        }
+    }
+}

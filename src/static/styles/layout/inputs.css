@@ -32,8 +32,13 @@
     font-size: 14px;
   }
 }
+.input-text.input-text-area {
+  resize: none;
+  height: 100px;
+}
 .input-text-label {
   font-size: 16px;
+  font-weight: 600;
 }
 .input-text-label.hidden {
   display: none;
@@ -101,9 +106,6 @@
 .light-theme .input-file-label:hover {
   background-color: #dfb6b2;
 }
-.light-theme .plus-svg {
-  fill: #391E41;
-}
 
 .dark-theme .input-text {
   background-color: #1F1023;
@@ -124,9 +126,6 @@
 }
 .dark-theme .input-file-label:hover {
   background-color: #391E41;
-}
-.dark-theme .plus-svg {
-  fill: #fbe4d8;
 }
 
 /*# sourceMappingURL=inputs.css.map */

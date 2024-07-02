@@ -21,9 +21,9 @@ export const createFeed = (items) => {
     return `
     <rss version="2.0">
         <channel>
-            <title>Book Reviewer</title>
+            <title>BookReviewer</title>
             <link>http://localhost:3000</link>
-            <description><![CDATA[Largest comunity of book lovers in the world with over 50 million reviews.<br/>Goodreads is a great place to promote your books.]]></description>
+            <description><![CDATA[Largest comunity of book lovers in the world with over 50 million reviews.<br/>BookReviewer is a great place to promote your books.]]></description>
             <language>en</language>
             ${items.map((item) => `
                 <item>

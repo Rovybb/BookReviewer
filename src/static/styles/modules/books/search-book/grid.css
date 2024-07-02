@@ -2,6 +2,34 @@
   justify-content: flex-start;
 }
 
+.search-form {
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.search-wrapper {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+}
+@media screen and (max-width: 576px) {
+  .search-wrapper {
+    gap: 10px;
+  }
+}
+
+.input-select {
+  width: 100%;
+  max-width: 200px;
+}
+
+.select-selected,
+.select-items {
+  border: 2px solid;
+}
+
 .books-grid {
   width: 100%;
   max-width: 1200px;

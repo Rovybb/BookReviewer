@@ -4,6 +4,7 @@ import jwt from "jsonwebtoken";
 import requestLogger from "../utils/requestLogger.js";
 import { IncomingMessage, ServerResponse } from "node:http";
 import bookPageGenerator from "./generators/bookPageGenerator.js";
+import errorPageTemplate from "./generators/templates/errorPageTemplate.js";
 
 const MIME_TYPES = {
     default: "application/octet-stream",
@@ -41,6 +42,8 @@ const resolveUrl = (url) => {
         return "./views/group_page.html";
     } else if (url === "/documentation") {
         return "./views/doc.html";
+    } else if (url === "/admin") {
+        return "./views/admin.html";
     } else {
         return url;
     }
@@ -54,26 +57,39 @@ const prepareFile = async (url) => {
     const toBool = [() => true, () => false];
     const found = await fs.promises.access(filePath).then(...toBool);
     // console.log(`Found: ${found}, Path: ${filePath}`);               // Uncomment for debugging
-    const streamPath = found ? filePath : SRC_PATH + "/views/404.html";
-    const ext = path.extname(streamPath).substring(1).toLowerCase();
-    const stream = fs.createReadStream(streamPath);
-    return { found, ext, stream };
+    if (found) {
+        const ext = path.extname(filePath).substring(1).toLowerCase();
+        const stream = fs.createReadStream(filePath);
+        return { found, ext, stream };
+    }
+    return { found: false, ext: "", stream: null };
 };
 
 export const sendData = async (req, res) => {
     const file = await prepareFile(req.url);
-    const statusCode = file.found ? 200 : 404;
+    if (!file.found) {
+        res.writeHead(404, { "Content-Type": "text/html; charset=UTF-8" });
+        res.end(errorPageTemplate({
+            title: "Page Not found",
+            message: "You are trying to access an invalid link.<br><a href='/'>Return to home page</a>",
+        }));
+        requestLogger(req.method, req.url, 404);
+        return;
+    }
     const mimeType = MIME_TYPES[file.ext] || MIME_TYPES.default;
-    res.writeHead(statusCode, { "Content-Type": mimeType });
+    res.writeHead(200, { "Content-Type": mimeType });
     file.stream.pipe(res);
-    requestLogger(req.method, req.url, statusCode);
+    requestLogger(req.method, req.url, 200);
 };
 
-const handleProtectedRoutes = async (req, res) => {
+const handleProtectedRoutes = async (req, res, adminPermision) => {
     const cookieHeader = req.headers.cookie;
     if (!cookieHeader) {
-        res.writeHead(401, { "Content-Type": "text/plain" });
-        res.end("Unauthorized");
+        res.writeHead(401, { "Content-Type": "text/html; charset=UTF-8" });
+        res.end(errorPageTemplate({
+            title: "Unauthorized",
+            message: "You are not authorized to access this page.<br><a href='/login'>Try to login</a>"
+        }));
         requestLogger(req.method, req.url, 401);
         return;
     }
@@ -85,18 +101,34 @@ const handleProtectedRoutes = async (req, res) => {
     if (tokenCookie) {
         token = tokenCookie.split("=")[1];
     } else {
-        res.writeHead(401, { "Content-Type": "text/plain" });
-        res.end("Unauthorized");
+        res.writeHead(401, { "Content-Type": "text/html; charset=UTF-8" });
+        res.end(errorPageTemplate({
+            title: "Unauthorized",
+            message: "You are not authorized to access this page.<br><a href='/login'>Try to login</a>"
+        }));
         requestLogger(req.method, req.url, 401);
         return;
     }
 
     try {
         jwt.verify(token, process.env.JWT_SECRET);
+        if (adminPermision && jwt.decode(token).role !== "Admin") {
+            res.writeHead(403, { "Content-Type": "text/html; charset=UTF-8" });
+            res.end(errorPageTemplate({
+                title: "Forbidden",
+                message: "You are not authorized to access this page.<br><a href='/'>Return to home page</a>"
+            }));
+            requestLogger(req.method, req.url, 403);
+            return;
+        }
         await sendData(req, res);
     } catch (error) {
-        res.writeHead(401, { "Content-Type": "text/plain" });
-        res.end("Unauthorized");
+        console.error(error);
+        res.writeHead(401, { "Content-Type": "text/html; charset=UTF-8" });
+        res.end(errorPageTemplate({
+            title: "Unauthorized",
+            message: "You are not authorized to access this page.<br><a href='/login'>Try to login</a>"
+        }));
         requestLogger(req.method, req.url, 401);
     }
 };
@@ -107,8 +139,10 @@ const handleProtectedRoutes = async (req, res) => {
  * @param {ServerResponse<IncomingMessage>} res Server response
  */
 const pageRouter = async (req, res) => {
-    if (protectedRoutes.includes(req.url)) {
-        await handleProtectedRoutes(req, res);
+    if (req.url.startsWith("/admin")) {
+        await handleProtectedRoutes(req, res, true);
+    } else if (protectedRoutes.includes(req.url)) {
+        await handleProtectedRoutes(req, res, false);
     } else if (req.url.match(/\/books\/([0-9]+)/)) {
         await bookPageGenerator(req, res);
     } else if (req.url.match(/\/groups\/([0-9]+)/)) {
