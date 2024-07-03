@@ -1,5 +1,6 @@
 import * as bookModel from "../models/bookModel.js";
 import requestLogger from "../utils/requestLogger.js";
+import uploadImage from "../services/imageUploadService.js";
 
 export const searchBooks = async (req, res, search, genre) => {
     try {
@@ -51,7 +52,14 @@ export const addBook = async (req, res) => {
                 requestLogger(req.method, req.url, 400);
                 return;
             }
-            await bookModel.addBook(book);
+            await bookModel.addBook({
+                title: book.title,
+                author: book.author,
+                genre: book.genre,
+                imageLink: await uploadImage(book.imageLink),
+                description: book.description,
+                rating: 0,
+            });
             res.writeHead(201, { "Content-Type": "application/json" });
             res.end(JSON.stringify({ message: "Book added" }));
             requestLogger(req.method, req.url, 201);

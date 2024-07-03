@@ -1,7 +1,6 @@
-import sql from "mssql";
+import uploadImage from "../services/imageUploadService.js";
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
-import { queryDatabase } from "../data/dbConnection.js";
 import * as userModel from "../models/userModel.js";
 import requestLogger from "../utils/requestLogger.js";
 import usernameGenerator from "../utils/usernameGenerator.js";
@@ -80,8 +79,7 @@ export const getUserByEmail = async (req, res, email) => {
             res.end(JSON.stringify({ message: "User not found" }));
             requestLogger(req.method, req.url, 204);
         }
-    }
-    catch (err) {
+    } catch (err) {
         console.error(err);
         res.writeHead(500, { "Content-Type": "application/json" });
         res.end(JSON.stringify({ error: err.message }));
@@ -96,14 +94,17 @@ export const register = async (req, res) => {
             body += chunk.toString();
         });
         req.on("end", async () => {
-            const { username, email, password, profilePicture } = JSON.parse(body);
+            const { username, email, password, profilePicture } =
+                JSON.parse(body);
             const hashedPassword = await bcrypt.hash(password, 10);
             await userModel.addUser({
                 username: username || usernameGenerator(),
                 email: email,
                 password: hashedPassword,
                 role: "User",
-                profilePicture: profilePicture || null,
+                profilePicture: profilePicture
+                    ? await uploadImage(profilePicture, "profilePictures")
+                    : null,
             });
             res.writeHead(201, { "Content-Type": "application/json" });
             res.end(JSON.stringify({ message: "User registered" }));

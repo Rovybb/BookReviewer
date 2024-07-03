@@ -826,4 +826,41 @@ body:has(.mobile-menu.open) {
   background-color: #391E41;
 }
 
+@keyframes slideInAndOut {
+  0% {
+    top: -100%;
+  }
+  10% {
+    top: 10px;
+  }
+  90% {
+    top: 10px;
+  }
+  100% {
+    top: -100%;
+  }
+}
+.alert {
+  position: fixed;
+  top: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 20px;
+  font-weight: 500;
+  padding: 10px 16px;
+  border-radius: 8px;
+  z-index: 1000;
+  animation: slideInAndOut 3s ease-in-out 1 forwards;
+}
+
+.light-theme .alert {
+  background-color: #dfb6b2;
+  color: #391E41;
+}
+
+.dark-theme .alert {
+  background-color: #1F1023;
+  color: #fbe4d8;
+}
+
 /*# sourceMappingURL=index.css.map */
