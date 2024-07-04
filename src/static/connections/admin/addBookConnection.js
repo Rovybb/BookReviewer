@@ -12,6 +12,7 @@ const descriptionError = document.getElementById("addBookDescriptionError");
 
 const imageGroup = document.getElementById("addBookImageGroup");
 const imageField = document.getElementById("addBookImage");
+const imageError = document.getElementById("addBookImageError");
 
 const genreGroup = document.getElementById("addBookGenreGroup");
 const genreField = document.getElementById("addBookGenre");
@@ -38,7 +39,7 @@ const validateTitle = () => {
     titleGroup.classList.remove("error");
     titleError.textContent = "";
     return true;
-}
+};
 
 const validateAuthor = () => {
     authorField.removeEventListener("blur", validateAuthor);
@@ -59,25 +60,40 @@ const validateAuthor = () => {
     authorGroup.classList.remove("error");
     authorError.textContent = "";
     return true;
-}
+};
 
 const validateDescription = () => {
     descriptionField.removeEventListener("blur", validateDescription);
     descriptionField.addEventListener("input", validateDescription);
 
-    if (descriptionField.value.length > 500) {
+    if (descriptionField.value.length > 1000) {
         descriptionGroup.classList.add("error");
-        descriptionError.textContent = "Description must be at most 500 characters";
+        descriptionError.textContent =
+            "Description must be at most 500 characters";
         return false;
     }
 
     descriptionGroup.classList.remove("error");
     descriptionError.textContent = "";
     return true;
-}
+};
+
+const validateImage = () => {
+    if (imageField.files.length === 0) {
+        imageGroup.classList.add("error");
+        imageError.textContent = "Image cannot be empty";
+        return false;
+    }
+
+    imageGroup.classList.remove("error");
+    imageError.textContent = "";
+    return true;
+};
 
 const validateGenre = () => {
-    const selectOptions = genreField.parentNode.querySelector(".select-items").getElementsByTagName("div");
+    const selectOptions = genreField.parentNode
+        .querySelector(".select-items")
+        .getElementsByTagName("div");
     for (let i = 0; i < selectOptions.length; i++) {
         selectOptions[i].addEventListener("click", validateGenre);
     }
@@ -91,11 +107,17 @@ const validateGenre = () => {
     genreGroup.classList.remove("error");
     genreError.textContent = "";
     return true;
-}
+};
 
 const validateForm = () => {
-    return validateTitle() && validateAuthor() && validateDescription() && validateGenre();
-}
+    return (
+        validateTitle() &&
+        validateAuthor() &&
+        validateDescription() &&
+        validateGenre() &&
+        validateImage()
+    );
+};
 
 const handleSubmit = async (event) => {
     event.preventDefault();
@@ -103,34 +125,38 @@ const handleSubmit = async (event) => {
         return;
     }
 
-    const book = {
-        title: titleField.value,
-        author: authorField.value,
-        description: descriptionField.value,
-        imageLink: "https://images-na.ssl-images-amazon.com/images/S/compressed.photo.goodreads.com/books/1546071216i/5907.jpg", // TODO: Add image upload
-        genre: genreField.value,
-        rating: 0,
-    };
-
-    try {
-        const response = await fetch("/api/books", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify(book),
-        });
-
-        if (response.status === 201) {
-            alert("Book added");
-            titleField.value = "";
-            authorField.value = "";
-            descriptionField.value = "";
-            genreField.value = "";
+    const bookImageFile = imageField.files[0];
+    const reader = new FileReader();
+    reader.readAsDataURL(bookImageFile);
+    reader.onload = async () => {
+        const book = {
+            title: titleField.value,
+            author: authorField.value,
+            description: descriptionField.value,
+            imageLink: reader.result,
+            genre: genreField.value,
+        };
+    
+        try {
+            const response = await fetch("/api/books", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify(book),
+            });
+    
+            if (response.status === 201) {
+                alertMessage("Book added");
+                titleField.value = "";
+                authorField.value = "";
+                descriptionField.value = "";
+                genreField.value = "";
+            }
+        } catch (error) {
+            console.error(error);
         }
-    } catch (error) {
-        console.error(error);
-    }
+    };
 };
 
 titleField.addEventListener("blur", validateTitle);

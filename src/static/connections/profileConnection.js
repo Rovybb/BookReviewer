@@ -18,7 +18,7 @@ const loadProfile = async () => {
             username.textContent = data.username;
             if (data.role === "Admin") {
                 userActions.innerHTML += `
-                    <button class="button button--bordered" onclick="handleNavigate('/admin')">Admin panel</button>
+                    <button class="button button--bordered" onclick="handleNavigate('/admin')">Admin</button>
                 `;
             }
         }

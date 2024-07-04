@@ -1,10 +1,13 @@
-import sql from "mssql";
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
-import { queryDatabase } from "../data/dbConnection.js";
 import * as userModel from "../models/userModel.js";
 import requestLogger from "../utils/requestLogger.js";
 import usernameGenerator from "../utils/usernameGenerator.js";
+import {
+    uploadImage,
+    buildUrl,
+    deleteImage,
+} from "../services/imageUploadService.js";
 
 export const getUsers = async (req, res) => {
     try {
@@ -17,7 +20,10 @@ export const getUsers = async (req, res) => {
                     username: user.username,
                     email: user.email,
                     role: user.role,
-                    profilePicture: user.profilePicture,
+                    profilePicture: buildUrl(
+                        "profilePictures",
+                        user.profilePicture
+                    ),
                 }))
             )
         );
@@ -42,7 +48,10 @@ export const getUser = async (req, res, id) => {
                     username: user.username,
                     email: user.email,
                     role: user.role,
-                    profilePicture: user.profilePicture,
+                    profilePicture: buildUrl(
+                        "profilePictures",
+                        user.profilePicture
+                    ),
                 })
             );
             requestLogger(req.method, req.url, 200);
@@ -71,7 +80,10 @@ export const getUserByEmail = async (req, res, email) => {
                     username: user.username,
                     email: user.email,
                     role: user.role,
-                    profilePicture: user.profilePicture,
+                    profilePicture: buildUrl(
+                        "profilePictures",
+                        user.profilePicture
+                    ),
                 })
             );
             requestLogger(req.method, req.url, 200);
@@ -80,8 +92,7 @@ export const getUserByEmail = async (req, res, email) => {
             res.end(JSON.stringify({ message: "User not found" }));
             requestLogger(req.method, req.url, 204);
         }
-    }
-    catch (err) {
+    } catch (err) {
         console.error(err);
         res.writeHead(500, { "Content-Type": "application/json" });
         res.end(JSON.stringify({ error: err.message }));
@@ -96,14 +107,24 @@ export const register = async (req, res) => {
             body += chunk.toString();
         });
         req.on("end", async () => {
-            const { username, email, password, profilePicture } = JSON.parse(body);
+            const { username, email, password, profilePicture } =
+                JSON.parse(body);
+            const sameEmailUser = await userModel.getUserByEmail(email);
+            if (sameEmailUser.length > 0) {
+                res.writeHead(409, { "Content-Type": "application/json" });
+                res.end(JSON.stringify({ error: "Email already in use" }));
+                requestLogger(req.method, req.url, 409);
+                return;
+            }
             const hashedPassword = await bcrypt.hash(password, 10);
             await userModel.addUser({
                 username: username || usernameGenerator(),
                 email: email,
                 password: hashedPassword,
                 role: "User",
-                profilePicture: profilePicture || null,
+                profilePicture: profilePicture
+                    ? await uploadImage(profilePicture, "profilePictures")
+                    : null,
             });
             res.writeHead(201, { "Content-Type": "application/json" });
             res.end(JSON.stringify({ message: "User registered" }));
@@ -131,26 +152,27 @@ export const login = async (req, res) => {
 
             if (!user) {
                 res.writeHead(401, { "Content-Type": "application/json" });
-                res.end(JSON.stringify({ error: "Invalid email" }));
+                res.end(JSON.stringify({ error: "Invalid password or email" }));
                 requestLogger(req.method, req.url, 401);
                 return;
             }
 
             const validPassword = await bcrypt.compare(password, user.password);
-            if (validPassword) {
-                const token = jwt.sign(
-                    { id: user.id, role: user.role },
-                    process.env.JWT_SECRET,
-                    { expiresIn: "1h" }
-                );
-                res.writeHead(200, { "Content-Type": "application/json" });
-                res.end(JSON.stringify({ token }));
-                requestLogger(req.method, req.url, 200);
-            } else {
+            if (!validPassword) {
                 res.writeHead(401, { "Content-Type": "application/json" });
-                res.end(JSON.stringify({ error: "Invalid password" }));
+                res.end(JSON.stringify({ error: "Invalid password or email" }));
                 requestLogger(req.method, req.url, 401);
+                return;
             }
+
+            const token = jwt.sign(
+                { id: user.id, role: user.role },
+                process.env.JWT_SECRET,
+                { expiresIn: "1h" }
+            );
+            res.writeHead(200, { "Content-Type": "application/json" });
+            res.end(JSON.stringify({ token }));
+            requestLogger(req.method, req.url, 200);
         });
     } catch (err) {
         console.error(err);
@@ -169,12 +191,37 @@ export const updateUser = async (req, res, id) => {
         req.on("end", async () => {
             const { username, password, profilePicture, email } =
                 JSON.parse(body);
-            const hashedPassword = await bcrypt.hash(password, 10);
+            const user = await userModel.getUserById(id);
+            if (user.length === 0) {
+                res.writeHead(404, { "Content-Type": "application/json" });
+                res.end(JSON.stringify({ error: "User not found" }));
+                requestLogger(req.method, req.url, 404);
+                return;
+            }
+            const validPassword = await bcrypt.compare(password, user[0].password);
+            if (!validPassword) {
+                res.writeHead(401, { "Content-Type": "application/json" });
+                res.end(JSON.stringify({ error: "Invalid password" }));
+                requestLogger(req.method, req.url, 401);
+                return;
+            }
+            let newImageLink = user[0].profilePicture;
+            if (profilePicture) {
+                if (user[0].profilePicture) {
+                    await deleteImage(
+                        "profilePictures",
+                        user[0].profilePicture
+                    );
+                }
+                newImageLink = await uploadImage(
+                    profilePicture,
+                    "profilePictures"
+                );
+            }
             await userModel.updateUser(id, {
                 username: username,
                 email: email,
-                password: hashedPassword,
-                profilePicture: profilePicture,
+                profilePicture: newImageLink,
             });
             res.writeHead(200, { "Content-Type": "application/json" });
             res.end(JSON.stringify({ message: "User updated" }));
@@ -188,8 +235,57 @@ export const updateUser = async (req, res, id) => {
     }
 };
 
+export const updateUserPassword = async (req, res, id) => {
+    try {
+        let body = "";
+        req.on("data", (chunk) => {
+            body += chunk.toString();
+        });
+        req.on("end", async () => {
+            const { oldPassword, newPassword } = JSON.parse(body);
+            const user = await userModel.getUserById(id);
+            if (user.length === 0) {
+                res.writeHead(404, { "Content-Type": "application/json" });
+                res.end(JSON.stringify({ error: "User not found" }));
+                requestLogger(req.method, req.url, 404);
+                return;
+            }
+            const validPassword = await bcrypt.compare(
+                oldPassword,
+                user[0].password
+            );
+            if (!validPassword) {
+                res.writeHead(401, { "Content-Type": "application/json" });
+                res.end(JSON.stringify({ error: "Invalid password" }));
+                requestLogger(req.method, req.url, 401);
+                return;
+            }
+            const hashedPassword = await bcrypt.hash(newPassword, 10);
+            await userModel.updateUserPassword(id, hashedPassword);
+            res.writeHead(200, { "Content-Type": "application/json" });
+            res.end(JSON.stringify({ message: "Password updated" }));
+            requestLogger(req.method, req.url, 200);
+        });
+    } catch (err) {
+        console.error(err);
+        res.writeHead(500, { "Content-Type": "application/json" });
+        res.end(JSON.stringify({ error: err.message }));
+        requestLogger(req.method, req.url, 500);
+    }
+};
+
 export const deleteUser = async (req, res, id) => {
     try {
+        const user = await userModel.getUserById(id);
+        if (user.length === 0) {
+            res.writeHead(404, { "Content-Type": "application/json" });
+            res.end(JSON.stringify({ error: "User not found" }));
+            requestLogger(req.method, req.url, 404);
+            return;
+        }
+        if (user[0].profilePicture) {
+            await deleteImage("profilePictures", user[0].profilePicture);
+        }
         await userModel.deleteUser(id);
         res.writeHead(204, { "Content-Type": "application/json" });
         res.end();
