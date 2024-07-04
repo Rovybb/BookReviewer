@@ -114,7 +114,7 @@ const bookPageTemplate = (book) => {
                         </div>
                     </div>
                     <p class="book-card-description">
-                        ${book.description}
+                        ${book.description.split('\n').join('<br>')}
                     </p>
                 </div>
                 <section class="comment-section">

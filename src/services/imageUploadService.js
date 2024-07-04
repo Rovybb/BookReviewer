@@ -1,5 +1,5 @@
 import { initializeApp } from "firebase/app";
-import { getStorage, ref, uploadString } from "firebase/storage";
+import { getStorage, ref, uploadString, deleteObject } from "firebase/storage";
 
 const firebaseConfig = {
     apiKey: process.env.FIREBASE_API_KEY,
@@ -14,10 +14,19 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const storage = getStorage(app, "gs://" + process.env.FIREBASE_STORAGE_BUCKET);
 
+const buildUrl = (folder, name) => {
+    return `https://firebasestorage.googleapis.com/v0/b/bookreviewer-be71e.appspot.com/o/${folder}%2F${name}?alt=media&token=2c92dcb8-60b2-4d23-8810-84da335cae95`;
+};
+
 const uploadImage = async (data_url, folder) => {
     const uploadedImageRef = ref(storage, folder + "/" + Date.now());
     await uploadString(uploadedImageRef, data_url, "data_url");
-    return `https://firebasestorage.googleapis.com/v0/b/bookreviewer-be71e.appspot.com/o/${folder}%2F${uploadedImageRef.name}?alt=media&token=2c92dcb8-60b2-4d23-8810-84da335cae95`;
+    return uploadedImageRef.name;
 };
 
-export default uploadImage;
+const deleteImage = async (folder, name) => {
+    const imageRef = ref(storage, folder + "/" + name);
+    await deleteObject(imageRef);
+};
+
+export { uploadImage, buildUrl, deleteImage };
