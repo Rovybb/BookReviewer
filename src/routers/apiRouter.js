@@ -4,15 +4,12 @@ import handleUserRoutes from './routes/userRoutes.js';
 import handleStatisticsRoutes from './routes/statisticsRoutes.js';
 import handleGroupRoutes from './routes/groupRoutes.js';
 import handleGroupMessageRoutes from './routes/groupMessageRoutes.js';
-import { getAllNews, createFeed } from '../services/newsService.js';
-import requestLogger from '../utils/requestLogger.js';
+import handleNewsRoutes from './routes/newsRoutes.js';
+import { rssService } from '../services/rssService.js';
 
 const handleAPIRoutes = async (req, res) => {
     if (req.url === '/rss.xml') {
-        res.writeHead(200, { "Content-Type": "application/xml" });
-        res.write(createFeed(await getAllNews()));
-        res.end();
-        requestLogger(req.method, req.url, 200);
+        rssService(req, res);
     } else if (req.url.startsWith('/api/books')) {
         handleBookRoutes(req, res);
     } else if (req.url.startsWith('/api/reviews')) {
@@ -28,7 +25,11 @@ const handleAPIRoutes = async (req, res) => {
     }
     else if (req.url.startsWith('/api/statistics')) {
         handleStatisticsRoutes(req, res);
-    } else {
+    }
+    else if (req.url.startsWith('/api/news')) {
+        handleNewsRoutes(req, res);
+    }
+    else {
         res.writeHead(404, { 'Content-Type': 'application/json' });
         res.end(JSON.stringify({ message: 'Route Not Found' }));
     }
