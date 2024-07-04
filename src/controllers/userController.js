@@ -186,9 +186,9 @@ export const updateUser = async (req, res, id) => {
             body += chunk.toString();
         });
         req.on("end", async () => {
-            let creds;
+            let user;
             try {
-                creds = JSON.parse(body);
+                user = JSON.parse(body);
             }
             catch (error) {
                 res.writeHead(400, { "Content-Type": "application/json" });
@@ -196,8 +196,7 @@ export const updateUser = async (req, res, id) => {
                 requestLogger(req.method, req.url, 400);
                 return;
             }
-            const { username, password, profilePicture, email } =
-                JSON.parse(body);
+            const { username, password, profilePicture, email } = user;
             const hashedPassword = await bcrypt.hash(password, 10);
             await userModel.updateUser(id, {
                 username: username,

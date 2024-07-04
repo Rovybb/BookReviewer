@@ -1,23 +1,25 @@
 import { getReadingStatistics } from './statisticsService.js';
+import { getNews } from '../models/newsModel.js';
+import requestLogger from '../utils/requestLogger.js';
 
-export const getAllNews = async () => {
+const getAllNews = async () => {
 
     const statistics = await getReadingStatistics();
 
     const news = [{
         title: 'Most popular author and genre this week',
         link: 'http://localhost:3000',
-        description: `This week's most read author is ${statistics.mostReadAuthors[0].author} and the most read genre is ${statistics.mostReadGenres[0].genre}.`
+        content: `This week's most read author is ${statistics.mostReadAuthors[0].author} and the most read genre is ${statistics.mostReadGenres[0].genre}.`
     },
     {
         title: 'Top 5 most read books this week',
         link: 'http://localhost:3000',
-        description: `These are the top 5 most read books this week: ${statistics.top5MostReadBooks.map(book => book.title).join(", ")}.`
+        content: `These are the top 5 most read books this week: ${statistics.top5MostReadBooks.map(book => book.title).join(", ")}.`
     }];
     return news;
 };
 
-export const createFeed = (items) => {
+const createFeed = (items) => {
     return `
     <rss version="2.0">
         <channel>
@@ -29,7 +31,7 @@ export const createFeed = (items) => {
                 <item>
                     <title>${item.title}</title>
                     <link>${item.link}</link>
-                    <description>${item.description}</description>
+                    <description>${item.content}</description>
                     <author>
                         <![CDATA[
                             <a href="http://localhost:3000">Book Reviewer</a>
@@ -43,3 +45,13 @@ export const createFeed = (items) => {
     </rss>
     `;
 };
+
+const rssService = async (req, res) => {
+    const news = await getNews();
+    res.writeHead(200, { "Content-Type": "application/xml" });
+    res.write(createFeed(news));
+    res.end();
+    requestLogger(req.method, req.url, 200);
+};
+
+export { getAllNews, createFeed, rssService };

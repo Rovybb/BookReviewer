@@ -4,15 +4,15 @@ import {
     addNews,
     updateNews,
     deleteNews
-} from "../controllers/newsController.js";
-import requestLogger from "../utils/requestLogger.js";
+} from "../../controllers/newsController.js";
+import requestLogger from "../../utils/requestLogger.js";
 
 const handleNewsRoutes = (req, res) => {
     if (req.url === "/api/news" && req.method === "GET") {
         getNews(req, res);
     } else if (req.url.match(/\/api\/news\/([0-9]+)/) && req.method === "GET") {
         const id = req.url.split("/")[3];
-        getNew(req, res, id);
+        getNewsById(req, res, id);
     } else if (req.url === "/api/news" && req.method === "POST") {
         addNews(req, res);
     } else if (req.url.match(/\/api\/news\/([0-9]+)/) && req.method === "PUT") {
