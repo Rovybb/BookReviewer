@@ -1,9 +1,20 @@
 import * as bookModel from "../models/bookModel.js";
 import requestLogger from "../utils/requestLogger.js";
+import {
+    uploadImage,
+    buildUrl,
+    deleteImage,
+} from "../services/imageUploadService.js";
 
 export const searchBooks = async (req, res, search, genre) => {
     try {
-        const books = await bookModel.searchBooks(search, genre.split("%20").join(" "));
+        const books = await bookModel.searchBooks(
+            search.split("%20").join(" "),
+            genre.split("%20").join(" ")
+        );
+        books.forEach((book) => {
+            book.imageLink = buildUrl("books", book.imageLink);
+        });
         res.writeHead(200, { "Content-Type": "application/json" });
         res.end(JSON.stringify(books));
         requestLogger(req.method, req.url, 200);
@@ -18,15 +29,16 @@ export const searchBooks = async (req, res, search, genre) => {
 export const getBook = async (req, res, id) => {
     try {
         const book = await bookModel.getBookById(id);
-        if (book.length > 0) {
-            res.writeHead(200, { "Content-Type": "application/json" });
-            res.end(JSON.stringify(book[0]));
-            requestLogger(req.method, req.url, 200);
-        } else {
+        if (book.length === 0) {
             res.writeHead(404, { "Content-Type": "application/json" });
             res.end(JSON.stringify({ error: "Book not found" }));
             requestLogger(req.method, req.url, 404);
+            return;
         }
+        book[0].imageLink = buildUrl("books", book[0].imageLink);
+        res.writeHead(200, { "Content-Type": "application/json" });
+        res.end(JSON.stringify(book[0]));
+        requestLogger(req.method, req.url, 200);
     } catch (err) {
         console.error(err);
         res.writeHead(500, { "Content-Type": "application/json" });
@@ -51,7 +63,14 @@ export const addBook = async (req, res) => {
                 requestLogger(req.method, req.url, 400);
                 return;
             }
-            await bookModel.addBook(book);
+            await bookModel.addBook({
+                title: book.title,
+                author: book.author,
+                genre: book.genre,
+                imageLink: await uploadImage(book.imageLink, "books"),
+                description: book.description,
+                rating: 0,
+            });
             res.writeHead(201, { "Content-Type": "application/json" });
             res.end(JSON.stringify({ message: "Book added" }));
             requestLogger(req.method, req.url, 201);
@@ -80,6 +99,19 @@ export const updateBook = async (req, res, id) => {
                 requestLogger(req.method, req.url, 400);
                 return;
             }
+            const bookQuery = await bookModel.getBookById(id);
+            if (bookQuery.length === 0) {
+                res.writeHead(404, { "Content-Type": "application/json" });
+                res.end(JSON.stringify({ error: "Book not found" }));
+                requestLogger(req.method, req.url, 404);
+                return;
+            }
+            if (book.imageLink) {
+                if (bookQuery[0].imageLink) {
+                    await deleteImage("books", bookQuery[0].imageLink);
+                }
+                book.imageLink = await uploadImage(book.imageLink, "books");
+            }
             await bookModel.updateBook(id, book);
             res.writeHead(200, { "Content-Type": "application/json" });
             res.end(JSON.stringify({ message: "Book updated" }));
@@ -95,6 +127,16 @@ export const updateBook = async (req, res, id) => {
 
 export const deleteBook = async (req, res, id) => {
     try {
+        const book = await bookModel.getBookById(id);
+        if (book.length === 0) {
+            res.writeHead(404, { "Content-Type": "application/json" });
+            res.end(JSON.stringify({ error: "Book not found" }));
+            requestLogger(req.method, req.url, 404);
+            return;
+        }
+        if (book[0].imageLink) {
+            await deleteImage("books", book[0].imageLink);
+        }
         await bookModel.deleteBook(id);
         res.writeHead(204, { "Content-Type": "application/json" });
         res.end();

@@ -37,14 +37,22 @@ export const addUser = async (user) => {
 export const updateUser = async (id, updatedUser) => {
     const query = `
         UPDATE Users
-        SET username = @username, email = @email,  password = @password, profilePicture = @profilePicture
+        SET username = @username, email = @email, profilePicture = @profilePicture
         WHERE id = @id
     `;
     const params = [
         { name: 'username', type: sql.NVarChar, value: updatedUser.username },
         { name: 'email', type: sql.NVarChar, value: updatedUser.email },
-        { name: 'password', type: sql.NVarChar, value: updatedUser.password },
         { name: 'profilePicture', type: sql.NVarChar, value: updatedUser.profilePicture },
+        { name: 'id', type: sql.Int, value: id }
+    ];
+    await queryDatabase(query, params);
+};
+
+export const updateUserPassword = async (id, password) => {
+    const query = 'UPDATE Users SET password = @password WHERE id = @id';
+    const params = [
+        { name: 'password', type: sql.NVarChar, value: password },
         { name: 'id', type: sql.Int, value: id }
     ];
     await queryDatabase(query, params);

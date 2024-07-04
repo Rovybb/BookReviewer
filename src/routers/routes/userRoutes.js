@@ -5,6 +5,7 @@ import {
     register,
     login,
     updateUser,
+    updateUserPassword,
     deleteUser,
     addBookToLectureList,
     deleteFromLectureList,
@@ -30,6 +31,9 @@ function handleUserRoutes(req, res) {
         register(req, res);
     } else if (req.url === "/api/users/login" && req.method === "POST") {
         login(req, res);
+    } else if (req.url.match(/\/api\/users\/password\/([0-9]+)/) && req.method === "PUT") {
+        const id = req.url.split("/")[4];
+        updateUserPassword(req, res, id);
     } else if (
         req.url.match(/\/api\/users\/([0-9]+)/) &&
         req.method === "PUT"

@@ -35,6 +35,12 @@ const validateEmail = () => {
         return false;
     }
 
+    if (emailField.value.length > 100) {
+        emailGroup.classList.add("error");
+        emailError.textContent = "Email is too long";
+        return false;
+    }
+
     const emailRegex = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/;
     if (!emailRegex.test(emailField.value)) {
         emailGroup.classList.add("error");
@@ -82,6 +88,12 @@ const validatePassword = () => {
         return false;
     }
 
+    if (passwordField.value.length > 100) {
+        passwordGroup.classList.add("error");
+        passwordError.textContent = "Password is too long";
+        return false;
+    }
+
     if (passwordField.value.length < 6) {
         passwordGroup.classList.add("error");
         passwordError.textContent = "Password must be at least 6 characters";
@@ -108,6 +120,21 @@ const validateConfirmPassword = () => {
     return true;
 };
 
+const validateUsername = () => {
+    usernameField.removeEventListener("blur", validateUsername);
+    usernameField.addEventListener("input", validateUsername);
+
+    if (usernameField.value.length > 100) {
+        usernameGroup.classList.add("error");
+        usernameError.textContent = "Username is too long";
+        return false;
+    }
+
+    usernameGroup.classList.remove("error");
+    usernameError.textContent = "";
+    return true;
+};
+
 const validateFormStep1 = async () => {
     const isEmailValid = validateEmail();
     let isEmailNotUsed = false;
@@ -122,6 +149,11 @@ const validateFormStep1 = async () => {
         isPasswordValid &&
         isConfirmPasswordValid
     );
+};
+
+const validateFormStep2 = () => {
+    const isUsernameValid = validateUsername();
+    return isUsernameValid;
 };
 
 const verifyFirstStep = async (event) => {
@@ -142,6 +174,7 @@ const goBack = (event) => {
     event.preventDefault();
     passwordField.value = "";
     confirmPasswordField.value = "";
+    usernameField.value = "";
     firstStepForm.classList.remove("hidden");
     secondStepForm.classList.add("hidden");
     nextButton.type = "submit";
@@ -149,17 +182,7 @@ const goBack = (event) => {
     emailField.focus();
 };
 
-const handleSubmit = async (event) => {
-    event.preventDefault();
-    if (!validateFormStep1()) {
-        return;
-    }
-
-    const email = emailField.value;
-    const password = passwordField.value;
-    const username = usernameField.value;
-    // const profilePicture = profilePictureField.value;
-
+const register = async (user) => {
     try {
         const response = await fetch("/api/users/register", {
             method: "POST",
@@ -167,12 +190,10 @@ const handleSubmit = async (event) => {
                 "Content-Type": "application/json",
             },
             body: JSON.stringify({
-                email,
-                password,
-                username,
-                profilePicture:
-                    "https://is1-ssl.mzstatic.com/image/thumb/Music126/v4/e5/63/15/e5631543-9e8c-7cb7-61b4-d122fb6003cc/23UM1IM16968.rgb.jpg/256x256bb.jpg",
-                // TODO: Add profile picture
+                email: user.email,
+                password: user.password,
+                username: user.username,
+                profilePicture: user.profilePicture,
             }),
         });
 
@@ -188,10 +209,45 @@ const handleSubmit = async (event) => {
     }
 };
 
+const handleSubmit = async (event) => {
+    event.preventDefault();
+    if (!validateFormStep2) {
+        return;
+    }
+
+    const email = emailField.value;
+    const password = passwordField.value;
+    const username = usernameField.value;
+    const profilePictureFile = profilePictureField.files[0];
+
+    if (profilePictureFile) {
+        const reader = new FileReader();
+        reader.readAsDataURL(profilePictureFile);
+        reader.onload = async () => {
+            const user = {
+                email: email,
+                password: password,
+                username: username,
+                profilePicture: reader.result,
+            };
+            await register(user);
+        };
+    } else {
+        const user = {
+            email: email,
+            password: password,
+            username: username,
+            profilePicture: null,
+        };
+        register(user);
+    }
+};
+
 emailField.addEventListener("blur", validateEmail);
 emailField.addEventListener("blur", validateEmailNotInUse);
 passwordField.addEventListener("blur", validatePassword);
 confirmPasswordField.addEventListener("blur", validateConfirmPassword);
+usernameField.addEventListener("blur", validateUsername);
 
 nextButton.addEventListener("click", verifyFirstStep);
 backButton.addEventListener("click", goBack);

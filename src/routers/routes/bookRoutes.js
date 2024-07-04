@@ -9,6 +9,12 @@ import requestLogger from "../../utils/requestLogger.js";
 
 const handleBookRoutes = (req, res) => {
     if (
+        req.url.match(/\/api\/books\/([0-9]+)/) &&
+        req.method === "GET"
+    ) {
+        const id = req.url.split("/")[3];
+        getBook(req, res, id);
+    } else if (
         req.url.match(
             /\/api\/books(\?(search|genre)=.*(&(search|genre)=.*)?)?/
         ) &&
@@ -27,12 +33,6 @@ const handleBookRoutes = (req, res) => {
             return;
         }
         searchBooks(req, res, "", "");
-    } else if (
-        req.url.match(/\/api\/books\/([0-9]+)/) &&
-        req.method === "GET"
-    ) {
-        const id = req.url.split("/")[3];
-        getBook(req, res, id);
     } else if (req.url === "/api/books" && req.method === "POST") {
         addBook(req, res);
     } else if (

@@ -1,0 +1,36 @@
+@import "../boilerplate/theme";
+
+@keyframes slideInAndOut {
+    0% {
+        top: -100%;
+    }
+    10% {
+        top: 10px;
+    }
+    90% {
+        top: 10px;
+    }
+    100% {
+        top: -100%;
+    }
+}
+
+.alert {
+    position: fixed;
+    top: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: $font-size-lg;
+    font-weight: 500;
+    padding: 10px 16px;
+    border-radius: 8px;
+    z-index: 1000;
+    animation: slideInAndOut 3s ease-in-out 1 forwards;
+}
+
+@include themify($themes) {
+    .alert {
+        background-color: themed($card-bg);
+        color: themed($text);
+    }
+}

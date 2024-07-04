@@ -3,7 +3,7 @@
     <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Admin panel - BookReviewer</title>
+        <title>Admin - BookReviewer</title>
         <link
             rel="apple-touch-icon"
             sizes="180x180"
@@ -86,7 +86,7 @@
                 </div>
             </header>
             <main class="main-content">
-                <h2 class="admin-title">Admin panel</h2>
+                <h2 class="admin-title">Admin</h2>
                 <div class="admin-panels-wrapper">
                     <div class="admin-panel">
                         <h3 class="admin-panel-title">Add book</h3>
@@ -171,6 +171,10 @@
                                             placeholder="Book Image"
                                             onchange="handlePreview('#addBookImageGroup')"
                                         />
+                                        <span
+                                            class="input-error"
+                                            id="addBookImageError"
+                                        ></span>
                                     </div>
                                     <div class="input-group" id="addBookGenreGroup">
                                         <label
@@ -183,11 +187,11 @@
                                                 <option value="">
                                                     Select genre
                                                 </option>
-                                                <option value="Action">Action</option>
                                                 <option value="Adventure">Adventure</option>
                                                 <option value="Comedy">Comedy</option>
                                                 <option value="Drama">Drama</option>
                                                 <option value="Fantasy">Fantasy</option>
+                                                <option value="Fiction">Fiction</option>
                                                 <option value="History">History</option>
                                                 <option value="Horror">Horror</option>
                                                 <option value="Mystery">Mystery</option>
@@ -309,6 +313,7 @@
             </footer>
         </div>
         <script src="/connections/headerButtonConnection.js"></script>
+        <script src="/utils/handleAlert.js"></script>
         <script src="/utils/handleSelectInput.js"></script>
         <script src="/utils/handlePreview.js"></script>
         <script src="/utils/handleNavigate.js"></script>

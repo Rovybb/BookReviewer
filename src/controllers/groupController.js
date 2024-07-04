@@ -1,9 +1,17 @@
 import * as groupModel from "../models/groupModel.js";
 import requestLogger from "../utils/requestLogger.js";
+import {
+    uploadImage,
+    buildUrl,
+    deleteImage,
+} from "../services/imageUploadService.js";
 
 export const getGroups = async (req, res) => {
     try {
         const groups = await groupModel.getGroups();
+        groups.forEach((group) => {
+            group.imageLink = buildUrl("groups", group.imageLink);
+        });
         res.writeHead(200, { "Content-Type": "application/json" });
         res.end(JSON.stringify(groups));
         requestLogger(req.method, req.url, 200);
@@ -18,15 +26,16 @@ export const getGroups = async (req, res) => {
 export const getGroup = async (req, res, id) => {
     try {
         const group = await groupModel.getGroupById(id);
-        if (group.length > 0) {
-            res.writeHead(200, { "Content-Type": "application/json" });
-            res.end(JSON.stringify(group[0]));
-            requestLogger(req.method, req.url, 200);
-        } else {
+        if (group.length === 0) {
             res.writeHead(404, { "Content-Type": "application/json" });
             res.end(JSON.stringify({ error: "Group not found" }));
             requestLogger(req.method, req.url, 404);
+            return;
         }
+        group[0].imageLink = buildUrl("groups", group[0].imageLink);
+        res.writeHead(200, { "Content-Type": "application/json" });
+        res.end(JSON.stringify(group[0]));
+        requestLogger(req.method, req.url, 200);
     } catch (err) {
         console.error(err);
         res.writeHead(500, { "Content-Type": "application/json" });
@@ -42,7 +51,6 @@ export const createGroup = async (req, res) => {
             body += chunk.toString();
         });
         req.on("end", async () => {
-
             let group;
             try {
                 group = JSON.parse(body);
@@ -53,6 +61,7 @@ export const createGroup = async (req, res) => {
                 requestLogger(req.method, req.url, 400);
                 return;
             }
+            group.imageLink = await uploadImage(group.imageLink, "groups");
             await groupModel.createGroup(group);
             res.writeHead(201, { "Content-Type": "application/json" });
             res.end(JSON.stringify({ message: "Group created" }));
