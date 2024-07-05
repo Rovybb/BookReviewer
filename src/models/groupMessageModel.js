@@ -13,6 +13,12 @@ export const getGroupMessageById = async (id) => {
     return await queryDatabase(query, params);
 };
 
+export const getGroupMessagesByGroupId = async (groupId) => {
+    const query = 'SELECT * FROM GroupMessages WHERE groupId = @groupId';
+    const params = [{ name: 'groupId', type: sql.Int, value: groupId }];
+    return await queryDatabase(query, params);
+};
+
 export const createGroupMessage = async (groupMessage) => {
     const query = `
         INSERT INTO GroupMessages (groupId, userId, message, createdAt)

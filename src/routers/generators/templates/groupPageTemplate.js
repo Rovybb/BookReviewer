@@ -99,56 +99,29 @@ return `
                     <span class="group-members-count">Members: ${group.membersCount}</span>
                     <p class="group-description">${group.description.split('\n').join('<br>')}</p>
                 </div>
-                <button class="button">Join group</button>
+                <div class="group-buttons-container">
+                    <button class="button" id="joinButton">Join group</button>
+                    <button class="button" id="leaveButton">Leave group</button>
+                    <button class="button" id="deleteGroupButton">Delete</button>
+                    <button class="button" id="editGroupButton">Edit</button>
+                </div>
                 <section class="chat-section">
                     <div class="chat-section-title-container">
                         <h2 class="chat-section-title">Chat</h2>
                     </div>
-                    <form class="chat-section-form">
-                        <textarea
-                            class="input-text"
-                            placeholder="Write in chat..."
-                            required
-                        ></textarea>
-                        <button type="submit" class="button">Send</button>
+                    <form class="chat-section-form" id="messageForm">
+                        <div class="input-group" id="messageGroup">
+                            <textarea
+                                class="input-text"
+                                placeholder="Write in chat..."
+                                id="messageInput"
+                            ></textarea>
+                            <span class="input-error" id="messageError"></span>
+                        </div>
+                        <button type="submit" class="button" id="sendButton">Send</button>
                     </form>
                     <div class="messages">
-                        <div class="message">
-                            <div class="message-header">
-                                <img
-                                    src="/assets/profile_placeholder.jpg"
-                                    alt="User"
-                                    class="message-header-image"
-                                />
-                                <div class="message-header-text">
-                                    <span class="message-author">John Doe</span>
-                                    <span class="message-date">01-01-2024</span>
-                                </div>
-                            </div>
-                            <p class="message-content">
-                                This is a great manga! I love the art style and
-                                the story is very interesting. I can't wait to
-                                read the next volume.
-                            </p>
-                        </div>
-                        <div class="message">
-                            <div class="message-header">
-                                <img
-                                    src="/assets/profile_placeholder.jpg"
-                                    alt="User"
-                                    class="message-header-image"
-                                />
-                                <div class="message-header-text">
-                                    <span class="message-author">John Doe</span>
-                                    <span class="message-date">01-01-2024</span>
-                                </div>
-                            </div>
-                            <p class="message-content">
-                                I've read the whole series and it's amazing! I
-                                highly recommend it to anyone who loves dark
-                                fantasy.
-                            </p>
-                        </div>
+                        <p class="placeholder">Loadin...</p>
                     </div>
                 </section>
             </main>
@@ -248,6 +221,10 @@ return `
             </footer>
         </div>
         <script src="/connections/headerButtonConnection.js"></script>
+        <script src="/connections/groups/joinGroupConnection.js"></script>
+        <script src="/connections/groups/showMessagesConnection.js"></script>
+        <script src="/connections/groups/createMessageConnection.js"></script>
+        <script src="/utils/handleAlert.js"></script>
         <script src="/utils/handleNavigate.js"></script>
         <script src="/utils/handleOpenMenu.js"></script>
         <script src="/utils/handleTheme.js"></script>

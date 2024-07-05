@@ -1,7 +1,8 @@
 import {
     getReviews,
     getReview,
-    getReviewByBookId,
+    getReviewsByBookId,
+    getReviewByBookIdAndUserId,
     addReview,
     updateReview,
     deleteReview,
@@ -18,9 +19,19 @@ const handleReviewRoutes = (req, res) => {
     ) {
         const id = req.url.split("/")[3];
         getReview(req, res, id);
-    } else if (req.url.match(/\/api\/reviews\/books\/([0-9]+)/) && req.method === "GET") {
+    } else if (
+        req.url.match(/\/api\/reviews\/books\/([0-9]+)\?userId=([0-9]+)/) &&
+        req.method === "GET"
+    ) {
+        const bookId = req.url.split("/")[4].split("?")[0];
+        const userId = req.url.split("=")[1];
+        getReviewByBookIdAndUserId(req, res, bookId, userId);
+    } else if (
+        req.url.match(/\/api\/reviews\/books\/([0-9]+)/) &&
+        req.method === "GET"
+    ) {
         const bookId = req.url.split("/")[4];
-        getReviewByBookId(req, res, bookId);
+        getReviewsByBookId(req, res, bookId);
     } else if (req.url === "/api/reviews" && req.method === "POST") {
         verifyToken(req, res, addReview);
     } else if (

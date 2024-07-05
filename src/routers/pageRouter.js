@@ -40,8 +40,6 @@ const resolveUrl = (url) => {
         return "./views/books.html";
     }  else if (url === "/groups") {
         return "./views/groups.html";
-    } else if (url.includes("/groups/") && !url.includes(".css")) {
-        return "./views/group_page.html";
     } else if (url === "/documentation") {
         return "./views/doc.html";
     } else if (url === "/admin") {

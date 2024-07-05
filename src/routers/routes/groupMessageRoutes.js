@@ -6,6 +6,7 @@ import {
     deleteGroupMessage,
 } from "../../controllers/groupMessageController.js";
 import requestLogger from "../../utils/requestLogger.js";
+import verifyToken from "../../services/authService.js";
 
 const handleGroupMessageRoutes = (req, res) => {
     if (
@@ -21,7 +22,7 @@ const handleGroupMessageRoutes = (req, res) => {
         const id = req.url.split("/")[3];
         getGroupMessage(req, res, id);
     } else if (req.url === "/api/groupMessages" && req.method === "POST") {
-        createGroupMessage(req, res);
+        verifyToken(req, res, createGroupMessage);
     } else if (
         req.url.match(/\/api\/groupMessages\/([0-9]+)/) &&
         req.method === "PUT"

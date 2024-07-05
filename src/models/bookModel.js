@@ -79,6 +79,20 @@ export const updateBook = async (id, updatedBook) => {
     await queryDatabase(query, params);
 };
 
+export const updateBookRating = async (id) => {
+    const query = `
+        UPDATE Books
+        SET rating = (
+            SELECT AVG(rating)
+            FROM Reviews
+            WHERE bookId = @id
+        )
+        WHERE id = @id
+    `;
+    const params = [{ name: "id", type: sql.Int, value: id }];
+    await queryDatabase(query, params);
+};
+
 export const deleteBook = async (id) => {
     const query = "DELETE FROM Books WHERE id = @id";
     const params = [{ name: "id", type: sql.Int, value: id }];

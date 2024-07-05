@@ -7,6 +7,23 @@ const commentError = document.getElementById("commentError");
 
 commentSectionForm.style.display = "none";
 
+const hasAlraedyReviewed = async (userId) => {
+    const bookId = window.location.pathname.split("/")[2];
+    try {
+        const response = await fetch(`/api/reviews/books/${bookId}?userId=${userId}`, {
+            method: "GET",
+        });
+
+        if (response.status === 200) {
+            return true;
+        }
+
+        return false;
+    } catch (error) {
+        console.error(error);
+    }
+};
+
 const isLogged = async () => {
     const token = document.cookie.split("=")[1];
     try {
@@ -17,7 +34,7 @@ const isLogged = async () => {
             },
         });
 
-        if (response.status === 200) {
+        if (response.status === 200 && !(await hasAlraedyReviewed((await response.json()).id))) {
             commentSectionForm.style.display = "block";
         }
     } catch (error) {

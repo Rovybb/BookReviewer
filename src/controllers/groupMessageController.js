@@ -51,10 +51,10 @@ export const createGroupMessage = async (req, res) => {
                 requestLogger(req.method, req.url, 400);
                 return;
             }
-            const { groupId, userId, message } = groupMessage;
+            const { groupId, message } = groupMessage;
 
             const isUserInGroup = await groupMessageModel.isUserInGroup(
-                userId,
+                req.userId,
                 groupId
             );
             if (!isUserInGroup) {
@@ -70,7 +70,7 @@ export const createGroupMessage = async (req, res) => {
 
             await groupMessageModel.createGroupMessage({
                 groupId,
-                userId,
+                userId: req.userId,
                 message,
             });
             res.writeHead(201, { "Content-Type": "application/json" });

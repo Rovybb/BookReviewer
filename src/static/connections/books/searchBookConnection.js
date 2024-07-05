@@ -27,7 +27,7 @@ const handleSearch = async (event) => {
         );
         const books = await response.json();
 
-        booksGrid.innerHTML = books.map(buildBookCard).join("");
+        booksGrid.innerHTML = books ? books.map(buildBookCard).join("") : "No books found";
     } catch (error) {
         console.error(error);
     }

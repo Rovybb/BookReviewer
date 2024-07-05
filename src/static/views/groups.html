@@ -94,144 +94,14 @@
                         type="text"
                         class="search-input"
                         placeholder="Search groups"
+                        id="search"
                     />
                     <button class="search-button">
                         <span class="fa-solid fa-search"></span>
                     </button>
                 </form>
                 <div class="groups-container">
-                    <div
-                        class="group-card"
-                        onclick="handleNavigate('/groups/BookFans')"
-                    >
-                        <img
-                            src="/assets/group.png"
-                            alt=""
-                            class="group-card-image"
-                        />
-                        <div class="group-card-text-container">
-                            <h3 class="group-card-title">Group</h3>
-                            <p class="group-card-members-count">Members: 10</p>
-                            <p class="group-card-description">
-                                Lorem ipsum dolor, sit amet consectetur
-                                adipisicing elit. Neque minima qui tempora,
-                                pariatur dicta laboriosam ducimus atque ut saepe
-                                repellendus voluptate alias adipisci deleniti
-                                quae reiciendis nemo accusamus similique hic
-                                amet, temporibus recusandae sed. Suscipit ut
-                                iusto dolorum eligendi accusantium quas
-                                recusandae odit nostrum. Dolorem, ex asperiores,
-                                quidem fuga aperiam nisi vel totam fugit eaque
-                                eveniet modi quas architecto reprehenderit quo
-                                voluptatibus expedita laborum magnam. Ea
-                                tempore, impedit excepturi dolor culpa qui
-                                expedita modi iure explicabo quaerat cum
-                                similique, provident ab a nobis. Molestiae nam
-                                dolorum, ducimus eius vitae quis beatae harum,
-                                esse commodi maiores nesciunt asperiores
-                                similique, quo nemo.
-                            </p>
-                        </div>
-                    </div>
-                    <div
-                        class="group-card"
-                        onclick="handleNavigate('/groups/BookFans')"
-                    >
-                        <img
-                            src="/assets/group.png"
-                            alt=""
-                            class="group-card-image"
-                        />
-                        <div class="group-card-text-container">
-                            <h3 class="group-card-title">Group</h3>
-                            <p class="group-card-members-count">Members: 10</p>
-                            <p class="group-card-description">
-                                Lorem ipsum dolor, sit amet consectetur
-                                adipisicing elit. Neque minima qui tempora,
-                                pariatur dicta laboriosam ducimus atque ut saepe
-                                repellendus voluptate alias adipisci deleniti
-                                quae reiciendis nemo accusamus similique hic
-                                amet, temporibus recusandae sed. Suscipit ut
-                                iusto dolorum eligendi accusantium quas
-                                recusandae odit nostrum. Dolorem, ex asperiores,
-                                quidem fuga aperiam nisi vel totam fugit eaque
-                                eveniet modi quas architecto reprehenderit quo
-                                voluptatibus expedita laborum magnam. Ea
-                                tempore, impedit excepturi dolor culpa qui
-                                expedita modi iure explicabo quaerat cum
-                                similique, provident ab a nobis. Molestiae nam
-                                dolorum, ducimus eius vitae quis beatae harum,
-                                esse commodi maiores nesciunt asperiores
-                                similique, quo nemo.
-                            </p>
-                        </div>
-                    </div>
-                    <div
-                        class="group-card"
-                        onclick="handleNavigate('/groups/BookFans')"
-                    >
-                        <img
-                            src="/assets/group.png"
-                            alt=""
-                            class="group-card-image"
-                        />
-                        <div class="group-card-text-container">
-                            <h3 class="group-card-title">Group</h3>
-                            <p class="group-card-members-count">Members: 10</p>
-                            <p class="group-card-description">
-                                Lorem ipsum dolor, sit amet consectetur
-                                adipisicing elit. Neque minima qui tempora,
-                                pariatur dicta laboriosam ducimus atque ut saepe
-                                repellendus voluptate alias adipisci deleniti
-                                quae reiciendis nemo accusamus similique hic
-                                amet, temporibus recusandae sed. Suscipit ut
-                                iusto dolorum eligendi accusantium quas
-                                recusandae odit nostrum. Dolorem, ex asperiores,
-                                quidem fuga aperiam nisi vel totam fugit eaque
-                                eveniet modi quas architecto reprehenderit quo
-                                voluptatibus expedita laborum magnam. Ea
-                                tempore, impedit excepturi dolor culpa qui
-                                expedita modi iure explicabo quaerat cum
-                                similique, provident ab a nobis. Molestiae nam
-                                dolorum, ducimus eius vitae quis beatae harum,
-                                esse commodi maiores nesciunt asperiores
-                                similique, quo nemo.
-                            </p>
-                        </div>
-                    </div>
-                    <div
-                        class="group-card"
-                        onclick="handleNavigate('/groups/BookFans')"
-                    >
-                        <img
-                            src="/assets/group.png"
-                            alt=""
-                            class="group-card-image"
-                        />
-                        <div class="group-card-text-container">
-                            <h3 class="group-card-title">Group</h3>
-                            <p class="group-card-members-count">Members: 10</p>
-                            <p class="group-card-description">
-                                Lorem ipsum dolor, sit amet consectetur
-                                adipisicing elit. Neque minima qui tempora,
-                                pariatur dicta laboriosam ducimus atque ut saepe
-                                repellendus voluptate alias adipisci deleniti
-                                quae reiciendis nemo accusamus similique hic
-                                amet, temporibus recusandae sed. Suscipit ut
-                                iusto dolorum eligendi accusantium quas
-                                recusandae odit nostrum. Dolorem, ex asperiores,
-                                quidem fuga aperiam nisi vel totam fugit eaque
-                                eveniet modi quas architecto reprehenderit quo
-                                voluptatibus expedita laborum magnam. Ea
-                                tempore, impedit excepturi dolor culpa qui
-                                expedita modi iure explicabo quaerat cum
-                                similique, provident ab a nobis. Molestiae nam
-                                dolorum, ducimus eius vitae quis beatae harum,
-                                esse commodi maiores nesciunt asperiores
-                                similique, quo nemo.
-                            </p>
-                        </div>
-                    </div>
+                    Loading...
                 </div>
             </main>
             <footer class="footer">
@@ -330,6 +200,7 @@
             </footer>
         </div>
         <script src="/connections/headerButtonConnection.js"></script>
+        <script src="/connections/groups/searchGroupConnection.js"></script>
         <script src="/utils/handleNavigate.js"></script>
         <script src="/utils/handleOpenMenu.js"></script>
         <script src="/utils/handleTheme.js"></script>

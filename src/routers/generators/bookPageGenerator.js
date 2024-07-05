@@ -7,7 +7,6 @@ import { buildUrl } from "../../services/imageUploadService.js";
 
 const bookPageGenerator = async (req, res) => {
     const id = req.url.split("/")[2];
-    console.log(id);
     try {
         const queryResponse = await getBookById(id);
         if (!queryResponse.length) {

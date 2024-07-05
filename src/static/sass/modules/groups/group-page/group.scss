@@ -59,6 +59,17 @@
     font-weight: 400;
 }
 
+.group-buttons-container {
+    display: flex;
+    gap: 10px;
+
+    @media screen and (max-width: $breakpoint-sm) {
+        flex-direction: column;
+        align-items: center;
+        gap: 5px;
+    }
+}
+
 .chat-section {
     width: 100%;
     max-width: 1200px;
@@ -103,6 +114,11 @@
     display: flex;
     flex-direction: column-reverse;
     gap: 20px;
+
+    .placeholder {
+        align-self: center;
+        font-size: $font-size-lg;
+    }
 }
 
 .message {

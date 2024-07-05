@@ -100,8 +100,8 @@ const bookPageTemplate = (book) => {
                             alt="${book.title}"
                         />
                         <div class="book-card-buttons">
-                            <button class="button" id="addToListButton">+Add</button>
-                            <button class="button" id="removeFromListButton">-Remove</button>
+                            <button class="button" id="addToListButton"><i class="fa fa-plus"></i> Add</button>
+                            <button class="button" id="removeFromListButton"><i class="fa fa-minus"></i> Remove</button>
                             <button class="button" id="deleteBookButton">Delete</button>
                             <button class="button" id="editBookButton">Edit</button>
                         </div>
@@ -116,7 +116,7 @@ const bookPageTemplate = (book) => {
                             <span class="fa fa-star"></span>
                             <span class="fa fa-star"></span>
                         </div>
-                        <span class="book-card-rating-text">${book.rating.toFixed(2) || 0} / 5</span>
+                        <span class="book-card-rating-text">${book.rating?.toFixed(2) || 0} / 5</span>
                         <div class="book-card-tag">
                             <i class="fa-solid fa-tag"></i
                             ><span id="bookGenre">${book.genre}</span>
@@ -155,7 +155,7 @@ const bookPageTemplate = (book) => {
                         <button type="submit" class="button" id="submitComment">Submit</button>
                     </form>
                     <div class="comments">
-                        <p class="placeholder">No reviews yet</p>
+                        <p class="placeholder">Loading...</p>
                     </div>
                 </section>
             </main>

@@ -12,9 +12,24 @@ export const getReviewById = async (id) => {
     return await queryDatabase(query, params);
 };
 
-export const getReviewByBookId = async (bookId) => {
+export const getReviewsByBookId = async (bookId) => {
     const query = 'SELECT * FROM Reviews WHERE bookId = @bookId';
     const params = [{ name: 'bookId', type: sql.Int, value: bookId }];
+    return await queryDatabase(query, params);
+};
+
+export const getReviewsByUserId = async (userId) => {
+    const query = 'SELECT * FROM Reviews WHERE userId = @userId';
+    const params = [{ name: 'userId', type: sql.Int, value: userId }];
+    return await queryDatabase(query, params);
+};
+
+export const getReviewByBookIdAndUserId = async (bookId, userId) => {
+    const query = 'SELECT * FROM Reviews WHERE bookId = @bookId AND userId = @userId';
+    const params = [
+        { name: 'bookId', type: sql.Int, value: bookId },
+        { name: 'userId', type: sql.Int, value: userId }
+    ];
     return await queryDatabase(query, params);
 };
 

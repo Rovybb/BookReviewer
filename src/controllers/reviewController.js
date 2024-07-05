@@ -1,5 +1,6 @@
 import * as reviewModel from "../models/reviewModel.js";
 import requestLogger from "../utils/requestLogger.js";
+import { updateBookRating } from "../models/bookModel.js";
 
 export const getReviews = async (req, res) => {
     try {
@@ -18,15 +19,15 @@ export const getReviews = async (req, res) => {
 export const getReview = async (req, res, id) => {
     try {
         const review = await reviewModel.getReviewById(id);
-        if (review.length > 0) {
-            res.writeHead(200, { "Content-Type": "application/json" });
-            res.end(JSON.stringify(review[0]));
-            requestLogger(req.method, req.url, 200);
-        } else {
+        if (review.length === 0) {
             res.writeHead(404, { "Content-Type": "application/json" });
             res.end(JSON.stringify({ error: "Review not found" }));
             requestLogger(req.method, req.url, 404);
+            return;
         }
+        res.writeHead(200, { "Content-Type": "application/json" });
+        res.end(JSON.stringify(review[0]));
+        requestLogger(req.method, req.url, 200);
     } catch (err) {
         console.error(err);
         res.writeHead(500, { "Content-Type": "application/json" });
@@ -35,9 +36,10 @@ export const getReview = async (req, res, id) => {
     }
 };
 
-export const getReviewByBookId = async (req, res, bookId) => {
+export const getReviewsByBookId = async (req, res, bookId) => {
     try {
-        const reviews = await reviewModel.getReviewByBookId(bookId);
+        await updateBookRating(bookId);
+        const reviews = await reviewModel.getReviewsByBookId(bookId);
         res.writeHead(200, { "Content-Type": "application/json" });
         res.end(JSON.stringify(reviews));
         requestLogger(req.method, req.url, 200);
@@ -48,6 +50,27 @@ export const getReviewByBookId = async (req, res, bookId) => {
         requestLogger(req.method, req.url, 500);
     }
 };
+
+export const getReviewByBookIdAndUserId = async (req, res, bookId, userId) => {
+    try {
+        const review = await reviewModel.getReviewByBookIdAndUserId(bookId, userId);
+        if (review.length === 0) {
+            res.writeHead(404, { "Content-Type": "application/json" });
+            res.end(JSON.stringify({ error: "Review not found" }));
+            requestLogger(req.method, req.url, 404);
+            return;
+        }
+        res.writeHead(200, { "Content-Type": "application/json" });
+        res.end(JSON.stringify(review[0]));
+        requestLogger(req.method, req.url, 200);
+    } catch (err) {
+        console.error(err);
+        res.writeHead(500, { "Content-Type": "application/json" });
+        res.end(JSON.stringify({ error: err.message }));
+        requestLogger(req.method, req.url, 500);
+    }
+};
+
 
 export const addReview = async (req, res) => {
     try {
@@ -65,7 +88,18 @@ export const addReview = async (req, res) => {
                 requestLogger(req.method, req.url, 400);
                 return;
             }
+            const existingReview = await reviewModel.getReviewByBookIdAndUserId(
+                review.bookId,
+                req.userId
+            );
+            if (existingReview.length > 0) {
+                res.writeHead(400, { "Content-Type": "application/json" });
+                res.end(JSON.stringify({ error: "Review already exists" }));
+                requestLogger(req.method, req.url, 400);
+                return;
+            }
             await reviewModel.addReview({ ...review, userId: req.userId });
+            await updateBookRating(review.bookId);
             res.writeHead(201, { "Content-Type": "application/json" });
             res.end(JSON.stringify({ message: "Review added" }));
             requestLogger(req.method, req.url, 201);
@@ -95,6 +129,7 @@ export const updateReview = async (req, res, id) => {
                 return;
             }
             await reviewModel.updateReview(id, review);
+            await updateBookRating(review.bookId);
             res.writeHead(200, { "Content-Type": "application/json" });
             res.end(JSON.stringify({ message: "Review updated" }));
             requestLogger(req.method, req.url, 200);

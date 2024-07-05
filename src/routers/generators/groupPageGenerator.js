@@ -3,6 +3,7 @@ import errorPageTemplate from "./templates/errorPageTemplate.js";
 import requestLogger from "../../utils/requestLogger.js";
 import groupPageTemplate from "./templates/groupPageTemplate.js";
 import { buildUrl } from "../../services/imageUploadService.js";
+import { sendData } from "../pageRouter.js";
 
 const groupPageGenerator = async (req, res) => {
     const id = req.url.split("/")[2];
