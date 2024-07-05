@@ -202,15 +202,11 @@
                         <li><a href="#registration">Registration</a></li>
                         <li><a href="#authentication">Authentication</a></li>
                         <li><a href="#management">Book Management</a></li>
-                        <li>
-                            <a href="#progress">Reading Progress</a>
-                        </li>
-                        <li>
-                            <a href="#news">News</a>
-                        </li>
-                        <li>
-                            <a href="#stats">Statistics</a>
-                        </li>
+                        <li><a href="#reviews">Reviews</a></li>
+                        <li><a href="#groups">Groups</a></li>
+                        <li><a href="#group_messages">Group Messages</a></li>
+                        <li><a href="#news">News</a></li>
+                        <li><a href="#stats">Statistics</a></li>
                     </ol>
                 </li>
             </ol>
@@ -280,10 +276,12 @@
                         <li>Authentication or registration of the users</li>
                         <li>Viewing and editing profiles</li>
                         <li>Creating book reviews</li>
-                        <li>Completing reviews</li>
                         <li>
                             Centralizing review data and generating statistics
                         </li>
+                        <li>Joining groups</li>
+                        <li>Sending messages to groups</li>
+                        <li>Subscribing to news feeds</li>
                         <li>Administration page of the platform</li>
                     </ul>
                 </section>
@@ -378,7 +376,7 @@
                     <p>
                         The communication between the front-end and back-end
                         relies on the HTTP protocol. Requests to the database
-                        will be made using SQL queries.
+                        will be made using SQL queries. The application will also use a connection to firebase to store images.
                     </p>
                 </section>
             </section>
@@ -505,58 +503,53 @@
                         <h3>Search and Browse Books</h3>
                         <ul>
                             <li>
-                                Explore books by categories, genres, authors,
-                                publishers, and publication years.
-                            </li>
-                            <li>
-                                Utilize advanced search filters to find specific
-                                books based on criteria like language or series.
+                                Explore books by authors and names
                             </li>
                         </ul>
-                        <h3>Personal Library Management</h3>
+                        <h3>Personal Lecture List Management</h3>
                         <ul>
-                            <li>Add new books to personal libraries.</li>
+                            <li>Add new books to Lecture List.</li>
                             <li>
-                                Edit book details (e.g., title, author, genre)
-                                within the library.
-                            </li>
-                            <li>
-                                Remove books from the library when no longer
-                                desired.
+                                Remove books from the Lecture List when no longer wanted
                             </li>
                         </ul>
                     </div>
                 </section>
 
-                <section id="progress">
-                    <h2>4.4 Reading Progress</h2>
+                <section id="reviews">
+                    <h2>4.4 Reviews</h2>
                     <div>
-                        <h3>Book Status Tracking</h3>
+                        <h3>Add Review to a book</h3>
                         <ul>
                             <li>
-                                Mark books as "currently reading," "read," or
-                                "want to read" to organize reading lists.
-                            </li>
-                            <li>
-                                Update and track progress within each reading
-                                status (e.g., percentage completed, last read
-                                page).
-                            </li>
-                        </ul>
-
-                        <h3>Reading History</h3>
-                        <ul>
-                            <li>
-                                View a comprehensive history of books read,
-                                including completion dates and reading
-                                durations.
+                                You can add a star review and comment to a book
                             </li>
                         </ul>
                     </div>
                 </section>
-
+                <section id="groups">
+                    <h2>4.5 Groups</h2>
+                    <div>
+                        <h3>Join a Group</h3>
+                        <ul>
+                            <li>
+                                Join a group to discuss books with other users
+                            </li>
+                        </ul>
+                    </div>
+                </section>
+                <section id="group_messages">
+                    <h2>4.6 Group Messages</h2>
+                    <div>
+                        <h3>Send a Message</h3>
+                        <ul>
+                            <li>
+                                Send a message to a group
+                            </li>
+                        </ul>
+                    </div>
                 <section id="news">
-                    <h2>4.5 News</h2>
+                    <h2>4.7 News</h2>
                     <div>
                         <h3>Book-Related Announcements</h3>
                         <ul>
@@ -565,37 +558,28 @@
                                 announcements, such as new releases, author
                                 interviews, and literary events.
                             </li>
-                            <li>
-                                Receive notifications about updates to favorite
-                                authors or series.
-                            </li>
                         </ul>
                     </div>
                 </section>
 
                 <section id="stats">
-                    <h2>4.6 Statistics</h2>
+                    <h2>4.8 Statistics</h2>
                     <div>
-                        <h3>Reading Habits Analysis</h3>
+                        <h3>Reading Analysis</h3>
                         <ul>
                             <li>
-                                Generate statistics on reading habits, such as:
+                                Generate statistics on weekly tops such as:
                             </li>
                             <li>Most read genres and authors.</li>
                             <li>
-                                Average time spent reading per session or per
-                                book.
+                              Top 5 most read books this week.
                             </li>
-                            <li>
-                                Reading progress over time (e.g., monthly or
-                                yearly summaries).
-                            </li>
+
                         </ul>
                         <h3>Data Export</h3>
                         <ul>
                             <li>
-                                Export reading data and statistics in CSV and
-                                DocBook formats for further analysis or archival
+                                Export reading data and statistics in CSV format for further analysis or archival
                                 purposes.
                             </li>
                         </ul>
