@@ -1,0 +1,37 @@
+@import "../../../boilerplate/theme.scss";
+
+.rating {
+    float: left;
+}
+
+label.fa-star {
+    cursor: pointer;
+}
+
+.rating > input {
+    display: none;
+}
+
+.rating > label {
+    float: right;
+    margin-right: 5px;
+}
+
+@include themify($themes) {
+    label.fa-star {
+        color: themed($link);
+    }
+
+    .rating > input:checked ~ label,
+    .rating:not(:checked) > label:hover,
+    .rating:not(:checked) > label:hover ~ label {
+        color: #ed8a19;
+    }
+
+    .rating > input:checked + label:hover,
+    .rating > input:checked ~ label:hover,
+    .rating > label:hover ~ input:checked ~ label,
+    .rating > input:checked ~ label:hover ~ label {
+        color: #feae53;
+    }
+}

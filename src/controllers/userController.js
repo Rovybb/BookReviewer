@@ -1,6 +1,7 @@
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 import * as userModel from "../models/userModel.js";
+import { getBookById } from "../models/bookModel.js";
 import requestLogger from "../utils/requestLogger.js";
 import usernameGenerator from "../utils/usernameGenerator.js";
 import {
@@ -38,7 +39,7 @@ export const getUsers = async (req, res) => {
 
 export const getUser = async (req, res, id) => {
     try {
-        const queryResponse = await userModel.getUserById(id);
+        const queryResponse = await userModel.getUserById(id || req.userId);
         if (queryResponse.length > 0) {
             const user = queryResponse[0];
             res.writeHead(200, { "Content-Type": "application/json" });
@@ -116,8 +117,7 @@ export const register = async (req, res) => {
                 requestLogger(req.method, req.url, 400);
                 return;
             }
-            const { username, email, password, profilePicture } =
-                user;
+            const { username, email, password, profilePicture } = user;
             const sameEmailUser = await userModel.getUserByEmail(email);
             if (sameEmailUser.length > 0) {
                 res.writeHead(409, { "Content-Type": "application/json" });
@@ -154,12 +154,10 @@ export const login = async (req, res) => {
             body += chunk.toString();
         });
         req.on("end", async () => {
-
             let creds;
             try {
                 creds = JSON.parse(body);
-            }
-            catch (error) {
+            } catch (error) {
                 res.writeHead(400, { "Content-Type": "application/json" });
                 res.end(JSON.stringify({ error: "Invalid JSON" }));
                 requestLogger(req.method, req.url, 400);
@@ -211,8 +209,7 @@ export const updateUser = async (req, res, id) => {
             let user;
             try {
                 user = JSON.parse(body);
-            }
-            catch (error) {
+            } catch (error) {
                 res.writeHead(400, { "Content-Type": "application/json" });
                 res.end(JSON.stringify({ error: "Invalid JSON" }));
                 requestLogger(req.method, req.url, 400);
@@ -226,7 +223,10 @@ export const updateUser = async (req, res, id) => {
                 requestLogger(req.method, req.url, 404);
                 return;
             }
-            const validPassword = await bcrypt.compare(password, user[0].password);
+            const validPassword = await bcrypt.compare(
+                password,
+                user[0].password
+            );
             if (!validPassword) {
                 res.writeHead(401, { "Content-Type": "application/json" });
                 res.end(JSON.stringify({ error: "Invalid password" }));
@@ -326,21 +326,12 @@ export const deleteUser = async (req, res, id) => {
     }
 };
 
-export const addBookToLectureList = async (req, res, userId) => {
+export const getLectureList = async (req, res) => {
     try {
-        let body = "";
-        req.on("data", (chunk) => {
-            body += chunk.toString();
-        });
-        req.on("end", async () => {
-            const { bookId } = JSON.parse(body);
-            await userModel.addBookToLectureList(userId, bookId);
-            res.writeHead(201, { "Content-Type": "application/json" });
-            res.end(
-                JSON.stringify({ message: "Book added to user's lecture list" })
-            );
-            requestLogger(req.method, req.url, 201);
-        });
+        const books = await userModel.getLectureList(req.userId);
+        res.writeHead(200, { "Content-Type": "application/json" });
+        res.end(JSON.stringify(books));
+        requestLogger(req.method, req.url, 200);
     } catch (err) {
         console.error(err);
         res.writeHead(500, { "Content-Type": "application/json" });
@@ -349,19 +340,62 @@ export const addBookToLectureList = async (req, res, userId) => {
     }
 };
 
-export const deleteFromLectureList = async (req, res, userId) => {
+export const addBookToLectureList = async (req, res) => {
     try {
-        let body = "";
-        req.on("data", (chunk) => {
-            body += chunk.toString();
-        });
-        req.on("end", async () => {
-            const { bookId } = JSON.parse(body);
-            await userModel.deleteFromLectureList(userId, bookId);
-            res.writeHead(204, { "Content-Type": "application/json" });
-            res.end();
-            requestLogger(req.method, req.url, 204);
-        });
+        const book = await getBookById(req.bookId);
+        if (book.length === 0) {
+            res.writeHead(404, { "Content-Type": "application/json" });
+            res.end(JSON.stringify({ error: "Book not found" }));
+            requestLogger(req.method, req.url, 404);
+            return;
+        }
+        const userBook = await userModel.getBookFromLectureList(
+            req.userId,
+            req.bookId
+        );
+        if (userBook.length > 0) {
+            res.writeHead(409, { "Content-Type": "application/json" });
+            res.end(JSON.stringify({ error: "Book already in user's lecture list" }));
+            requestLogger(req.method, req.url, 409);
+            return;
+        }
+        await userModel.addBookToLectureList(req.userId, req.bookId);
+        res.writeHead(201, { "Content-Type": "application/json" });
+        res.end(
+            JSON.stringify({ message: "Book added to user's lecture list" })
+        );
+        requestLogger(req.method, req.url, 201);
+    } catch (err) {
+        console.error(err);
+        res.writeHead(500, { "Content-Type": "application/json" });
+        res.end(JSON.stringify({ error: err.message }));
+        requestLogger(req.method, req.url, 500);
+    }
+};
+
+export const deleteFromLectureList = async (req, res) => {
+    try {
+        const book = await getBookById(req.bookId);
+        if (book.length === 0) {
+            res.writeHead(404, { "Content-Type": "application/json" });
+            res.end(JSON.stringify({ error: "Book not found" }));
+            requestLogger(req.method, req.url, 404);
+            return;
+        }
+        const userBook = await userModel.getBookFromLectureList(
+            req.userId,
+            req.bookId
+        );
+        if (userBook.length === 0) {
+            res.writeHead(404, { "Content-Type": "application/json" });
+            res.end(JSON.stringify({ error: "Book not in user's lecture list" }));
+            requestLogger(req.method, req.url, 404);
+            return;
+        }
+        await userModel.deleteFromLectureList(req.userId, req.bookId);
+        res.writeHead(204, { "Content-Type": "application/json" });
+        res.end();
+        requestLogger(req.method, req.url, 204);
     } catch (err) {
         console.error(err);
         res.writeHead(500, { "Content-Type": "application/json" });

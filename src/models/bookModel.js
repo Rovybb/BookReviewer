@@ -65,7 +65,7 @@ export const updateBook = async (id, updatedBook) => {
     const query = `
         UPDATE Books
         SET title = @title, author = @author, genre = @genre,
-            imageLink = @imageLink, rating = @rating, description = @description
+            imageLink = @imageLink, description = @description
         WHERE id = @id
     `;
     const params = [
@@ -73,7 +73,6 @@ export const updateBook = async (id, updatedBook) => {
         { name: "author", type: sql.NVarChar, value: updatedBook.author },
         { name: "genre", type: sql.NVarChar, value: updatedBook.genre },
         { name: "imageLink", type: sql.NVarChar, value: updatedBook.imageLink },
-        { name: "rating", type: sql.Float, value: updatedBook.rating },
         { name: "description", type: sql.NVarChar, value: updatedBook.description },
         { name: "id", type: sql.Int, value: id },
     ];

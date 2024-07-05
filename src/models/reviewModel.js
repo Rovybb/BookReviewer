@@ -12,6 +12,12 @@ export const getReviewById = async (id) => {
     return await queryDatabase(query, params);
 };
 
+export const getReviewByBookId = async (bookId) => {
+    const query = 'SELECT * FROM Reviews WHERE bookId = @bookId';
+    const params = [{ name: 'bookId', type: sql.Int, value: bookId }];
+    return await queryDatabase(query, params);
+};
+
 export const addReview = async(review) => {
     const query = `
         INSERT INTO Reviews (rating, description, bookId, userId, createdAt)

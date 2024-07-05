@@ -7,11 +7,12 @@ import {
     updateUser,
     updateUserPassword,
     deleteUser,
+    getLectureList,
     addBookToLectureList,
     deleteFromLectureList,
 } from "../../controllers/userController.js";
 import requestLogger from "../../utils/requestLogger.js";
-import { verifyToken } from "../../services/authService.js";
+import verifyToken from "../../services/authService.js";
 
 function handleUserRoutes(req, res) {
     if (req.url === "/api/users" && req.method === "GET") {
@@ -47,17 +48,21 @@ function handleUserRoutes(req, res) {
         const id = req.url.split("/")[3];
         deleteUser(req, res, id);
     } else if (
-        req.url.match(/\/api\/users\/booklist\/([0-9]+)/) &&
+        req.url.match(/\/api\/users\/booklist\?bookId=([0-9]+)/) &&
         req.method === "POST"
     ) {
-        const id = req.url.split("/")[4];
-        addBookToLectureList(req, res, id);
+        const id = req.url.split("=")[1];
+        req.bookId = id;
+        verifyToken(req, res, addBookToLectureList);
+    } else if (req.url === "/api/users/booklist" && req.method === "GET") {
+        verifyToken(req, res, getLectureList);
     } else if (
-        req.url.match(/\/api\/users\/booklist\/([0-9]+)/) &&
+        req.url.match(/\/api\/users\/booklist\?bookId=([0-9]+)/) &&
         req.method === "DELETE"
     ) {
-        const id = req.url.split("/")[4];
-        deleteFromLectureList(req, res, id);
+        const id = req.url.split("=")[1];
+        req.bookId = id;
+        verifyToken(req, res, deleteFromLectureList);
     } else {
         res.writeHead(404, { "Content-Type": "application/json" });
         res.end(JSON.stringify({ message: "User Route Not Found" }));

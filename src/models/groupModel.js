@@ -55,3 +55,9 @@ export const joinGroup = async (userId, groupId) => {
     ];
     await queryDatabase(query, params);
 };
+
+export const getMembersCount = async (groupId) => {
+    const query = 'SELECT COUNT(*) AS membersCount FROM UsersGroups WHERE groupId = @groupId';
+    const result = await queryDatabase(query, [{ name: 'groupId', type: sql.Int, value: groupId }]);
+    return result[0].membersCount;
+};

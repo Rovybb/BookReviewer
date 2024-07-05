@@ -35,6 +35,20 @@ export const getReview = async (req, res, id) => {
     }
 };
 
+export const getReviewByBookId = async (req, res, bookId) => {
+    try {
+        const reviews = await reviewModel.getReviewByBookId(bookId);
+        res.writeHead(200, { "Content-Type": "application/json" });
+        res.end(JSON.stringify(reviews));
+        requestLogger(req.method, req.url, 200);
+    } catch (err) {
+        console.error(err);
+        res.writeHead(500, { "Content-Type": "application/json" });
+        res.end(JSON.stringify({ error: err.message }));
+        requestLogger(req.method, req.url, 500);
+    }
+};
+
 export const addReview = async (req, res) => {
     try {
         let body = "";
@@ -45,14 +59,13 @@ export const addReview = async (req, res) => {
             let review;
             try {
                 review = JSON.parse(body);
-            }
-            catch (error) {
+            } catch (error) {
                 res.writeHead(400, { "Content-Type": "application/json" });
                 res.end(JSON.stringify({ error: "Invalid JSON" }));
                 requestLogger(req.method, req.url, 400);
                 return;
             }
-            await reviewModel.addReview(review);
+            await reviewModel.addReview({ ...review, userId: req.userId });
             res.writeHead(201, { "Content-Type": "application/json" });
             res.end(JSON.stringify({ message: "Review added" }));
             requestLogger(req.method, req.url, 201);

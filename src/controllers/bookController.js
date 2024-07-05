@@ -48,6 +48,12 @@ export const getBook = async (req, res, id) => {
 };
 
 export const addBook = async (req, res) => {
+    if (req.userRole !== "Admin") {
+        res.writeHead(403, { "Content-Type": "application/json" });
+        res.end(JSON.stringify({ error: "Access denied" }));
+        requestLogger(req.method, req.url, 403);
+        return;
+    }
     try {
         let body = "";
         req.on("data", (chunk) => {
@@ -84,6 +90,13 @@ export const addBook = async (req, res) => {
 };
 
 export const updateBook = async (req, res, id) => {
+    if (req.userRole !== "Admin") {
+        res.writeHead(403, { "Content-Type": "application/json" });
+        res.end(JSON.stringify({ error: "Access denied" }));
+        requestLogger(req.method, req.url, 403);
+        return;
+    }
+    const bookId = id[0];
     try {
         let body = "";
         req.on("data", (chunk) => {
@@ -99,20 +112,27 @@ export const updateBook = async (req, res, id) => {
                 requestLogger(req.method, req.url, 400);
                 return;
             }
-            const bookQuery = await bookModel.getBookById(id);
+            const bookQuery = await bookModel.getBookById(bookId);
             if (bookQuery.length === 0) {
                 res.writeHead(404, { "Content-Type": "application/json" });
                 res.end(JSON.stringify({ error: "Book not found" }));
                 requestLogger(req.method, req.url, 404);
                 return;
             }
+            let newImageLink = bookQuery[0].imageLink;
             if (book.imageLink) {
                 if (bookQuery[0].imageLink) {
                     await deleteImage("books", bookQuery[0].imageLink);
                 }
-                book.imageLink = await uploadImage(book.imageLink, "books");
+                newImageLink = await uploadImage(book.imageLink, "books");
             }
-            await bookModel.updateBook(id, book);
+            await bookModel.updateBook(bookId, {
+                title: book.title,
+                author: book.author,
+                genre: book.genre,
+                imageLink: newImageLink,
+                description: book.description,
+            });
             res.writeHead(200, { "Content-Type": "application/json" });
             res.end(JSON.stringify({ message: "Book updated" }));
             requestLogger(req.method, req.url, 200);
@@ -126,8 +146,15 @@ export const updateBook = async (req, res, id) => {
 };
 
 export const deleteBook = async (req, res, id) => {
+    if (req.userRole !== "Admin") {
+        res.writeHead(403, { "Content-Type": "application/json" });
+        res.end(JSON.stringify({ error: "Access denied" }));
+        requestLogger(req.method, req.url, 403);
+        return;
+    }
+    const bookId = id[0];
     try {
-        const book = await bookModel.getBookById(id);
+        const book = await bookModel.getBookById(bookId);
         if (book.length === 0) {
             res.writeHead(404, { "Content-Type": "application/json" });
             res.end(JSON.stringify({ error: "Book not found" }));
@@ -137,7 +164,7 @@ export const deleteBook = async (req, res, id) => {
         if (book[0].imageLink) {
             await deleteImage("books", book[0].imageLink);
         }
-        await bookModel.deleteBook(id);
+        await bookModel.deleteBook(bookId);
         res.writeHead(204, { "Content-Type": "application/json" });
         res.end();
         requestLogger(req.method, req.url, 204);

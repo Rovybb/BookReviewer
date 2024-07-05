@@ -10,7 +10,7 @@ import { IncomingMessage, ServerResponse } from "node:http";
  * @param {ServerResponse<IncomingMessage>} res - The response object.
  * @param {Function} next - The next middleware function.
  */
-const verifyToken = async (req, res, next) => {
+const verifyToken = async (req, res, next, ...params) => {
     const token = req.headers.authorization?.split(" ")[1];
     if (!token) {
         res.writeHead(401, { "Content-Type": "application/json" });
@@ -20,7 +20,9 @@ const verifyToken = async (req, res, next) => {
     }
     try {
         const decoded = jwt.verify(token, process.env.JWT_SECRET);
-        await next(req, res, decoded.id);
+        req.userId = decoded.id;
+        req.userRole = decoded.role;
+        await next(req, res, ...params);
     } catch (error) {
         res.writeHead(401, { "Content-Type": "application/json" });
         res.end(JSON.stringify({ error: "Invalid token" }));
@@ -28,4 +30,4 @@ const verifyToken = async (req, res, next) => {
     }
 };
 
-export { verifyToken };
+export default verifyToken;

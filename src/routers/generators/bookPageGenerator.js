@@ -1,4 +1,4 @@
-import * as bookModel from "../../models/bookModel.js";
+import { getBookById } from "../../models/bookModel.js";
 import bookPageTemplate from "./templates/bookPageTemplate.js";
 import { sendData } from "../pageRouter.js";
 import requestLogger from "../../utils/requestLogger.js";
@@ -7,8 +7,9 @@ import { buildUrl } from "../../services/imageUploadService.js";
 
 const bookPageGenerator = async (req, res) => {
     const id = req.url.split("/")[2];
+    console.log(id);
     try {
-        const queryResponse = await bookModel.getBookById(id);
+        const queryResponse = await getBookById(id);
         if (!queryResponse.length) {
             res.writeHead(404, { "Content-Type": "text/html" });
             res.end(errorPageTemplate({

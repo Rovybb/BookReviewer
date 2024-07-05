@@ -1,5 +1,3 @@
-const body = document.querySelector("body");
-
 const alertElement = document.createElement("div");
 alertElement.classList.add("alert");
 

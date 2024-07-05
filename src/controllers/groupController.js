@@ -92,6 +92,21 @@ export const updateGroup = async (req, res, id) => {
                 requestLogger(req.method, req.url, 400);
                 return;
             }
+            const oldGroup = await groupModel.getGroupById(id);
+            if (oldGroup.length === 0) {
+                res.writeHead(404, { "Content-Type": "application/json" });
+                res.end(JSON.stringify({ error: "Group not found" }));
+                requestLogger(req.method, req.url, 404);
+                return;
+            }
+            if (group.imageLink) {
+                if (oldGroup[0].imageLink) {
+                    await deleteImage("groups", oldGroup[0].imageLink);
+                }
+                group.imageLink = await uploadImage(group.imageLink, "groups");
+            } else {
+                group.imageLink = oldGroup[0].imageLink;
+            }
             await groupModel.updateGroup(id, group);
             res.writeHead(200, { "Content-Type": "application/json" });
             res.end(JSON.stringify({ message: "Group updated" }));
@@ -107,6 +122,16 @@ export const updateGroup = async (req, res, id) => {
 
 export const deleteGroup = async (req, res, id) => {
     try {
+        const group = await groupModel.getGroupById(id);
+        if (group.length === 0) {
+            res.writeHead(404, { "Content-Type": "application/json" });
+            res.end(JSON.stringify({ error: "Group not found" }));
+            requestLogger(req.method, req.url, 404);
+            return;
+        }
+        if (group[0].imageLink) {
+            await deleteImage("groups", group[0].imageLink);
+        }
         await groupModel.deleteGroup(id);
         res.writeHead(204, { "Content-Type": "application/json" });
         res.end();
@@ -126,16 +151,15 @@ export const joinGroup = async (req, res, id) => {
             body += chunk.toString();
         });
         req.on("end", async () => {
-            let user;
+            let userId;
             try {
-                user = JSON.parse(body);
+                userId = JSON.parse(body).userId;
             } catch (error) {
                 res.writeHead(400, { "Content-Type": "application/json" });
                 res.end(JSON.stringify({ error: "Invalid JSON" }));
                 requestLogger(req.method, req.url, 400);
                 return;
             }
-            const userId = user.userId;
             await groupModel.joinGroup(userId, id);
             res.writeHead(201, { "Content-Type": "application/json" });
             res.end(JSON.stringify({ message: "User joined group" }));

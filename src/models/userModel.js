@@ -64,7 +64,7 @@ export const deleteUser = async (id) => {
     await queryDatabase(query, params);
 };
 
-export const getListOfLecture = async (userId) => {
+export const getLectureList = async (userId) => {
     const query = `
         SELECT Books.*
         FROM UsersBooks
@@ -74,6 +74,19 @@ export const getListOfLecture = async (userId) => {
     const params = [{ name: 'userId', type: sql.Int, value: userId }];
     return await queryDatabase(query, params);
 };
+
+export const getBookFromLectureList = async (userId, bookId) => {
+    const query = `
+        SELECT *
+        FROM UsersBooks
+        WHERE userId = @userId AND bookId = @bookId
+    `;
+    const params = [
+        { name: 'userId', type: sql.Int, value: userId },
+        { name: 'bookId', type: sql.Int, value: bookId }
+    ];
+    return await queryDatabase(query, params);
+}
 
 export const addBookToLectureList = async (userId, bookId) => {
     const query = `

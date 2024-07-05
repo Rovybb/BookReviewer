@@ -136,12 +136,15 @@ const handleSubmit = async (event) => {
             imageLink: reader.result,
             genre: genreField.value,
         };
-    
+        
+        const token = document.cookie.split('=')[1];
+
         try {
             const response = await fetch("/api/books", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
+                    Authorization: `Bearer ${token}`,
                 },
                 body: JSON.stringify(book),
             });

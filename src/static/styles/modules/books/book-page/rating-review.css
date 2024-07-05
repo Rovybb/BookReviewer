@@ -1,0 +1,48 @@
+.rating {
+  float: left;
+}
+
+label.fa-star {
+  cursor: pointer;
+}
+
+.rating > input {
+  display: none;
+}
+
+.rating > label {
+  float: right;
+  margin-right: 5px;
+}
+
+.light-theme label.fa-star {
+  color: #854f6c;
+}
+.light-theme .rating > input:checked ~ label,
+.light-theme .rating:not(:checked) > label:hover,
+.light-theme .rating:not(:checked) > label:hover ~ label {
+  color: #ed8a19;
+}
+.light-theme .rating > input:checked + label:hover,
+.light-theme .rating > input:checked ~ label:hover,
+.light-theme .rating > label:hover ~ input:checked ~ label,
+.light-theme .rating > input:checked ~ label:hover ~ label {
+  color: #feae53;
+}
+
+.dark-theme label.fa-star {
+  color: #854f6c;
+}
+.dark-theme .rating > input:checked ~ label,
+.dark-theme .rating:not(:checked) > label:hover,
+.dark-theme .rating:not(:checked) > label:hover ~ label {
+  color: #ed8a19;
+}
+.dark-theme .rating > input:checked + label:hover,
+.dark-theme .rating > input:checked ~ label:hover,
+.dark-theme .rating > label:hover ~ input:checked ~ label,
+.dark-theme .rating > input:checked ~ label:hover ~ label {
+  color: #feae53;
+}
+
+/*# sourceMappingURL=rating-review.css.map */

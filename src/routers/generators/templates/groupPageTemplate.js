@@ -1,12 +1,12 @@
-const bookPageTemplate = (book) => {
-    return `
+const groupPageTemplate = (group) => {
+return `
 <!DOCTYPE html>
 <html lang="en">
     <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>${book.title}</title>
-        <meta name="description" content="${book.description}" />
+        <title>${group.name} - BookReviewer</title>
+        <meta name="description" content="${group.description}" />
         <link
             rel="apple-touch-icon"
             sizes="180x180"
@@ -26,10 +26,9 @@ const bookPageTemplate = (book) => {
         />
         <link rel="manifest" href="/public/site.webmanifest" />
         <link rel="stylesheet" href="/styles/layout/index.css" />
-        <link rel="stylesheet" href="/books/${book.id}/index.css" />
         <link
             rel="stylesheet"
-            href="/styles/modules/books/book-page/index.css"
+            href="/styles/modules/groups/group-page/index.css"
         />
         <script
             src="https://kit.fontawesome.com/3811cdfa76.js"
@@ -44,7 +43,7 @@ const bookPageTemplate = (book) => {
             >
             <ul class="mobile-menu-list">
                 <li class="mobile-menu-list-item">
-                    <a href="/index" class="menu-list-link">Home</a>
+                    <a href="/" class="menu-list-link">Home</a>
                 </li>
                 <li class="mobile-menu-list-item">
                     <a href="/about" class="menu-list-link">About</a>
@@ -93,69 +92,63 @@ const bookPageTemplate = (book) => {
                 </div>
             </header>
             <main class="main-content">
-                <div class="book-card">
-                    <div class="book-card-image">
-                        <img
-                            src="${book.imageLink}"
-                            alt="${book.title}"
-                        />
-                        <div class="book-card-buttons">
-                            <button class="button" id="addToListButton">+Add</button>
-                            <button class="button" id="removeFromListButton">-Remove</button>
-                            <button class="button" id="deleteBookButton">Delete</button>
-                            <button class="button" id="editBookButton">Edit</button>
-                        </div>
-                    </div>
-                    <div class="book-card-details">
-                        <h1 class="book-card-title">${book.title}</h1>
-                        <p class="book-card-author">by ${book.author}</p>
-                        <div class="book-card-rating">
-                            <span class="fa fa-star"></span>
-                            <span class="fa fa-star"></span>
-                            <span class="fa fa-star"></span>
-                            <span class="fa fa-star"></span>
-                            <span class="fa fa-star"></span>
-                        </div>
-                        <span class="book-card-rating-text">${book.rating.toFixed(2) || 0} / 5</span>
-                        <div class="book-card-tag">
-                            <i class="fa-solid fa-tag"></i
-                            ><span id="bookGenre">${book.genre}</span>
-                        </div>
-                    </div>
-                    <p class="book-card-description">
-                        ${book.description.split('\n').join('<br>')}
-                    </p>
+                <div class="banner"></div>
+                <img src="${group.imageLink}" alt="Group" class="group-image" />
+                <div class="group-info">
+                    <h2 class="group-name">${group.name}</h2>
+                    <span class="group-members-count">Members: ${group.membersCount}</span>
+                    <p class="group-description">${group.description.split('\n').join('<br>')}</p>
                 </div>
-                <section class="comment-section">
-                    <div class="comment-section-title-container">
-                        <h2 class="comment-section-title">Reviews</h2>
+                <button class="button">Join group</button>
+                <section class="chat-section">
+                    <div class="chat-section-title-container">
+                        <h2 class="chat-section-title">Chat</h2>
                     </div>
-                    <form class="comment-section-form">
-                        <div class="input-group" id="commentGroup">
-                            <textarea
-                                class="input-text"
-                                id="commentField"
-                                placeholder="Write a review..."
-                            ></textarea>
-                            <span class="input-error" id="commentError"></span>
-                        </div>
-                        <fieldset class="comment-section-form-rating rating">
-                            <input type="radio" name="rating" id="rating5" value="5" />
-                            <label for="rating5" class="fa fa-star"></label>
-                            <input type="radio" name="rating" id="rating4" value="4" />
-                            <label for="rating4" class="fa fa-star"></label>
-                            <input type="radio" name="rating" id="rating3" value="3" />
-                            <label for="rating3" class="fa fa-star"></label>
-                            <input type="radio" name="rating" id="rating2" value="2" />
-                            <label for="rating2" class="fa fa-star"></label>
-                            <input type="radio" name="rating" id="rating1" value="1" />
-                            <label for="rating1" class="fa fa-star"></label>
-                        </fieldset>
-                        <br>
-                        <button type="submit" class="button" id="submitComment">Submit</button>
+                    <form class="chat-section-form">
+                        <textarea
+                            class="input-text"
+                            placeholder="Write in chat..."
+                            required
+                        ></textarea>
+                        <button type="submit" class="button">Send</button>
                     </form>
-                    <div class="comments">
-                        <p class="placeholder">No reviews yet</p>
+                    <div class="messages">
+                        <div class="message">
+                            <div class="message-header">
+                                <img
+                                    src="/assets/profile_placeholder.jpg"
+                                    alt="User"
+                                    class="message-header-image"
+                                />
+                                <div class="message-header-text">
+                                    <span class="message-author">John Doe</span>
+                                    <span class="message-date">01-01-2024</span>
+                                </div>
+                            </div>
+                            <p class="message-content">
+                                This is a great manga! I love the art style and
+                                the story is very interesting. I can't wait to
+                                read the next volume.
+                            </p>
+                        </div>
+                        <div class="message">
+                            <div class="message-header">
+                                <img
+                                    src="/assets/profile_placeholder.jpg"
+                                    alt="User"
+                                    class="message-header-image"
+                                />
+                                <div class="message-header-text">
+                                    <span class="message-author">John Doe</span>
+                                    <span class="message-date">01-01-2024</span>
+                                </div>
+                            </div>
+                            <p class="message-content">
+                                I've read the whole series and it's amazing! I
+                                highly recommend it to anyone who loves dark
+                                fantasy.
+                            </p>
+                        </div>
                     </div>
                 </section>
             </main>
@@ -181,7 +174,7 @@ const bookPageTemplate = (book) => {
                                     >
                                 </li>
                                 <li>
-                                    <a href="/#news" class="footer-column-link"
+                                    <a href="/" class="footer-column-link"
                                         >News</a
                                     >
                                 </li>
@@ -218,7 +211,9 @@ const bookPageTemplate = (book) => {
                                     >
                                 </li>
                                 <li>
-                                    <a href="/" class="footer-column-link"
+                                    <a
+                                        href="/"
+                                        class="footer-column-link"
                                         >API</a
                                     >
                                 </li>
@@ -228,18 +223,12 @@ const bookPageTemplate = (book) => {
                     <div class="footer-copyright">
                         <ul class="footer-buttons">
                             <li>
-                                <button
-                                    class="footer-button"
-                                    onclick="handleNavigate('/rss.xml')"
-                                >
+                                <button class="footer-button" onclick="handleNavigate('/rss.xml')">
                                     <i class="fa-solid fa-rss"></i>
                                 </button>
                             </li>
                             <li>
-                                <button
-                                    class="footer-button"
-                                    onclick="toggleTheme()"
-                                >
+                                <button class="footer-button" onclick="toggleTheme()">
                                     <i
                                         class="fa-solid fa-moon"
                                         id="themeButtonIcon"
@@ -259,10 +248,6 @@ const bookPageTemplate = (book) => {
             </footer>
         </div>
         <script src="/connections/headerButtonConnection.js"></script>
-        <script src="/connections/books/buttonsConnection.js"></script>
-        <script src="/connections/books/createReviewConnection.js"></script>
-        <script src="/connections/books/showReviewsConnection.js"></script>
-        <script src="/utils/handleAlert.js"></script>
         <script src="/utils/handleNavigate.js"></script>
         <script src="/utils/handleOpenMenu.js"></script>
         <script src="/utils/handleTheme.js"></script>
@@ -271,4 +256,4 @@ const bookPageTemplate = (book) => {
     `;
 };
 
-export default bookPageTemplate;
+export default groupPageTemplate;

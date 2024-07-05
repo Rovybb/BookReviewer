@@ -190,8 +190,8 @@ const register = async (user) => {
                 "Content-Type": "application/json",
             },
             body: JSON.stringify({
-                email: user.email,
-                password: user.password,
+                email: user.email.toLowerCase().trim().replace(/\s/g, ""),
+                password: user.password.trim(),
                 username: user.username,
                 profilePicture: user.profilePicture,
             }),
@@ -252,3 +252,9 @@ usernameField.addEventListener("blur", validateUsername);
 nextButton.addEventListener("click", verifyFirstStep);
 backButton.addEventListener("click", goBack);
 registerButton.addEventListener("click", handleSubmit);
+
+document.addEventListener("keydown", (event) => {
+    if (event.key === "Spacebar" || event.key === " ") {
+        event.preventDefault();
+    }
+});

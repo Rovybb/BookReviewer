@@ -48,4 +48,5 @@ const loadProfileButton = async () => {
         console.error(error);
     }
 };
+
 loadProfileButton();

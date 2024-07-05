@@ -4,6 +4,8 @@ import jwt from "jsonwebtoken";
 import requestLogger from "../utils/requestLogger.js";
 import { IncomingMessage, ServerResponse } from "node:http";
 import bookPageGenerator from "./generators/bookPageGenerator.js";
+import groupPageGenerator from "./generators/groupPageGenerator.js";
+import ratingStarsCssGenerator from "./generators/ratingStarsCssGenerator.js";
 import errorPageTemplate from "./generators/templates/errorPageTemplate.js";
 
 const MIME_TYPES = {
@@ -143,8 +145,12 @@ const pageRouter = async (req, res) => {
         await handleProtectedRoutes(req, res, true);
     } else if (protectedRoutes.includes(req.url)) {
         await handleProtectedRoutes(req, res, false);
+    } else if (req.url.match(/\/books\/([0-9]+)\/index.css/)) {
+        await ratingStarsCssGenerator(req, res);
     } else if (req.url.match(/\/books\/([0-9]+)/)) {
         await bookPageGenerator(req, res);
+    } else if (req.url.match(/\/groups\/([0-9]+)/)) {
+        await groupPageGenerator(req, res);
     } else if (req.url.match(/\/groups\/([0-9]+)/)) {
         await sendData(req, res);
     } else await sendData(req, res);

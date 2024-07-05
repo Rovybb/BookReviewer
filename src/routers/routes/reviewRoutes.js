@@ -1,11 +1,13 @@
 import {
     getReviews,
     getReview,
+    getReviewByBookId,
     addReview,
     updateReview,
     deleteReview,
 } from "../../controllers/reviewController.js";
 import requestLogger from "../../utils/requestLogger.js";
+import verifyToken from "../../services/authService.js";
 
 const handleReviewRoutes = (req, res) => {
     if (req.url === "/api/reviews" && req.method === "GET") {
@@ -16,8 +18,11 @@ const handleReviewRoutes = (req, res) => {
     ) {
         const id = req.url.split("/")[3];
         getReview(req, res, id);
+    } else if (req.url.match(/\/api\/reviews\/books\/([0-9]+)/) && req.method === "GET") {
+        const bookId = req.url.split("/")[4];
+        getReviewByBookId(req, res, bookId);
     } else if (req.url === "/api/reviews" && req.method === "POST") {
-        addReview(req, res);
+        verifyToken(req, res, addReview);
     } else if (
         req.url.match(/\/api\/reviews\/([0-9]+)/) &&
         req.method === "PUT"
