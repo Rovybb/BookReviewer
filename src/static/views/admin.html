@@ -211,6 +211,85 @@
                             </div>
                         </form>
                     </div>
+                    <div class="admin-panel">
+                        <h3 class="admin-panel-title">Add group</h3>
+                        <form class="admin-panel-form">
+                            <div class="admin-panel-left-section">
+                                <div class="input-group" id="addGroupNameGroup">
+                                    <label for="addGroupName" class="input-text-label"
+                                        >Name</label
+                                    >
+                                    <input
+                                        type="text"
+                                        id="addGroupName"
+                                        class="input-text"
+                                        placeholder="Name"
+                                        required
+                                    />
+                                    <span
+                                        class="input-error"
+                                        id="addGroupNameError"
+                                    ></span>
+                                </div>
+                                <div class="input-group" id="addGroupDescriptionGroup">
+                                    <label
+                                        for="addGroupDescription"
+                                        class="input-text-label"
+                                        >Description</label
+                                    >
+                                    <textarea
+                                        type="text"
+                                        id="addGroupDescription"
+                                        class="input-text input-text-area"
+                                        placeholder="Description"
+                                    ></textarea>
+                                    <span
+                                        class="input-error"
+                                        id="addGroupDescriptionError"
+                                    ></span>
+                                </div>
+                            </div>
+                            <div class="admin-panel-right-section">
+                                <div class="admin-panel-right-section-inputs">
+                                    <div
+                                        class="input-group"
+                                        id="addGroupImageGroup"
+                                    >
+                                        <span class="input-text-label"
+                                            >Group Image</span
+                                        >
+                                        <label
+                                            for="addGroupImage"
+                                            class="input-file-label"
+                                        >
+                                            <div class="input-file-preview">
+                                                <i class="fa-solid fa-plus"></i>
+                                                <span
+                                                    class="input-file-label-text"
+                                                    >Add Book Image</span
+                                                >
+                                            </div>
+                                        </label>
+                                        <input
+                                            type="file"
+                                            accept="image/png, image/jpg, image/gif, image/jpeg"
+                                            id="addGroupImage"
+                                            class="input-file"
+                                            placeholder="Book Image"
+                                            onchange="handlePreview('#addGroupImageGroup')"
+                                        />
+                                        <span
+                                            class="input-error"
+                                            id="addGroupImageError"
+                                        ></span>
+                                    </div>
+                                </div>
+                                <button class="button" type="submit" id="addGroupSubmitButton">
+                                    Add group
+                                </button>
+                            </div>
+                        </form>
+                    </div>
                 </div>
             </main>
             <footer class="footer">
@@ -320,5 +399,6 @@
         <script src="/utils/handleOpenMenu.js"></script>
         <script src="/utils/handleTheme.js"></script>
         <script src="/connections/admin/addBookConnection.js"></script>
+        <script src="/connections/admin/addGroupConnection.js"></script>
     </body>
 </html>

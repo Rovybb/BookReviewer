@@ -67,6 +67,12 @@ export const searchGroups = async (req, res, search) => {
 };
 
 export const createGroup = async (req, res) => {
+    if (req.userRole !== "Admin") {
+        res.writeHead(403, { "Content-Type": "application/json" });
+        res.end(JSON.stringify({ error: "Access denied" }));
+        requestLogger(req.method, req.url, 403);
+        return;
+    }
     try {
         let body = "";
         req.on("data", (chunk) => {
