@@ -3,7 +3,7 @@
     <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Profile - BookReviewer</title>
+        <title>Edit Profile - BookReviewer</title>
         <link
             rel="apple-touch-icon"
             sizes="180x180"
@@ -23,10 +23,7 @@
         />
         <link rel="manifest" href="/public/site.webmanifest" />
         <link rel="stylesheet" href="/styles/layout/index.css" />
-        <link
-            rel="stylesheet"
-            href="/styles/modules/profile/index.css"
-        />
+        <link rel="stylesheet" href="/styles/modules/admin/index.css" />
         <script
             src="https://kit.fontawesome.com/3811cdfa76.js"
             crossorigin="anonymous"
@@ -52,7 +49,7 @@
                     <a href="/groups" class="menu-list-link">Groups</a>
                 </li>
                 <li class="mobile-menu-list-item">
-                    <a href="/" class="menu-list-link">Logout</a>
+                    <a href="/login" class="menu-list-link">Login</a>
                 </li>
             </ul>
         </div>
@@ -81,24 +78,109 @@
                     </ul>
                 </nav>
                 <button
+                    id="loginButton"
                     class="button button--bordered"
-                    onclick="handleLogout()"
-                >
-                    Logout
-                </button>
+                ></button>
                 <div class="mobile-menu-button">
                     <span class="fa fa-bars"></span>
                 </div>
             </header>
             <main class="main-content">
-                <div class="banner"></div>
-                <img src="/assets/profile_placeholder.jpg" alt="Profile picture" class="user-image" />
-                <div class="user-info">
-                    <h2 class="user-name"></h2>
-                </div>
-                <div class="user-actions">
-                    <button class="button button--bordered" onclick="handleNavigate('/profile/edit')">Edit Profile</button>
-                    <button class="button button--bordered">Change Password</button>
+                <h2 class="admin-title">Edit Profile</h2>
+                <div class="admin-panels-wrapper">
+                    <div class="admin-panel">
+                        <form class="admin-panel-form">
+                            <div class="admin-panel-left-section">
+                                <div class="input-group" id="passwordGroup">
+                                    <label for="password" class="input-text-label"
+                                        >Password</label
+                                    >
+                                    <input
+                                        type="password"
+                                        id="password"
+                                        class="input-text"
+                                        placeholder="Enter Password"
+                                        required
+                                    />
+                                    <span
+                                        class="input-error"
+                                        id="passwordError"
+                                    ></span>
+                                </div>
+                                <div class="input-group" id="changeUsernameGroup">
+                                    <label for="changeUsername" class="input-text-label"
+                                        >Username</label
+                                    >
+                                    <input
+                                        type="text"
+                                        id="changeUsername"
+                                        class="input-text"
+                                        placeholder="Change Username"
+                                        required
+                                    />
+                                    <span
+                                        class="input-error"
+                                        id="changeUsernameError"
+                                    ></span>
+                                </div>
+                                <div class="input-group" id="changeEmailGroup">
+                                    <label for="changeEmail" class="input-text-label"
+                                        >Email</label
+                                    >
+                                    <input
+                                        type="text"
+                                        id="changeEmail"
+                                        class="input-text"
+                                        placeholder="Change Email"
+                                        required
+                                    />
+                                    <span
+                                        class="input-error"
+                                        id="changeEmailError"
+                                    ></span>
+                                </div>
+                            </div>
+                            <div class="admin-panel-right-section">
+                                <div class="admin-panel-right-section-inputs">
+                                    <div
+                                        class="input-group"
+                                        id="changeProfilePictureGroup"
+                                    >
+                                        <span class="input-text-label"
+                                            >Profile Picture</span
+                                        >
+                                        <label
+                                            for="changeProfilePicture"
+                                            class="input-file-label"
+                                        >
+                                            <div class="input-file-preview">
+                                                <i class="fa-solid fa-plus"></i>
+                                                <span
+                                                    class="input-file-label-text"
+                                                    >Add Profile Picture</span
+                                                >
+                                            </div>
+                                        </label>
+                                        <input
+                                            type="file"
+                                            accept="image/png, image/jpg, image/gif, image/jpeg"
+                                            id="changeProfilePicture"
+                                            class="input-file"
+                                            placeholder="Book Image"
+                                            onchange="handlePreview('#changeProfilePictureGroup')"
+                                        />
+                                        <span
+                                            class="input-error"
+                                            id="changeProfilePictureError"
+                                        ></span>
+                                    </div>
+                                </div>
+                                <button class="button" type="submit" id="updateProfileSubmitButton">
+                                    Update Profile
+                                </button>
+                            </div>
+                        </form>
+                    </div>
                 </div>
             </main>
             <footer class="footer">
@@ -160,9 +242,7 @@
                                     >
                                 </li>
                                 <li>
-                                    <a
-                                        href="/"
-                                        class="footer-column-link"
+                                    <a href="/" class="footer-column-link"
                                         >API</a
                                     >
                                 </li>
@@ -172,12 +252,18 @@
                     <div class="footer-copyright">
                         <ul class="footer-buttons">
                             <li>
-                                <button class="footer-button" onclick="handleNavigate('/rss.xml')">
+                                <button
+                                    class="footer-button"
+                                    onclick="handleNavigate('/rss.xml')"
+                                >
                                     <i class="fa-solid fa-rss"></i>
                                 </button>
                             </li>
                             <li>
-                                <button class="footer-button" onclick="toggleTheme()">
+                                <button
+                                    class="footer-button"
+                                    onclick="toggleTheme()"
+                                >
                                     <i
                                         class="fa-solid fa-moon"
                                         id="themeButtonIcon"
@@ -196,7 +282,10 @@
                 </div>
             </footer>
         </div>
-        <script src="/connections/profile/profileConnection.js"></script>
+        <script src="/connections/headerButtonConnection.js"></script>
+        <script src="/connections/profile/editProfileConnection.js"></script>
+        <script src="/utils/handleAlert.js"></script>
+        <script src="/utils/handlePreview.js"></script>
         <script src="/utils/handleNavigate.js"></script>
         <script src="/utils/handleOpenMenu.js"></script>
         <script src="/utils/handleTheme.js"></script>

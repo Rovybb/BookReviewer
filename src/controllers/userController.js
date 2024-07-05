@@ -225,7 +225,7 @@ export const updateUser = async (req, res, id) => {
             }
             const validPassword = await bcrypt.compare(
                 password,
-                user[0].password
+                userToUpdate[0].password
             );
             if (!validPassword) {
                 res.writeHead(401, { "Content-Type": "application/json" });
@@ -233,12 +233,12 @@ export const updateUser = async (req, res, id) => {
                 requestLogger(req.method, req.url, 401);
                 return;
             }
-            let newImageLink = user[0].profilePicture;
+            let newImageLink = userToUpdate[0].profilePicture;
             if (profilePicture) {
-                if (user[0].profilePicture) {
+                if (userToUpdate[0].profilePicture) {
                     await deleteImage(
                         "profilePictures",
-                        user[0].profilePicture
+                        userToUpdate[0].profilePicture
                     );
                 }
                 newImageLink = await uploadImage(
@@ -355,7 +355,9 @@ export const addBookToLectureList = async (req, res) => {
         );
         if (userBook.length > 0) {
             res.writeHead(409, { "Content-Type": "application/json" });
-            res.end(JSON.stringify({ error: "Book already in user's lecture list" }));
+            res.end(
+                JSON.stringify({ error: "Book already in user's lecture list" })
+            );
             requestLogger(req.method, req.url, 409);
             return;
         }
@@ -388,7 +390,9 @@ export const deleteFromLectureList = async (req, res) => {
         );
         if (userBook.length === 0) {
             res.writeHead(404, { "Content-Type": "application/json" });
-            res.end(JSON.stringify({ error: "Book not in user's lecture list" }));
+            res.end(
+                JSON.stringify({ error: "Book not in user's lecture list" })
+            );
             requestLogger(req.method, req.url, 404);
             return;
         }

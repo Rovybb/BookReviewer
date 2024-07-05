@@ -21,7 +21,7 @@ const MIME_TYPES = {
     xml: "application/xml",
 };
 
-const protectedRoutes = ["/profile"];
+const protectedRoutes = ["/profile", "/profile/edit"];
 
 const resolveUrl = (url) => {
     if (url === "/" || url === "") {
@@ -30,6 +30,8 @@ const resolveUrl = (url) => {
         return "./views/about.html";
     } else if (url === "/help") {
         return "./views/help.html";
+    } else if (url === "/profile/edit") {
+        return "./views/edit_profile.html";
     } else if (url === "/profile") {
         return "./views/profile.html";
     } else if (url === "/login") {
