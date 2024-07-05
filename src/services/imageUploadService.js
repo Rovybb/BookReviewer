@@ -15,6 +15,7 @@ const app = initializeApp(firebaseConfig);
 const storage = getStorage(app, "gs://" + process.env.FIREBASE_STORAGE_BUCKET);
 
 const buildUrl = (folder, name) => {
+    if (!name) return null;
     return `https://firebasestorage.googleapis.com/v0/b/bookreviewer-be71e.appspot.com/o/${folder}%2F${name}?alt=media&token=2c92dcb8-60b2-4d23-8810-84da335cae95`;
 };
 
