@@ -30,7 +30,8 @@ const loadReviews = async () => {
                 return;
             }
             commentsContainer.innerHTML = "";
-            data.forEach(async (review) => {
+            for (let i = 0; i < data.length; i++) {
+                const review = data[i];
                 const user = await getUserById(review.userId);
                 const formatedDate = new Date(review.createdAt)
                     .toLocaleDateString("en-UK", {
@@ -74,7 +75,7 @@ const loadReviews = async () => {
                     </p>
                 `;
                 commentsContainer.appendChild(comment);
-            });
+            }
         }
     } catch (error) {
         console.error(error);

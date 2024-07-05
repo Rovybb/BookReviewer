@@ -30,8 +30,10 @@ const loadMessages = async () => {
                     '<p class="placeholder">No messages yet</p>';
                 return;
             }
+            console.log(data);
             messagesContainer.innerHTML = "";
-            data.forEach(async (message) => {
+            for (let i = 0; i <data.length; i ++) {
+                const message = data[i];
                 const user = await getUserById(message.userId);
                 const formatedDate = new Date(message.createdAt)
                     .toLocaleDateString("en-UK", {
@@ -66,7 +68,7 @@ const loadMessages = async () => {
                 </div>
                 `;
                 messagesContainer.appendChild(messageElement);
-            });
+            }
         }
     } catch (error) {
         console.error(error);

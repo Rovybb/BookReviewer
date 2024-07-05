@@ -2,7 +2,7 @@ import sql from "mssql";
 import { queryDatabase } from "../data/dbConnection.js";
 
 export const getReviews = async () => {
-    const query = 'SELECT * FROM Reviews';
+    const query = 'SELECT * FROM Reviews ORDER BY createdAt ASC';
     return await queryDatabase(query);
 };
 
@@ -13,13 +13,13 @@ export const getReviewById = async (id) => {
 };
 
 export const getReviewsByBookId = async (bookId) => {
-    const query = 'SELECT * FROM Reviews WHERE bookId = @bookId';
+    const query = 'SELECT * FROM Reviews WHERE bookId = @bookId ORDER BY createdAt ASC';
     const params = [{ name: 'bookId', type: sql.Int, value: bookId }];
     return await queryDatabase(query, params);
 };
 
 export const getReviewsByUserId = async (userId) => {
-    const query = 'SELECT * FROM Reviews WHERE userId = @userId';
+    const query = 'SELECT * FROM Reviews WHERE userId = @userId ORDER BY createdAt ASC';
     const params = [{ name: 'userId', type: sql.Int, value: userId }];
     return await queryDatabase(query, params);
 };

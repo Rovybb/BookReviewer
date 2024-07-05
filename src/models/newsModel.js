@@ -2,7 +2,7 @@ import sql from "mssql";
 import { queryDatabase } from "../data/dbConnection.js";
 
 export const getNews = async () => {
-    const query = 'SELECT * FROM News';
+    const query = 'SELECT * FROM News ORDER BY date ASC';
     return await queryDatabase(query);
 }
 
