@@ -96,7 +96,6 @@ export const updateBook = async (req, res, id) => {
         requestLogger(req.method, req.url, 403);
         return;
     }
-    const bookId = id[0];
     try {
         let body = "";
         req.on("data", (chunk) => {
@@ -112,7 +111,7 @@ export const updateBook = async (req, res, id) => {
                 requestLogger(req.method, req.url, 400);
                 return;
             }
-            const bookQuery = await bookModel.getBookById(bookId);
+            const bookQuery = await bookModel.getBookById(id);
             if (bookQuery.length === 0) {
                 res.writeHead(404, { "Content-Type": "application/json" });
                 res.end(JSON.stringify({ error: "Book not found" }));
@@ -126,7 +125,7 @@ export const updateBook = async (req, res, id) => {
                 }
                 newImageLink = await uploadImage(book.imageLink, "books");
             }
-            await bookModel.updateBook(bookId, {
+            await bookModel.updateBook(id, {
                 title: book.title,
                 author: book.author,
                 genre: book.genre,
@@ -152,9 +151,8 @@ export const deleteBook = async (req, res, id) => {
         requestLogger(req.method, req.url, 403);
         return;
     }
-    const bookId = id[0];
     try {
-        const book = await bookModel.getBookById(bookId);
+        const book = await bookModel.getBookById(id);
         if (book.length === 0) {
             res.writeHead(404, { "Content-Type": "application/json" });
             res.end(JSON.stringify({ error: "Book not found" }));
@@ -164,7 +162,7 @@ export const deleteBook = async (req, res, id) => {
         if (book[0].imageLink) {
             await deleteImage("books", book[0].imageLink);
         }
-        await bookModel.deleteBook(bookId);
+        await bookModel.deleteBook(id);
         res.writeHead(204, { "Content-Type": "application/json" });
         res.end();
         requestLogger(req.method, req.url, 204);

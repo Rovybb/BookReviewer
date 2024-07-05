@@ -148,7 +148,7 @@ export const deleteGroup = async (req, res, id) => {
         return;
     }
     try {
-        const group = await groupModel.getGroupById(id[0]);
+        const group = await groupModel.getGroupById(id);
         if (group.length === 0) {
             res.writeHead(404, { "Content-Type": "application/json" });
             res.end(JSON.stringify({ error: "Group not found" }));
@@ -158,7 +158,7 @@ export const deleteGroup = async (req, res, id) => {
         if (group[0].imageLink) {
             await deleteImage("groups", group[0].imageLink);
         }
-        await groupModel.deleteGroup(id[0]);
+        await groupModel.deleteGroup(id);
         res.writeHead(204, { "Content-Type": "application/json" });
         res.end();
         requestLogger(req.method, req.url, 204);
