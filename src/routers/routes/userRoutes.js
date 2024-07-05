@@ -15,7 +15,13 @@ import requestLogger from "../../utils/requestLogger.js";
 import verifyToken from "../../services/authService.js";
 
 function handleUserRoutes(req, res) {
-    if (req.url === "/api/users" && req.method === "GET") {
+    if (
+        req.url.match(/\/api\/users\/password\/([0-9]+)/) &&
+        req.method === "PUT"
+    ) {
+        const id = req.url.split("/")[4];
+        updateUserPassword(req, res, id);
+    } else if (req.url === "/api/users" && req.method === "GET") {
         getUsers(req, res);
     } else if (
         req.url.match(/\/api\/users\/([0-9]+)/) &&
@@ -32,9 +38,6 @@ function handleUserRoutes(req, res) {
         register(req, res);
     } else if (req.url === "/api/users/login" && req.method === "POST") {
         login(req, res);
-    } else if (req.url.match(/\/api\/users\/password\/([0-9]+)/) && req.method === "PUT") {
-        const id = req.url.split("/")[4];
-        updateUserPassword(req, res, id);
     } else if (
         req.url.match(/\/api\/users\/([0-9]+)/) &&
         req.method === "PUT"

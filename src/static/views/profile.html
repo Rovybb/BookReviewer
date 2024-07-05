@@ -23,10 +23,7 @@
         />
         <link rel="manifest" href="/public/site.webmanifest" />
         <link rel="stylesheet" href="/styles/layout/index.css" />
-        <link
-            rel="stylesheet"
-            href="/styles/modules/profile/index.css"
-        />
+        <link rel="stylesheet" href="/styles/modules/profile/index.css" />
         <script
             src="https://kit.fontawesome.com/3811cdfa76.js"
             crossorigin="anonymous"
@@ -92,13 +89,21 @@
             </header>
             <main class="main-content">
                 <div class="banner"></div>
-                <img src="/assets/profile_placeholder.jpg" alt="Profile picture" class="user-image" />
+                <img
+                    src="/assets/profile_placeholder.jpg"
+                    alt="Profile picture"
+                    class="user-image"
+                />
                 <div class="user-info">
                     <h2 class="user-name"></h2>
                 </div>
                 <div class="user-actions">
-                    <button class="button button--bordered" onclick="handleNavigate('/profile/edit')">Edit Profile</button>
-                    <button class="button button--bordered">Change Password</button>
+                    <button
+                        class="button button--bordered"
+                        onclick="handleNavigate('/profile/edit')"
+                    >
+                        Edit Profile
+                    </button>
                 </div>
             </main>
             <footer class="footer">
@@ -160,9 +165,7 @@
                                     >
                                 </li>
                                 <li>
-                                    <a
-                                        href="/"
-                                        class="footer-column-link"
+                                    <a href="/" class="footer-column-link"
                                         >API</a
                                     >
                                 </li>
@@ -172,12 +175,18 @@
                     <div class="footer-copyright">
                         <ul class="footer-buttons">
                             <li>
-                                <button class="footer-button" onclick="handleNavigate('/rss.xml')">
+                                <button
+                                    class="footer-button"
+                                    onclick="handleNavigate('/rss.xml')"
+                                >
                                     <i class="fa-solid fa-rss"></i>
                                 </button>
                             </li>
                             <li>
-                                <button class="footer-button" onclick="toggleTheme()">
+                                <button
+                                    class="footer-button"
+                                    onclick="toggleTheme()"
+                                >
                                     <i
                                         class="fa-solid fa-moon"
                                         id="themeButtonIcon"

@@ -89,11 +89,12 @@
                 <h2 class="admin-title">Edit Profile</h2>
                 <div class="admin-panels-wrapper">
                     <div class="admin-panel">
+                        <h3 class="admin-panel-title">Update Profile</h3>
                         <form class="admin-panel-form">
                             <div class="admin-panel-left-section">
                                 <div class="input-group" id="passwordGroup">
                                     <label for="password" class="input-text-label"
-                                        >Password</label
+                                        >Confirm Password</label
                                     >
                                     <input
                                         type="password"
@@ -177,6 +178,68 @@
                                 </div>
                                 <button class="button" type="submit" id="updateProfileSubmitButton">
                                     Update Profile
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="admin-panel">
+                        <h3 class="admin-panel-title">Change Password</h3>
+                        <form class="admin-panel-form">
+                            <div class="admin-panel-left-section">
+                                <div class="input-group" id="oldPasswordGroup">
+                                    <label for="oldPassword" class="input-text-label"
+                                        >Old Password</label
+                                    >
+                                    <input
+                                        type="password"
+                                        id="oldPassword"
+                                        class="input-text"
+                                        placeholder="Old Password"
+                                        required
+                                    />
+                                    <span
+                                        class="input-error"
+                                        id="oldPasswordError"
+                                    ></span>
+                                </div>
+                                <div class="input-group" id="newPasswordGroup">
+                                    <label for="newPassword" class="input-text-label"
+                                        >New Password</label
+                                    >
+                                    <input
+                                        type="password"
+                                        id="newPassword"
+                                        class="input-text"
+                                        placeholder="New Password"
+                                        required
+                                    />
+                                    <span
+                                        class="input-error"
+                                        id="newPasswordError"
+                                    ></span>
+                                </div>
+                                <div class="input-group" id="confirmPasswordGroup">
+                                    <label for="confirmPassword" class="input-text-label"
+                                        >Confirm Password</label
+                                    >
+                                    <input
+                                        type="password"
+                                        id="confirmPassword"
+                                        class="input-text"
+                                        placeholder="Confirm Password"
+                                        required
+                                    />
+                                    <span
+                                        class="input-error"
+                                        id="confirmPasswordError"
+                                    ></span>
+                                </div>
+                            </div>
+                            <div class="admin-panel-right-section">
+                                <div class="admin-panel-right-section-inputs">
+                                </div>
+                                <button class="button" type="submit" id="changePasswordSubmitButton">
+                                    Change Password
                                 </button>
                             </div>
                         </form>
@@ -284,6 +347,7 @@
         </div>
         <script src="/connections/headerButtonConnection.js"></script>
         <script src="/connections/profile/editProfileConnection.js"></script>
+        <script src="/connections/profile/changePasswordConnection.js"></script>
         <script src="/utils/handleAlert.js"></script>
         <script src="/utils/handlePreview.js"></script>
         <script src="/utils/handleNavigate.js"></script>
