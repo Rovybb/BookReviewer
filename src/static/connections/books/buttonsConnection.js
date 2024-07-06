@@ -64,7 +64,7 @@ const removeFromList = async () => {
 };
 
 const editBook = () => {
-    window.location.href = `/admin/edit-book/${
+    window.location.href = `/books/edit/${
         window.location.pathname.split("/")[2]
     }`;
 };

@@ -38,9 +38,13 @@ const resolveUrl = (url) => {
         return "./views/login.html";
     } else if (url === "/register") {
         return "./views/register.html";
+    } else if (url.match(/\/books\/edit\/([0-9]+)/)) {
+        return "./views/edit_book.html";
     } else if (url === "/books") {
         return "./views/books.html";
-    }  else if (url === "/groups") {
+    } else if (url.match(/\/groups\/edit\/([0-9]+)/)) {
+        return "./views/edit_group.html";
+    } else if (url === "/groups") {
         return "./views/groups.html";
     } else if (url === "/documentation") {
         return "./views/doc.html";
@@ -145,10 +149,14 @@ const pageRouter = async (req, res) => {
         await handleProtectedRoutes(req, res, true);
     } else if (protectedRoutes.includes(req.url)) {
         await handleProtectedRoutes(req, res, false);
+    } else if (req.url.match(/\/books\/edit\/([0-9]+)/)) {
+        await handleProtectedRoutes(req, res, true);
     } else if (req.url.match(/\/books\/([0-9]+)\/index.css/)) {
         await ratingStarsCssGenerator(req, res);
     } else if (req.url.match(/\/books\/([0-9]+)/)) {
         await bookPageGenerator(req, res);
+    } else if (req.url.match(/\/groups\/edit\/([0-9]+)/)) {
+        await handleProtectedRoutes(req, res, true);
     } else if (req.url.match(/\/groups\/([0-9]+)/)) {
         await groupPageGenerator(req, res);
     } else if (req.url.match(/\/groups\/([0-9]+)/)) {
