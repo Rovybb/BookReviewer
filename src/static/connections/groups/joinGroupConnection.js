@@ -89,7 +89,7 @@ const deleteGroup = async () => {
 };
 
 const editGroup = () => {
-    window.location.href = `/admin/edit-group/${
+    window.location.href = `/groups/edit/${
         window.location.pathname.split("/")[2]
     }`;
 };

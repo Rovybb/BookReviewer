@@ -3,7 +3,7 @@
     <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Admin - BookReviewer</title>
+        <title>Edit Group - BookReviewer</title>
         <link
             rel="apple-touch-icon"
             sizes="180x180"
@@ -86,166 +86,42 @@
                 </div>
             </header>
             <main class="main-content">
-                <h2 class="admin-title">Admin</h2>
+                <h2 class="admin-title">Edit Group</h2>
                 <div class="admin-panels-wrapper">
                     <div class="admin-panel">
-                        <h3 class="admin-panel-title">Add book</h3>
                         <form class="admin-panel-form">
                             <div class="admin-panel-left-section">
-                                <div class="input-group" id="addBookTitleGroup">
-                                    <label for="addBookTitle" class="input-text-label"
-                                        >Title</label
-                                    >
-                                    <input
-                                        type="text"
-                                        id="addBookTitle"
-                                        class="input-text"
-                                        placeholder="Title"
-                                        required
-                                    />
-                                    <span
-                                        class="input-error"
-                                        id="addBookTitleError"
-                                    ></span>
-                                </div>
-                                <div class="input-group" id="addBookAuthorGroup">
-                                    <label for="addBookAuthor" class="input-text-label"
-                                        >Author</label
-                                    >
-                                    <input
-                                        type="text"
-                                        id="addBookAuthor"
-                                        class="input-text"
-                                        placeholder="Author"
-                                        required
-                                    />
-                                    <span
-                                        class="input-error"
-                                        id="addBookAuthorError"
-                                    ></span>
-                                </div>
-                                <div class="input-group" id="addBookDescriptionGroup">
-                                    <label
-                                        for="addBookDescription"
-                                        class="input-text-label"
-                                        >Description</label
-                                    >
-                                    <textarea
-                                        type="text"
-                                        id="addBookDescription"
-                                        class="input-text input-text-area"
-                                        placeholder="Description"
-                                    ></textarea>
-                                    <span
-                                        class="input-error"
-                                        id="addBookDescriptionError"
-                                    ></span>
-                                </div>
-                            </div>
-                            <div class="admin-panel-right-section">
-                                <div class="admin-panel-right-section-inputs">
-                                    <div
-                                        class="input-group"
-                                        id="addBookImageGroup"
-                                    >
-                                        <span class="input-text-label"
-                                            >Book Image</span
-                                        >
-                                        <label
-                                            for="addBookImage"
-                                            class="input-file-label"
-                                        >
-                                            <div class="input-file-preview">
-                                                <i class="fa-solid fa-plus"></i>
-                                                <span
-                                                    class="input-file-label-text"
-                                                    >Add Book Image</span
-                                                >
-                                            </div>
-                                        </label>
-                                        <input
-                                            type="file"
-                                            accept="image/png, image/jpg, image/gif, image/jpeg"
-                                            id="addBookImage"
-                                            class="input-file"
-                                            placeholder="Book Image"
-                                            onchange="handlePreview('#addBookImageGroup')"
-                                        />
-                                        <span
-                                            class="input-error"
-                                            id="addBookImageError"
-                                        ></span>
-                                    </div>
-                                    <div class="input-group" id="addBookGenreGroup">
-                                        <label
-                                            for="addBookGenre"
-                                            class="input-text-label"
-                                            >Genre</label
-                                        >
-                                        <div class="input-select">
-                                            <select id="addBookGenre">
-                                                <option value="">
-                                                    Select genre
-                                                </option>
-                                                <option value="Adventure">Adventure</option>
-                                                <option value="Comedy">Comedy</option>
-                                                <option value="Drama">Drama</option>
-                                                <option value="Fantasy">Fantasy</option>
-                                                <option value="Fiction">Fiction</option>
-                                                <option value="History">History</option>
-                                                <option value="Horror">Horror</option>
-                                                <option value="Mystery">Mystery</option>
-                                                <option value="Romance">Romance</option>
-                                                <option value="Science Fiction">Science Fiction</option>
-                                            </select>
-                                        </div>
-                                        <span
-                                            class="input-error"
-                                            id="addBookGenreError"
-                                        ></span>
-                                    </div>
-                                </div>
-                                <button class="button" type="submit" id="addBookSubmitButton">
-                                    Add book
-                                </button>
-                            </div>
-                        </form>
-                    </div>
-                    <div class="admin-panel">
-                        <h3 class="admin-panel-title">Add group</h3>
-                        <form class="admin-panel-form">
-                            <div class="admin-panel-left-section">
-                                <div class="input-group" id="addGroupNameGroup">
-                                    <label for="addGroupName" class="input-text-label"
+                                <div class="input-group" id="editGroupNameGroup">
+                                    <label for="editGroupName" class="input-text-label"
                                         >Name</label
                                     >
                                     <input
                                         type="text"
-                                        id="addGroupName"
+                                        id="editGroupName"
                                         class="input-text"
                                         placeholder="Name"
                                         required
                                     />
                                     <span
                                         class="input-error"
-                                        id="addGroupNameError"
+                                        id="editGroupNameError"
                                     ></span>
                                 </div>
-                                <div class="input-group" id="addGroupDescriptionGroup">
+                                <div class="input-group" id="editGroupDescriptionGroup">
                                     <label
-                                        for="addGroupDescription"
+                                        for="editGroupDescription"
                                         class="input-text-label"
                                         >Description</label
                                     >
                                     <textarea
                                         type="text"
-                                        id="addGroupDescription"
+                                        id="editGroupDescription"
                                         class="input-text input-text-area"
                                         placeholder="Description"
                                     ></textarea>
                                     <span
                                         class="input-error"
-                                        id="addGroupDescriptionError"
+                                        id="editGroupDescriptionError"
                                     ></span>
                                 </div>
                             </div>
@@ -253,13 +129,13 @@
                                 <div class="admin-panel-right-section-inputs">
                                     <div
                                         class="input-group"
-                                        id="addGroupImageGroup"
+                                        id="editGroupImageGroup"
                                     >
                                         <span class="input-text-label"
                                             >Group Image</span
                                         >
                                         <label
-                                            for="addGroupImage"
+                                            for="editGroupImage"
                                             class="input-file-label"
                                         >
                                             <div class="input-file-preview">
@@ -273,19 +149,19 @@
                                         <input
                                             type="file"
                                             accept="image/png, image/jpg, image/gif, image/jpeg"
-                                            id="addGroupImage"
+                                            id="editGroupImage"
                                             class="input-file"
                                             placeholder="Book Image"
-                                            onchange="handlePreview('#addGroupImageGroup')"
+                                            onchange="handlePreview('#editGroupImageGroup')"
                                         />
                                         <span
                                             class="input-error"
-                                            id="addGroupImageError"
+                                            id="editGroupImageError"
                                         ></span>
                                     </div>
                                 </div>
-                                <button class="button" type="submit" id="addGroupSubmitButton">
-                                    Add group
+                                <button class="button" type="submit" id="editGroupSubmitButton">
+                                    Update group
                                 </button>
                             </div>
                         </form>
@@ -392,13 +268,11 @@
             </footer>
         </div>
         <script src="/connections/headerButtonConnection.js"></script>
+        <script src="/connections/admin/editGroupConnection.js"></script>
         <script src="/utils/handleAlert.js"></script>
-        <script src="/utils/handleSelectInput.js"></script>
         <script src="/utils/handlePreview.js"></script>
         <script src="/utils/handleNavigate.js"></script>
         <script src="/utils/handleOpenMenu.js"></script>
         <script src="/utils/handleTheme.js"></script>
-        <script src="/connections/admin/addBookConnection.js"></script>
-        <script src="/connections/admin/addGroupConnection.js"></script>
     </body>
 </html>

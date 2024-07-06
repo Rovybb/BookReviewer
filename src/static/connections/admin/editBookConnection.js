@@ -124,7 +124,6 @@ const completeBookData = async () => {
         descriptionField.value = book.description;
         genreField.nextElementSibling.textContent = book.genre;
         genreField.value = book.genre;
-
     } catch (error) {
         console.error(error);
     }

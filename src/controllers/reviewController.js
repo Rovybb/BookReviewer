@@ -106,7 +106,7 @@ export const addReview = async (req, res) => {
             await addNews({
                 title: "New review",
                 content: `New review for book ${book[0].title}`,
-                link: `/books/${review.bookId}`,
+                link: `http://localhost:3000/books/${review.bookId}`,
             });
             res.writeHead(201, { "Content-Type": "application/json" });
             res.end(JSON.stringify({ message: "Review added" }));

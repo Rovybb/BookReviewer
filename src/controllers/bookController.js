@@ -81,7 +81,7 @@ export const addBook = async (req, res) => {
             await addNews({
                 title: "New book added",
                 content: `A new ${book.genre} book has been added to the library: ${book.title} by ${book.author}`,
-                link: `/books/${newBook[0].id}`,
+                link: `http://localhost:3000/books/${newBook[0].id}`,
             });
             res.writeHead(201, { "Content-Type": "application/json" });
             res.end(JSON.stringify({ message: "Book added" }));
