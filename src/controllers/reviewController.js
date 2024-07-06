@@ -1,6 +1,8 @@
 import * as reviewModel from "../models/reviewModel.js";
 import requestLogger from "../utils/requestLogger.js";
 import { updateBookRating } from "../models/bookModel.js";
+import { addNews } from "../models/newsModel.js";
+import { getBookById } from "../models/bookModel.js";
 
 export const getReviews = async (req, res) => {
     try {
@@ -100,6 +102,12 @@ export const addReview = async (req, res) => {
             }
             await reviewModel.addReview({ ...review, userId: req.userId });
             await updateBookRating(review.bookId);
+            const book = await getBookById(review.bookId);
+            await addNews({
+                title: "New review",
+                content: `New review for book ${book[0].title}`,
+                link: `/books/${review.bookId}`,
+            });
             res.writeHead(201, { "Content-Type": "application/json" });
             res.end(JSON.stringify({ message: "Review added" }));
             requestLogger(req.method, req.url, 201);

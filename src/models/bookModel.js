@@ -58,7 +58,7 @@ export const addBook = async (book) => {
         { name: "rating", type: sql.Float, value: book.rating },
         { name: "description", type: sql.NVarChar, value: book.description },
     ];
-    await queryDatabase(query, params);
+    return await queryDatabase(query, params);
 };
 
 export const updateBook = async (id, updatedBook) => {

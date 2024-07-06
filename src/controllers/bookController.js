@@ -1,5 +1,6 @@
 import * as bookModel from "../models/bookModel.js";
 import requestLogger from "../utils/requestLogger.js";
+import { addNews } from "../models/newsModel.js";
 import {
     uploadImage,
     buildUrl,
@@ -69,13 +70,18 @@ export const addBook = async (req, res) => {
                 requestLogger(req.method, req.url, 400);
                 return;
             }
-            await bookModel.addBook({
+            const newBook = await bookModel.addBook({
                 title: book.title,
                 author: book.author,
                 genre: book.genre,
                 imageLink: await uploadImage(book.imageLink, "books"),
                 description: book.description,
                 rating: 0,
+            });
+            await addNews({
+                title: "New book added",
+                content: `A new ${book.genre} book has been added to the library: ${book.title} by ${book.author}`,
+                link: `/books/${newBook[0].id}`,
             });
             res.writeHead(201, { "Content-Type": "application/json" });
             res.end(JSON.stringify({ message: "Book added" }));
