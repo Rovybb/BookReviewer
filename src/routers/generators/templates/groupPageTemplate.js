@@ -166,11 +166,6 @@ return `
                                         >Help</a
                                     >
                                 </li>
-                                <li>
-                                    <a href="/help" class="footer-column-link"
-                                        >Contact</a
-                                    >
-                                </li>
                             </ul>
                         </div>
                         <div class="footer-column">
@@ -185,9 +180,9 @@ return `
                                 </li>
                                 <li>
                                     <a
-                                        href="/"
+                                        href="/api/statistics/download"
                                         class="footer-column-link"
-                                        >API</a
+                                        >Statistics</a
                                     >
                                 </li>
                             </ul>

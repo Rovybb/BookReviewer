@@ -1,7 +1,6 @@
 import { queryDatabase } from "../data/dbConnection.js";
-import { createObjectCsvWriter } from "csv-writer";
 
-export const getReadingStatistics = async () => {
+const getReadingStatistics = async () => {
     const mostReadGenresQuery = `
         SELECT genre, COUNT(*) AS count
         FROM Books
@@ -39,27 +38,4 @@ export const getReadingStatistics = async () => {
     };
 };
 
-export const exportStatisticsToCSV = async (statistics, filePath) => {
-    const csvWriter = createObjectCsvWriter({
-        path: filePath,
-        header: [
-            { id: 'metric', title: 'Metric' },
-            { id: 'value', title: 'Value' }
-        ]
-    });
-
-    const records = [
-        { metric: 'Most Read Genres', value: JSON.stringify(statistics.mostReadGenres) },
-        { metric: 'Most Read Authors', value: JSON.stringify(statistics.mostReadAuthors) },
-        { metric: 'Top Five Most Read Books', value: JSON.stringify(statistics.top5MostReadBooks) },
-    ];
-
-    await csvWriter.writeRecords(records);
-    console.log('Statistics exported to CSV successfully.');
-};
-
-export const generateAndExportStatistics = async (filePath) => {
-    const statistics = await getReadingStatistics();
-    await exportStatisticsToCSV(statistics, filePath);
-};
-
+export default getReadingStatistics;

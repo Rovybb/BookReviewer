@@ -132,11 +132,6 @@ const errorPageTemplate = (error) => {
                                         >Help</a
                                     >
                                 </li>
-                                <li>
-                                    <a href="/help" class="footer-column-link"
-                                        >Contact</a
-                                    >
-                                </li>
                             </ul>
                         </div>
                         <div class="footer-column">
@@ -151,9 +146,9 @@ const errorPageTemplate = (error) => {
                                 </li>
                                 <li>
                                     <a
-                                        href="/"
+                                        href="/api/statistics/download"
                                         class="footer-column-link"
-                                        >API</a
+                                        >Statistics</a
                                     >
                                 </li>
                             </ul>

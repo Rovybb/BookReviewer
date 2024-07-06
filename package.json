@@ -13,9 +13,9 @@
   "license": "MIT",
   "dependencies": {
     "bcryptjs": "^2.4.3",
-    "csv-writer": "^1.6.0",
     "dotenv": "^16.4.5",
     "firebase": "^10.12.2",
+    "json2csv": "^6.0.0-alpha.2",
     "jsonwebtoken": "^9.0.2",
     "mssql": "^11.0.0"
   },

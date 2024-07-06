@@ -1,10 +1,10 @@
 import handleBookRoutes from './routes/bookRoutes.js';
 import handleReviewRoutes from './routes/reviewRoutes.js';
 import handleUserRoutes from './routes/userRoutes.js';
-import handleStatisticsRoutes from './routes/statisticsRoutes.js';
 import handleGroupRoutes from './routes/groupRoutes.js';
 import handleGroupMessageRoutes from './routes/groupMessageRoutes.js';
 import handleNewsRoutes from './routes/newsRoutes.js';
+import downloadStatistics from './routes/statisticsRoutes.js';
 import { rssService } from '../services/rssService.js';
 
 const handleAPIRoutes = async (req, res) => {
@@ -16,15 +16,13 @@ const handleAPIRoutes = async (req, res) => {
         handleReviewRoutes(req, res);
     } else if (req.url.startsWith('/api/users')) {
         handleUserRoutes(req, res);
-    } else if (req.url.startsWith('/api/statistics')) {
-        handleStatisticsRoutes(req, res);
     } else if (req.url.startsWith('/api/groups')) {
         handleGroupRoutes(req, res);
     } else if (req.url.startsWith('/api/groupMessages')) {
         handleGroupMessageRoutes(req, res);
     }
-    else if (req.url.startsWith('/api/statistics')) {
-        handleStatisticsRoutes(req, res);
+    else if (req.url.startsWith('/api/statistics/download')) {
+        downloadStatistics(req, res);
     }
     else if (req.url.startsWith('/api/news')) {
         handleNewsRoutes(req, res);

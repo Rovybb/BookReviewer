@@ -200,11 +200,6 @@ const bookPageTemplate = (book) => {
                                         >Help</a
                                     >
                                 </li>
-                                <li>
-                                    <a href="/help" class="footer-column-link"
-                                        >Contact</a
-                                    >
-                                </li>
                             </ul>
                         </div>
                         <div class="footer-column">
@@ -218,8 +213,10 @@ const bookPageTemplate = (book) => {
                                     >
                                 </li>
                                 <li>
-                                    <a href="/" class="footer-column-link"
-                                        >API</a
+                                    <a
+                                        href="/api/statistics/download"
+                                        class="footer-column-link"
+                                        >Statistics</a
                                     >
                                 </li>
                             </ul>

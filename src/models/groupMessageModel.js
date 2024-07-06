@@ -2,7 +2,7 @@ import sql from "mssql";
 import { queryDatabase } from "../data/dbConnection.js";
 
 export const getGroupMessages = async (groupId) => {
-    const query = 'SELECT * FROM GroupMessages WHERE groupId = @groupId ORDER BY createdAt ASC';
+    const query = 'SELECT * FROM GroupMessages WHERE groupId = @groupId ORDER BY createdAt DESC';
     const params = [{ name: 'groupId', type: sql.Int, value: groupId }];
     console.log(await queryDatabase(query, params));
     return await queryDatabase(query, params);
@@ -13,12 +13,6 @@ export const getGroupMessageById = async (id) => {
     const params = [{ name: 'id', type: sql.Int, value: id }];
     return await queryDatabase(query, params);
 };
-
-// export const getGroupMessagesByGroupId = async (groupId) => {
-//     const query = 'SELECT * FROM GroupMessages WHERE groupId = @groupId ORDER BY createdAt ASC';
-//     const params = [{ name: 'groupId', type: sql.Int, value: groupId }];
-//     return await queryDatabase(query, params);
-// };
 
 export const createGroupMessage = async (groupMessage) => {
     const query = `

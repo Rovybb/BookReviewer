@@ -1,4 +1,4 @@
-import { getReadingStatistics } from './statisticsService.js';
+import getReadingStatistics from './statisticsService.js';
 import { getNews } from '../models/newsModel.js';
 import requestLogger from '../utils/requestLogger.js';
 
