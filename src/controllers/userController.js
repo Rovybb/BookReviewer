@@ -329,6 +329,9 @@ export const deleteUser = async (req, res, id) => {
 export const getLectureList = async (req, res) => {
     try {
         const books = await userModel.getLectureList(req.userId);
+        books.forEach((book) => {
+            book.imageLink = buildUrl("books", book.imageLink);
+        });
         res.writeHead(200, { "Content-Type": "application/json" });
         res.end(JSON.stringify(books));
         requestLogger(req.method, req.url, 200);

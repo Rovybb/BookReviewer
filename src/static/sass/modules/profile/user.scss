@@ -55,41 +55,27 @@
     gap: 10px;
     transform: translate(0, -50px);
     padding: 0 10px;
-    
+
     @media screen and (max-width: $breakpoint-lg) {
         width: 100%;
     }
-    
-    @media screen and (max-width: $breakpoint-sm){
+
+    @media screen and (max-width: $breakpoint-sm) {
         flex-direction: column;
         justify-content: center;
         align-items: center;
     }
 }
 
-.update-profile-form {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    width: 990px;
-    
-    @media screen and (max-width: $breakpoint-lg) {
-        width: 100%;
-    }
+.booklist-title-container {
+    padding: 0 20px 10px 20px;
 }
 
-.input-group {
-    display: flex;
-    flex-direction: column;
-    gap: 5px;
-
-    label {
-        font-size: $font-size-md;
-        font-weight: 600;
-    }
+.booklist-title {
+    font-size: $font-size-xl;
+    font-weight: bold;
+    text-align: center;
 }
-
-
 
 @include themify($themes) {
     .banner {
@@ -99,5 +85,9 @@
                 themed($bg) 100%
             ),
             url("/assets/banner.png");
+    }
+
+    .booklist-title-container {
+        border-bottom: 2px solid themed($border);
     }
 }

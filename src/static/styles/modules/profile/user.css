@@ -70,34 +70,28 @@
   }
 }
 
-.update-profile-form {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-  width: 990px;
-}
-@media screen and (max-width: 992px) {
-  .update-profile-form {
-    width: 100%;
-  }
+.booklist-title-container {
+  padding: 0 20px 10px 20px;
 }
 
-.input-group {
-  display: flex;
-  flex-direction: column;
-  gap: 5px;
-}
-.input-group label {
-  font-size: 16px;
-  font-weight: 600;
+.booklist-title {
+  font-size: 24px;
+  font-weight: bold;
+  text-align: center;
 }
 
 .light-theme .banner {
   background-image: linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, #fbe4d8 100%), url("/assets/banner.png");
 }
+.light-theme .booklist-title-container {
+  border-bottom: 2px solid #391E41;
+}
 
 .dark-theme .banner {
   background-image: linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, #190019 100%), url("/assets/banner.png");
+}
+.dark-theme .booklist-title-container {
+  border-bottom: 2px solid #fbe4d8;
 }
 
 /*# sourceMappingURL=user.css.map */
