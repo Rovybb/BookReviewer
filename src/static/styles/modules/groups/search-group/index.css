@@ -48,6 +48,7 @@
   background-size: cover;
   background-position: center;
   -webkit-user-drag: none;
+  object-fit: cover;
 }
 .group-card-text-container {
   height: 100%;

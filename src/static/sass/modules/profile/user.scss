@@ -26,6 +26,7 @@
     background-size: cover;
     transform: translate(0, -50px);
     -webkit-user-drag: none;
+    object-fit: cover;
 }
 
 .user-info {

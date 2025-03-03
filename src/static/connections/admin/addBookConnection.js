@@ -69,7 +69,7 @@ const validateDescription = () => {
     if (descriptionField.value.length > 1000) {
         descriptionGroup.classList.add("error");
         descriptionError.textContent =
-            "Description must be at most 500 characters";
+            "Description must be at most 1000 characters";
         return false;
     }
 

@@ -28,7 +28,7 @@ const showBooks = async () => {
         });
         const books = await response.json();
 
-        booksGrid.innerHTML = books ? books.map(buildBookCard).join("") : "No books added to list";
+        booksGrid.innerHTML = books.length !== 0 ? books.map(buildBookCard).join("") : "No books added";
     } catch (error) {
         console.error(error);
     }

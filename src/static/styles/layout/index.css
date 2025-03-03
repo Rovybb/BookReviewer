@@ -265,7 +265,9 @@ body:has(.mobile-menu.open) {
 
 .button-image {
   width: 100%;
+  height: 100%;
   border-radius: 50%;
+  object-fit: cover;
 }
 .button-image:hover {
   filter: brightness(0.8);
