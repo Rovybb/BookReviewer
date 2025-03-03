@@ -1,4 +1,4 @@
-# web-project-2024
+# BookReviewer
 
 
 <ul>
